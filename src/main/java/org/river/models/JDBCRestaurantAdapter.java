@@ -24,22 +24,22 @@ public class JDBCRestaurantAdapter implements RestaurantAdapter {
     }
 
     @Override
-    public List<Restaurant> queryWeeklyHottestRestaurant() {
+    public List<Restaurant> queryWeeklyHottestRestaurants() {
         return null;
     }
 
     @Override
-    public List<Restaurant> queryWorstRestaurant() {
+    public List<Restaurant> queryWorstRestaurants() {
         return null;
     }
 
     @Override
-    public List<Restaurant> queryRestaurant(Area area) {
+    public List<Restaurant> queryRestaurants(Area area) {
         return null;
     }
 
     @Override
-    public List<Restaurant> queryRestaurant(FoodCategory foodCategory) {
+    public List<Restaurant> queryRestaurants(FoodCategory foodCategory) {
         return null;
     }
 
@@ -64,12 +64,12 @@ public class JDBCRestaurantAdapter implements RestaurantAdapter {
     }
 
     @Override
-    public List<Comment> queryComment(User user) {
+    public List<Comment> queryComments(User user) {
         return null;
     }
 
     @Override
-    public List<Comment> queryComment(Restaurant restaurant) {
+    public List<Comment> queryComments(Restaurant restaurant) {
         return null;
     }
 }
