@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.river.controllers.LoginController">
+   <left>
+      <AnchorPane prefHeight="200.0" prefWidth="345.0" style="-fx-background-color: #0598ff;" BorderPane.alignment="CENTER">
+         <children>
+            <Text fill="WHITE" layoutX="28.0" layoutY="335.0" strokeType="OUTSIDE" strokeWidth="0.0" text="NTU Restaurant Rating">
+               <font>
+                  <Font name="Elephant" size="24.0" />
+               </font>
+            </Text>
+            <ImageView fitHeight="88.0" fitWidth="112.0" layoutX="125.0" layoutY="132.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/restaurant.png" />
+               </image>
+            </ImageView>
+            <Text fill="WHITE" layoutX="104.0" layoutY="271.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome to">
+               <font>
+                  <Font name="Bodoni MT Black" size="23.0" />
+               </font>
+            </Text>
+         </children></AnchorPane>
+   </left>
+   <center>
+      <AnchorPane prefHeight="200.0" prefWidth="350.0" style="-fx-background-color: #ffffff;" BorderPane.alignment="CENTER">
+         <children>
+            <TextField fx:id="userName" layoutX="95.0" layoutY="211.0" promptText="User Name" style="-fx-background-color: transparent; -fx-border-color: #0598ff; -fx-border-width: 0px 0px 2px 0px;" />
+            <PasswordField fx:id="password" layoutX="95.0" layoutY="265.0" promptText="Password" style="-fx-background-color: transparent; -fx-border-width: 0px 0px 2px 0px; -fx-border-color: #0598ff;" />
+            <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="66.0" layoutY="215.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/user_icon.PNG" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="67.0" layoutY="269.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/key_icon.PNG" />
+               </image>
+            </ImageView>
+            <Button fx:id="button" layoutX="131.0" layoutY="338.0" mnemonicParsing="false" onAction="#handleLogin" prefHeight="31.0" prefWidth="64.0" style="-fx-background-color: #0598ff;" text="Login" textFill="WHITE" />
+            <ImageView fitHeight="63.0" fitWidth="105.0" layoutX="124.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/users_icon.PNG" />
+               </image>
+            </ImageView>
+            <Text fill="#0598ff" layoutX="113.0" layoutY="163.0" strokeType="OUTSIDE" strokeWidth="0.0" text="User Login">
+               <font>
+                  <Font size="23.0" />
+               </font>
+            </Text>
+            <Hyperlink layoutX="247.0" layoutY="458.0" text="Sign up">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Hyperlink>
+            <Text fill="#0598ff" layoutX="102.0" layoutY="477.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Don't have an account?" />
+         </children>
+      </AnchorPane>
+   </center>
+</BorderPane>

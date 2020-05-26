@@ -1,7 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="de867bdc-71b1-437c-a8b1-59cf6870e4c2" name="Default Changelist" comment="" />
+    <list default="true" id="de867bdc-71b1-437c-a8b1-59cf6870e4c2" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/river/controllers/LoginController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/pics/key_icon.PNG" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/pics/user_icon.PNG" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/views/Login.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/river/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/river/App.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/module-info.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/module-info.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/river/App.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/river/App.class" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -49,19 +61,29 @@
       <list>
         <option value="Enum" />
         <option value="Interface" />
+        <option value="JavaFXApplication" />
+        <option value="FxmlFile" />
         <option value="Class" />
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="ProjectId" id="1cPRZIOuc2pc3m5STf3iVaq0Ak4" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showExcludedFiles" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="DatabaseDriversLRU" value="mysql" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="project.structure.last.edited" value="Modules" />
@@ -70,6 +92,9 @@
     <property name="settings.editor.selected.configurable" value="database.main" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\NTU\OOP\project2\NTURestaurantRatingSystem\src\main\resources" />
+    </key>
     <key name="CreateClassDialog.RecentsKey">
       <recent name="org.river.entities" />
     </key>
@@ -127,12 +152,16 @@
       <option name="presentableId" value="Default" />
       <updated>1590428295740</updated>
       <workItem from="1590465397271" duration="6971000" />
-      <workItem from="1590472745494" duration="7034000" />
+      <workItem from="1590472745494" duration="16675000" />
+      <workItem from="1590509139173" duration="846000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
   </component>
   <component name="WindowStateProjectService">
     <state x="278" y="68" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1590472888361">
@@ -151,22 +180,22 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="499" y="159" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1536.824@0.0.1536.824" timestamp="1590469136558" />
-    <state width="1024" height="210" key="GridCell.Tab.0.bottom" timestamp="1590472598437">
+    <state width="1493" height="122" key="GridCell.Tab.0.bottom" timestamp="1590510207452">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1024" height="210" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1590472598437" />
-    <state width="1024" height="210" key="GridCell.Tab.0.center" timestamp="1590472598436">
+    <state width="1493" height="122" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1590510207452" />
+    <state width="1493" height="122" key="GridCell.Tab.0.center" timestamp="1590510207452">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1024" height="210" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1590472598436" />
-    <state width="1024" height="210" key="GridCell.Tab.0.left" timestamp="1590472598436">
+    <state width="1493" height="122" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1590510207452" />
+    <state width="1493" height="122" key="GridCell.Tab.0.left" timestamp="1590510207452">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1024" height="210" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1590472598436" />
-    <state width="1024" height="210" key="GridCell.Tab.0.right" timestamp="1590472598436">
+    <state width="1493" height="122" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1590510207452" />
+    <state width="1493" height="122" key="GridCell.Tab.0.right" timestamp="1590510207452">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1024" height="210" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1590472598436" />
+    <state width="1493" height="122" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1590510207452" />
     <state width="199" height="477" key="HiddenNamespacesPopup" timestamp="1590472661490">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -191,6 +220,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="620" y="134" key="com.intellij.database.view.ui.DbObjectDialog/0.0.1536.824@0.0.1536.824" timestamp="1590472344098" />
+    <state x="197" y="114" key="new project wizard" timestamp="1590501526801">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="197" y="114" key="new project wizard/0.0.1536.824@0.0.1536.824" timestamp="1590501526801" />
     <state x="431" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1590468796614">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
