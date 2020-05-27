@@ -1,5 +1,6 @@
-package org.river.models;
+package org.river.controllers;
 
+import org.river.controllers.FoulLanguageFilter;
 import org.river.entities.Comment;
 
 import java.util.List;
@@ -7,7 +8,7 @@ import java.util.List;
 /**
  * @author - Haribo
  */
-public class FoulLanguageGuardImpl implements FoulLanguageGuard {
+public class FoulLanguageFilterImpl implements FoulLanguageFilter {
     @Override
     public List<Comment> queryCommentsWithFoulLanguage(List<Comment> comments) {
         return null;

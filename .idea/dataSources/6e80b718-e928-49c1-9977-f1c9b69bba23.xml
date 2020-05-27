@@ -1210,7 +1210,7 @@ restaurant_id</ColNames>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="302" parent="286" name="foodcategory">
+    <column id="302" parent="286" name="food_category">
       <Position>3</Position>
       <DataType>varchar(100)|0s</DataType>
       <NotNull>1</NotNull>
