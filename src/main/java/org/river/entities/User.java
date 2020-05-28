@@ -5,7 +5,7 @@ package org.river.entities;
  */
 public class User {
     private Integer id;
-    private Integer role_id;
+    private Integer roleId;
     private String name;
     private String account;
     private String password;
@@ -15,9 +15,9 @@ public class User {
     public User() {
     }
 
-    public User(Integer id, Integer role_id, String name, String account, String password, String email, String department) {
+    public User(Integer id, Integer roleId, String name, String account, String password, String email, String department) {
         this.id = id;
-        this.role_id = role_id;
+        this.roleId = roleId;
         this.name = name;
         this.account = account;
         this.password = password;
@@ -33,12 +33,12 @@ public class User {
         this.id = id;
     }
 
-    public Integer getRole_id() {
-        return role_id;
+    public Integer getRoleId() {
+        return roleId;
     }
 
-    public void setRole_id(Integer role_id) {
-        this.role_id = role_id;
+    public void setRoleId(Integer roleId) {
+        this.roleId = roleId;
     }
 
     public String getName() {

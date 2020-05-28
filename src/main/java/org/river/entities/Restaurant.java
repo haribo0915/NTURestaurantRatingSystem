@@ -7,8 +7,8 @@ import javafx.scene.image.Image;
  */
 public class Restaurant {
     private Integer id;
-    private Integer area_id;
-    private Integer foodCategory_id;
+    private Integer areaId;
+    private Integer foodCategoryId;
     private String name;
     private String description;
     private Image image;
@@ -17,10 +17,10 @@ public class Restaurant {
     public Restaurant() {
     }
 
-    public Restaurant(Integer id, Integer area_id, Integer foodCategory_id, String name, String description, Image image, String address) {
+    public Restaurant(Integer id, Integer areaId, Integer foodCategoryId, String name, String description, Image image, String address) {
         this.id = id;
-        this.area_id = area_id;
-        this.foodCategory_id = foodCategory_id;
+        this.areaId = areaId;
+        this.foodCategoryId = foodCategoryId;
         this.name = name;
         this.description = description;
         this.image = image;
@@ -35,20 +35,20 @@ public class Restaurant {
         this.id = id;
     }
 
-    public Integer getArea_id() {
-        return area_id;
+    public Integer getAreaId() {
+        return areaId;
     }
 
-    public void setArea_id(Integer area_id) {
-        this.area_id = area_id;
+    public void setAreaId(Integer areaId) {
+        this.areaId = areaId;
     }
 
-    public Integer getFoodCategory_id() {
-        return foodCategory_id;
+    public Integer getFoodCategoryId() {
+        return foodCategoryId;
     }
 
-    public void setFoodCategory_id(Integer foodCategory_id) {
-        this.foodCategory_id = foodCategory_id;
+    public void setFoodCategoryId(Integer foodCategoryId) {
+        this.foodCategoryId = foodCategoryId;
     }
 
     public String getName() {

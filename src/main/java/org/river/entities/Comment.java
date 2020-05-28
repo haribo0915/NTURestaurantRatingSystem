@@ -8,8 +8,8 @@ import java.sql.Timestamp;
  */
 public class Comment {
     private Integer id;
-    private Integer user_id;
-    private Integer restaurant_id;
+    private Integer userId;
+    private Integer restaurantId;
     private Integer rate;
     private String description;
     private Image image;
@@ -18,10 +18,10 @@ public class Comment {
     public Comment() {
     }
 
-    public Comment(Integer id, Integer user_id, Integer restaurant_id, Integer rate, String description, Image image, Timestamp timestamp) {
+    public Comment(Integer id, Integer userId, Integer restaurantId, Integer rate, String description, Image image, Timestamp timestamp) {
         this.id = id;
-        this.user_id = user_id;
-        this.restaurant_id = restaurant_id;
+        this.userId = userId;
+        this.restaurantId = restaurantId;
         this.rate = rate;
         this.description = description;
         this.image = image;
@@ -36,20 +36,20 @@ public class Comment {
         this.id = id;
     }
 
-    public Integer getUser_id() {
-        return user_id;
+    public Integer getUserId() {
+        return userId;
     }
 
-    public void setUser_id(Integer user_id) {
-        this.user_id = user_id;
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 
-    public Integer getRestaurant_id() {
-        return restaurant_id;
+    public Integer getRestaurantId() {
+        return restaurantId;
     }
 
-    public void setRestaurant_id(Integer restaurant_id) {
-        this.restaurant_id = restaurant_id;
+    public void setRestaurantId(Integer restaurantId) {
+        this.restaurantId = restaurantId;
     }
 
     public Integer getRate() {

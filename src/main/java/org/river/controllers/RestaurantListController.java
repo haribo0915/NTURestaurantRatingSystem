@@ -7,6 +7,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import org.river.entities.Area;
 import org.river.entities.FoodCategory;
 import org.river.entities.Restaurant;
@@ -27,9 +28,9 @@ public class RestaurantListController implements Initializable {
     @FXML
     private TableColumn<Restaurant, String> nameCol;
     @FXML
-    private TableColumn<Restaurant, String> foodCategoryCol;
+    private TableColumn<Restaurant, Integer> foodCategoryCol;
     @FXML
-    private TableColumn<Restaurant, String> areaCol;
+    private TableColumn<Restaurant, Integer> areaCol;
     @FXML
     private TableColumn<Restaurant, String> addressCol;
     @FXML
@@ -44,27 +45,22 @@ public class RestaurantListController implements Initializable {
             ResultSet rs = conn.createStatement().executeQuery("select  * from restaurant");
 
             while(rs.next()) {
-                restaurantObservableList.add(new Restaurant(rs.getString("name"), rs.getString("food_category"),
-                        rs.getString("address"), rs.getString("area")));
+                Restaurant restaurant = new Restaurant(rs.getInt("id"), rs.getInt("food_category_id"), rs.getInt("area_id"),
+                rs.getString("name"), rs.getString("description"), (Image) rs.getBlob("image"), rs.getString("address"));
+                restaurantObservableList.add(restaurant);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
+        initTable();
+        restaurantTable.setItems(restaurantObservableList);
+
     }
     private void initTable() {
         nameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
-        foodCategoryCol.setCellValueFactory(new PropertyValueFactory<>("foodCategory"));
-        areaCol.setCellValueFactory(new PropertyValueFactory<>("area"));
+        foodCategoryCol.setCellValueFactory(new PropertyValueFactory<>("foodCategoryId"));
+        areaCol.setCellValueFactory(new PropertyValueFactory<>("areaId"));
         addressCol.setCellValueFactory(new PropertyValueFactory<>("address"));
-    }
-
-    private void refreshTable() {
-        initTable();
-        query = "SELECT a.firstname, a.lastname, a.gender, p.position, a.account_ID FROM account as a " +
-                "JOIN positions as p ON a.position_ID=p.position_ID " +
-                "ORDER BY a.firstname";
-        tblview.setItems(dao.getAccountsData(query));
-
     }
 }

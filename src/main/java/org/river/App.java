@@ -18,7 +18,7 @@ public class App extends Application {
     @Override
     public void start(Stage stage) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/Login.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/RestaurantList.fxml"));
             Parent root = null;
             root = loader.load();
             stage.setTitle("NTU Restaurant Rating System");
