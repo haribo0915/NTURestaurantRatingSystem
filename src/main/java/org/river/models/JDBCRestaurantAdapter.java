@@ -72,6 +72,16 @@ public class JDBCRestaurantAdapter implements RestaurantAdapter {
     }
 
     @Override
+    public Area queryArea(String name) throws QueryException {
+        return null;
+    }
+
+    @Override
+    public List<Area> queryAreas() throws QueryException {
+        return null;
+    }
+
+    @Override
     public FoodCategory createFoodCategory(FoodCategory foodCategory) throws CreateException {
         return null;
     }
@@ -88,6 +98,16 @@ public class JDBCRestaurantAdapter implements RestaurantAdapter {
 
     @Override
     public FoodCategory queryFoodCategory(Integer id) throws QueryException {
+        return null;
+    }
+
+    @Override
+    public FoodCategory queryFoodCategory(String name) throws QueryException {
+        return null;
+    }
+
+    @Override
+    public List<FoodCategory> queryFoodCategories() throws QueryException {
         return null;
     }
 
@@ -113,6 +133,11 @@ public class JDBCRestaurantAdapter implements RestaurantAdapter {
 
     @Override
     public List<Comment> queryComments(Restaurant restaurant) throws QueryException {
+        return null;
+    }
+
+    @Override
+    public List<UserComment> queryUserComments(Restaurant restaurant, User user) throws QueryException {
         return null;
     }
 }

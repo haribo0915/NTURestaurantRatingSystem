@@ -2,29 +2,29 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="de867bdc-71b1-437c-a8b1-59cf6870e4c2" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/fire.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/river/controllers/RestaurantDetailsController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/river/entities/UserComment.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/river/models/JDBCRestaurantAdapterFactory.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/river/models/JDBCUserAdapterFactory.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/river/models/RestaurantAdapterFactory.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/river/models/UserAdapterFactory.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/views/RestaurantDetails.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/river/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/river/App.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/river/controllers/DBConnector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/river/controllers/DBConnector.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/river/controllers/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/river/controllers/LoginController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/river/controllers/RestaurantListController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/river/controllers/RestaurantListController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/river/entities/Comment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/river/entities/Comment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/river/entities/Restaurant.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/river/entities/Restaurant.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/river/entities/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/river/entities/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/river/models/JDBCRestaurantAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/river/models/JDBCRestaurantAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/river/models/RestaurantAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/river/models/RestaurantAdapter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/views/Login.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/views/Login.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/views/RestaurantList.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/views/RestaurantList.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/module-info.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/module-info.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/org/river/App.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/river/App.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/river/entities/Area.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/river/entities/Area.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/river/entities/Comment.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/river/entities/Comment.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/river/entities/FoodCategory.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/river/entities/FoodCategory.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/river/entities/Restaurant.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/river/entities/Restaurant.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/river/entities/Role.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/river/entities/Role.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/river/entities/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/river/entities/User.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/river/controllers/LoginController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/river/controllers/LoginController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/river/controllers/RestaurantListController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/river/controllers/RestaurantListController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/org/river/models/JDBCRestaurantAdapter.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/river/models/JDBCRestaurantAdapter.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/river/models/JDBCUserAdapter.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/river/models/JDBCUserAdapter.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/org/river/models/RestaurantAdapter.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/river/models/RestaurantAdapter.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/river/models/UserAdapter.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/river/models/UserAdapter.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/views/Login.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/views/Login.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/views/RestaurantList.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/views/RestaurantList.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -70,6 +70,13 @@
         <item name="ntu_restaurant_rating_system@localhost" type="feb32156:DbDataSourceImpl" />
         <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
         <item name="ntu_restaurant_rating_system: schema" type="76f4a085:MysqlImplModel$Schema" />
+        <item name="comment: table" type="285a2a93:MysqlImplModel$Table" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="ntu_restaurant_rating_system@localhost" type="feb32156:DbDataSourceImpl" />
+        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
+        <item name="ntu_restaurant_rating_system: schema" type="76f4a085:MysqlImplModel$Schema" />
         <item name="food_category: table" type="285a2a93:MysqlImplModel$Table" />
       </path>
       <path>
@@ -87,8 +94,8 @@
       <list>
         <option value="Enum" />
         <option value="JavaFXApplication" />
-        <option value="Interface" />
         <option value="FxmlFile" />
+        <option value="Interface" />
         <option value="Class" />
       </list>
     </option>
@@ -112,6 +119,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/java/org/river/controllers" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.2" />
@@ -122,7 +130,11 @@
       <recent name="org.river.controllers" />
       <recent name="org.river.entities" />
     </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\NTU\OOP\project2\NTURestaurantRatingSystem\src\main\java\org\river\controllers" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\NTU\OOP\project2\NTURestaurantRatingSystem" />
       <recent name="D:\NTU\OOP\project2\NTURestaurantRatingSystem\src\main\resources" />
     </key>
   </component>
@@ -183,7 +195,7 @@
       <workItem from="1590509139173" duration="1439000" />
       <workItem from="1590514662520" duration="1984000" />
       <workItem from="1590551546635" duration="17119000" />
-      <workItem from="1590633413158" duration="6113000" />
+      <workItem from="1590633413158" duration="30778000" />
     </task>
     <servers />
   </component>
@@ -194,14 +206,18 @@
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="499" y="167" key="#com.intellij.codeInsight.editorActions.RestoreReferencesDialog" timestamp="1590674513301">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="499" y="167" key="#com.intellij.codeInsight.editorActions.RestoreReferencesDialog/0.0.1536.824@0.0.1536.824" timestamp="1590674513301" />
     <state x="278" y="68" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1590637970817">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="278" y="68" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.824@0.0.1536.824" timestamp="1590637970817" />
-    <state x="574" y="96" key="#com.intellij.ide.util.MemberChooser" timestamp="1590638352720">
+    <state x="574" y="96" key="#com.intellij.ide.util.MemberChooser" timestamp="1590676639615">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="574" y="96" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824@0.0.1536.824" timestamp="1590638352720" />
+    <state x="574" y="96" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824@0.0.1536.824" timestamp="1590676639615" />
     <state x="556" y="297" width="423" height="239" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes" timestamp="1590516511882">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -214,22 +230,38 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="499" y="159" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1536.824@0.0.1536.824" timestamp="1590633681731" />
-    <state width="1493" height="66" key="GridCell.Tab.0.bottom" timestamp="1590638463045">
+    <state width="1493" height="143" key="GridCell.Tab.0.bottom" timestamp="1590682574456">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="66" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1590638463045" />
-    <state width="1493" height="66" key="GridCell.Tab.0.center" timestamp="1590638463045">
+    <state width="1493" height="143" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1590682574456" />
+    <state width="1493" height="143" key="GridCell.Tab.0.center" timestamp="1590682574456">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="66" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1590638463045" />
-    <state width="1493" height="66" key="GridCell.Tab.0.left" timestamp="1590638463045">
+    <state width="1493" height="143" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1590682574456" />
+    <state width="1493" height="143" key="GridCell.Tab.0.left" timestamp="1590682574456">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="66" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1590638463045" />
-    <state width="1493" height="66" key="GridCell.Tab.0.right" timestamp="1590638463045">
+    <state width="1493" height="143" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1590682574456" />
+    <state width="1493" height="143" key="GridCell.Tab.0.right" timestamp="1590682574456">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="66" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1590638463045" />
+    <state width="1493" height="143" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1590682574456" />
+    <state width="1493" height="114" key="GridCell.Tab.1.bottom" timestamp="1590679346754">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="114" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1590679346754" />
+    <state width="1493" height="114" key="GridCell.Tab.1.center" timestamp="1590679346754">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="114" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1590679346754" />
+    <state width="1493" height="114" key="GridCell.Tab.1.left" timestamp="1590679346754">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="114" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1590679346754" />
+    <state width="1493" height="114" key="GridCell.Tab.1.right" timestamp="1590679346754">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="114" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1590679346754" />
     <state width="199" height="477" key="HiddenNamespacesPopup" timestamp="1590472661490">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -266,10 +298,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="197" y="114" key="new project wizard/0.0.1536.824@0.0.1536.824" timestamp="1590501526801" />
-    <state x="511" y="30" key="refactoring.ChangeSignatureDialog" timestamp="1590514916542">
+    <state x="880" y="60" key="refactoring.ChangeSignatureDialog" timestamp="1590677384656">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="511" y="30" key="refactoring.ChangeSignatureDialog/0.0.1536.824@0.0.1536.824" timestamp="1590514916542" />
+    <state x="880" y="60" key="refactoring.ChangeSignatureDialog/0.0.1536.824@0.0.1536.824" timestamp="1590677384656" />
     <state x="431" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1590634548837">
       <screen x="0" y="0" width="1536" height="824" />
     </state>

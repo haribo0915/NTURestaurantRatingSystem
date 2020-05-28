@@ -22,16 +22,22 @@ public interface RestaurantAdapter {
     Area updateArea(Area area) throws UpdateException;
     Area deleteArea(Area area) throws DeleteException;
     Area queryArea(Integer id) throws QueryException;
+    Area queryArea(String name) throws QueryException;
+    List<Area> queryAreas() throws QueryException;
 
     FoodCategory createFoodCategory(FoodCategory foodCategory) throws CreateException;
     FoodCategory updateFoodCategory(FoodCategory foodCategory) throws UpdateException;
     FoodCategory deleteFoodCategory(FoodCategory foodCategory) throws DeleteException;
     FoodCategory queryFoodCategory(Integer id) throws QueryException;
+    FoodCategory queryFoodCategory(String name) throws QueryException;
+    List<FoodCategory> queryFoodCategories() throws QueryException;
 
     Comment createComment(Comment comment) throws CreateException;
     Comment updateComment(Comment comment) throws UpdateException;
     Comment deleteComment(Comment comment) throws DeleteException;
     List<Comment> queryComments(User user) throws QueryException;
     List<Comment> queryComments(Restaurant restaurant) throws QueryException;
+
+    List<UserComment> queryUserComments(Restaurant restaurant, User user) throws QueryException;
 
 }

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <AnchorPane prefHeight="145.0" prefWidth="700.0">
+         <children>
+            <Label fx:id="restaurantNameLabel" layoutX="14.0" layoutY="9.0" prefHeight="42.0" prefWidth="194.0" text="Label" />
+            <Label fx:id="restaurantAddressLabel" layoutX="14.0" layoutY="58.0" prefHeight="35.0" prefWidth="243.0" text="Label" />
+            <Label layoutX="14.0" layoutY="100.0" prefHeight="35.0" prefWidth="99.0" text="Average  Rate: " />
+            <ImageView fx:id="restaurantImage" fitHeight="134.0" fitWidth="212.0" layoutX="437.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true" />
+            <Label fx:id="restaurantDescriptionLabel" alignment="CENTER" layoutX="208.0" layoutY="8.0" prefHeight="134.0" prefWidth="218.0" text="Label" />
+            <Label fx:id="restaurantRateLabel" layoutX="122.0" layoutY="100.0" prefHeight="35.0" prefWidth="42.0" text="Label" />
+         </children>
+      </AnchorPane>
+      <TableView fx:id="userCommentTable" layoutY="148.0" prefHeight="352.0" prefWidth="700.0">
+        <columns>
+          <TableColumn fx:id="nameCol" prefWidth="75.0" text="Name" />
+          <TableColumn fx:id="departmentCol" prefWidth="109.60001373291016" text="Department" />
+            <TableColumn fx:id="rateCol" prefWidth="44.00006103515625" text="Rate" />
+            <TableColumn fx:id="commentCol" minWidth="4.0" prefWidth="287.9999694824219" text="Comment" />
+            <TableColumn fx:id="dateCol" minWidth="0.0" prefWidth="180.800048828125" text="Date" />
+        </columns>
+      </TableView>
+   </children>
+</AnchorPane>

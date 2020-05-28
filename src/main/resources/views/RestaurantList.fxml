@@ -10,16 +10,17 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.river.controllers.RestaurantListController">
+<!-- Don't need to add fx:controller="org.river.controllers.RestaurantListController", I've set it from FXMLLoader -->
+<AnchorPane prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <AnchorPane prefHeight="502.0" prefWidth="273.0" style="-fx-background-color: #88d2f7;">
+      <AnchorPane layoutY="-1.0" prefHeight="502.0" prefWidth="273.0" style="-fx-background-color: #88d2f7;">
          <children>
             <ImageView fitHeight="42.0" fitWidth="37.0" layoutX="69.0" layoutY="49.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/hot-dog.png" />
                </image></ImageView>
-            <ComboBox layoutX="58.0" layoutY="178.0" prefWidth="150.0" promptText="Food Category" style="-fx-background-color: #88d2f7; -fx-border-color: #ffffff; -fx-border-width: 0px 0px 2px 0px;" />
-            <ComboBox layoutX="58.0" layoutY="235.0" prefWidth="150.0" promptText="Area" style="-fx-background-color: #88d2f7; -fx-border-width: 0px 0px 2px 0px; -fx-border-color: #ffffff;" />
+            <ComboBox fx:id="foodCategoryComboBox" layoutX="58.0" layoutY="178.0" prefWidth="150.0" promptText="Food Category" style="-fx-background-color: #88d2f7; -fx-border-color: #ffffff; -fx-border-width: 0px 0px 2px 0px;" />
+            <ComboBox fx:id="areaComboBox" layoutX="58.0" layoutY="238.0" prefWidth="150.0" promptText="Area" style="-fx-background-color: #88d2f7; -fx-border-width: 0px 0px 2px 0px; -fx-border-color: #ffffff;" />
             <ImageView fitHeight="26.0" fitWidth="37.0" layoutX="10.0" layoutY="178.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/food_icon.PNG" />
@@ -45,7 +46,7 @@
                   <Font name="Lucida Handwriting Italic" size="14.0" />
                </font>
             </Label>
-            <Button fx:id="queryHottestRestaurantBtn" alignment="BASELINE_LEFT" graphicTextGap="10.0" layoutX="3.0" layoutY="342.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="269.0" style="-fx-background-color: #88d2f7;" text="Search weekly hottest" textFill="#e835bc">
+            <Button fx:id="queryHottestRestaurantBtn" alignment="BASELINE_LEFT" graphicTextGap="10.0" layoutX="3.0" layoutY="342.0" mnemonicParsing="false" onAction="#queryHottestRestaurantHandler" prefHeight="38.0" prefWidth="269.0" style="-fx-background-color: #88d2f7;" text="Search weekly hottest" textFill="#e835bc">
                <graphic>
                   <ImageView fitHeight="33.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -56,44 +57,31 @@
                <font>
                   <Font name="Lucida Handwriting Italic" size="13.0" />
                </font></Button>
-            <Button fx:id="queryFoodCategoryBtn" layoutX="223.0" layoutY="178.0" mnemonicParsing="false" prefHeight="21.0" prefWidth="37.0" style="-fx-background-radius: 30;" text="Go" />
-            <Button fx:id="queryRestaurantAreaBtn" layoutX="223.0" layoutY="235.0" mnemonicParsing="false" prefHeight="21.0" prefWidth="37.0" style="-fx-background-radius: 30;" text="Go" />
+            <Button fx:id="queryRestaurantByFoodCategoryBtn" layoutX="223.0" layoutY="178.0" mnemonicParsing="false" onAction="#queryRestaurantByFoodCategoryHandler" prefHeight="21.0" prefWidth="37.0" style="-fx-background-radius: 30;" text="Go" />
+            <Button fx:id="queryRestaurantByAreaBtn" layoutX="223.0" layoutY="235.0" mnemonicParsing="false" onAction="#queryRestaurantByAreaHandler" prefHeight="21.0" prefWidth="37.0" style="-fx-background-radius: 30;" text="Go" />
             <ImageView fitHeight="26.0" fitWidth="41.0" layoutX="10.0" layoutY="291.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/title.png" />
                </image>
             </ImageView>
-            <ComboBox layoutX="59.0" layoutY="291.0" prefWidth="150.0" promptText="Restaurant Name" style="-fx-background-color: #88d2f7; -fx-border-width: 0px 0px 2px 0px; -fx-border-color: #ffffff;" />
-            <Button fx:id="queryFoodCategoryBtn" layoutX="223.0" layoutY="291.0" mnemonicParsing="false" prefHeight="21.0" prefWidth="37.0" style="-fx-background-radius: 30;" text="Go" />
-            <Button fx:id="queryWorstRestaurantBtn" alignment="BASELINE_LEFT" graphicTextGap="10.0" layoutX="3.0" layoutY="400.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="269.0" style="-fx-background-color: #88d2f7;" text="Search weekly worst" textFill="#e835bc">
-               <graphic>
-                  <ImageView fitHeight="33.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../images/bad.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-               <font>
-                  <Font name="Lucida Handwriting Italic" size="13.0" />
-               </font>
-            </Button>
+            <ComboBox fx:id="restaurantNameComboBox" layoutX="59.0" layoutY="291.0" prefWidth="150.0" promptText="Restaurant Name" style="-fx-background-color: #88d2f7; -fx-border-width: 0px 0px 2px 0px; -fx-border-color: #ffffff;" />
+            <Button fx:id="queryRestaurantByNameBtn" layoutX="223.0" layoutY="291.0" mnemonicParsing="false" onAction="#queryRestaurantByNameHandler" prefHeight="21.0" prefWidth="37.0" style="-fx-background-radius: 30;" text="Go" />
          </children>
       </AnchorPane>
       <AnchorPane layoutX="273.0" layoutY="-1.0" prefHeight="500.0" prefWidth="427.0">
          <children>
-            <TableView fx:id="restaurantTable" layoutY="90.0" prefHeight="412.0" prefWidth="427.0">
+            <TableView fx:id="restaurantTable" layoutY="100.0" prefHeight="402.0" prefWidth="427.0">
               <columns>
-                <TableColumn fx:id="nameCol" prefWidth="116.7999267578125" text="Name" />
-                <TableColumn fx:id="foodCategoryCol" prefWidth="104.79998779296875" text="Food Category" />
-                  <TableColumn fx:id="areaCol" minWidth="5.5999755859375" prefWidth="95.19998168945312" text="Area" />
-                  <TableColumn fx:id="addressCol" prefWidth="112.0" text="Address" />
+                <TableColumn fx:id="nameCol" prefWidth="171.199951171875" style="-fx-background-color: #88d2f7;" text="Name" />
+                  <TableColumn fx:id="addressCol" minWidth="0.0" prefWidth="255.2000305175781" style="-fx-background-color: #88d2f7;" text="Address" />
               </columns>
             </TableView>
-            <Label layoutX="49.0" layoutY="14.0" prefHeight="74.0" prefWidth="352.0" text="Restaurant Information" textFill="#da0b0b">
+            <Label layoutX="49.0" layoutY="14.0" prefHeight="26.0" prefWidth="352.0" text="Restaurant Information" textFill="#da0b0b">
                <font>
                   <Font name="Lucida Handwriting Italic" size="24.0" />
                </font>
             </Label>
+            <Button fx:id="querySelectedRestaurantBtn" layoutX="186.0" layoutY="65.0" mnemonicParsing="false" onAction="#querySelectedRestaurantHandler" style="-fx-background-radius: 50;" text="Search" />
          </children>
       </AnchorPane>
    </children>
