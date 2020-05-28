@@ -5,23 +5,23 @@ package org.river.entities;
  */
 public class User {
     private Integer id;
+    private Integer role_id;
     private String name;
     private String account;
     private String password;
     private String email;
-    private Role role;
     private String department;
 
     public User() {
     }
 
-    public User(Integer id, String name, String account, String password, String email, Role role, String department) {
+    public User(Integer id, Integer role_id, String name, String account, String password, String email, String department) {
         this.id = id;
+        this.role_id = role_id;
         this.name = name;
         this.account = account;
         this.password = password;
         this.email = email;
-        this.role = role;
         this.department = department;
     }
 
@@ -31,6 +31,14 @@ public class User {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public Integer getRole_id() {
+        return role_id;
+    }
+
+    public void setRole_id(Integer role_id) {
+        this.role_id = role_id;
     }
 
     public String getName() {
@@ -63,14 +71,6 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public Role getRole() {
-        return role;
-    }
-
-    public void setRole(Role role) {
-        this.role = role;
     }
 
     public String getDepartment() {

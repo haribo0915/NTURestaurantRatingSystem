@@ -12,11 +12,21 @@ public interface RestaurantAdapter {
     Restaurant createRestaurant(Restaurant restaurant) throws CreateException;
     Restaurant updateRestaurant(Restaurant restaurant) throws UpdateException;
     Restaurant deleteRestaurant(Restaurant restaurant) throws DeleteException;
-    List<Restaurant> queryWeeklyHottestRestaurants() throws QueryException;
-    List<Restaurant> queryWorstRestaurants() throws QueryException;
+    Restaurant queryRestaurant(String name) throws QueryException;
+    List<Restaurant> queryRestaurants() throws QueryException;
     List<Restaurant> queryRestaurants(Area area) throws QueryException;
     List<Restaurant> queryRestaurants(FoodCategory foodCategory) throws QueryException;
-    Restaurant queryRestaurant(String name) throws QueryException;
+    List<Restaurant> queryWeeklyHottestRestaurants() throws QueryException;
+
+    Area createArea(Area area) throws CreateException;
+    Area updateArea(Area area) throws UpdateException;
+    Area deleteArea(Area area) throws DeleteException;
+    Area queryArea(Integer id) throws QueryException;
+
+    FoodCategory createFoodCategory(FoodCategory foodCategory) throws CreateException;
+    FoodCategory updateFoodCategory(FoodCategory foodCategory) throws UpdateException;
+    FoodCategory deleteFoodCategory(FoodCategory foodCategory) throws DeleteException;
+    FoodCategory queryFoodCategory(Integer id) throws QueryException;
 
     Comment createComment(Comment comment) throws CreateException;
     Comment updateComment(Comment comment) throws UpdateException;

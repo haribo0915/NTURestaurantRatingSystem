@@ -40,7 +40,7 @@
                   <Image url="@../images/sweet.png" />
                </image>
             </ImageView>
-            <Label layoutX="4.0" layoutY="113.0" prefHeight="51.0" prefWidth="266.0" text="Search your favorite restaurant!" textFill="#e835bc">
+            <Label layoutX="5.0" layoutY="113.0" prefHeight="51.0" prefWidth="266.0" text="Search your favorite restaurant !" textFill="#e835bc">
                <font>
                   <Font name="Lucida Handwriting Italic" size="14.0" />
                </font>

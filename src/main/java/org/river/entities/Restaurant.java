@@ -7,31 +7,24 @@ import javafx.scene.image.Image;
  */
 public class Restaurant {
     private Integer id;
+    private Integer area_id;
+    private Integer foodCategory_id;
     private String name;
     private String description;
-    private FoodCategory foodCategory;
     private Image image;
     private String address;
-    private Area area;
 
     public Restaurant() {
     }
 
-    public Restaurant(String name, FoodCategory foodCategory, String address, Area area) {
-        this.name = name;
-        this.foodCategory = foodCategory;
-        this.address = address;
-        this.area = area;
-    }
-
-    public Restaurant(Integer id, String name, String description, FoodCategory foodCategory, Image image, String address, Area area) {
+    public Restaurant(Integer id, Integer area_id, Integer foodCategory_id, String name, String description, Image image, String address) {
         this.id = id;
+        this.area_id = area_id;
+        this.foodCategory_id = foodCategory_id;
         this.name = name;
         this.description = description;
-        this.foodCategory = foodCategory;
         this.image = image;
         this.address = address;
-        this.area = area;
     }
 
     public Integer getId() {
@@ -40,6 +33,22 @@ public class Restaurant {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public Integer getArea_id() {
+        return area_id;
+    }
+
+    public void setArea_id(Integer area_id) {
+        this.area_id = area_id;
+    }
+
+    public Integer getFoodCategory_id() {
+        return foodCategory_id;
+    }
+
+    public void setFoodCategory_id(Integer foodCategory_id) {
+        this.foodCategory_id = foodCategory_id;
     }
 
     public String getName() {
@@ -58,14 +67,6 @@ public class Restaurant {
         this.description = description;
     }
 
-    public FoodCategory getFoodCategory() {
-        return foodCategory;
-    }
-
-    public void setFoodCategory(FoodCategory foodCategory) {
-        this.foodCategory = foodCategory;
-    }
-
     public Image getImage() {
         return image;
     }
@@ -80,13 +81,5 @@ public class Restaurant {
 
     public void setAddress(String address) {
         this.address = address;
-    }
-
-    public Area getArea() {
-        return area;
-    }
-
-    public void setArea(Area area) {
-        this.area = area;
     }
 }
