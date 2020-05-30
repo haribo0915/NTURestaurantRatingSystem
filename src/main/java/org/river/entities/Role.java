@@ -5,12 +5,12 @@ package org.river.entities;
  */
 public class Role {
     private Integer id;
-    private Integer title;
+    private String title;
 
     public Role() {
     }
 
-    public Role(Integer id, Integer title) {
+    public Role(Integer id, String title) {
         this.id = id;
         this.title = title;
     }
@@ -23,11 +23,11 @@ public class Role {
         this.id = id;
     }
 
-    public Integer getTitle() {
+    public String getTitle() {
         return title;
     }
 
-    public void setTitle(Integer title) {
+    public void setTitle(String title) {
         this.title = title;
     }
 }
