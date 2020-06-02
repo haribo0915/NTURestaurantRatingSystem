@@ -2,13 +2,21 @@ package org.river.controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 import org.river.entities.User;
+import org.river.models.RestaurantAdapter;
+import org.river.models.RestaurantAdapterFactory;
 import org.river.models.UserAdapter;
 import org.river.models.UserAdapterFactory;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -16,6 +24,8 @@ import java.util.ResourceBundle;
  * @author - Haribo
  */
 public class RegisterController implements Initializable {
+    private RestaurantAdapterFactory restaurantAdapterFactory;
+    private RestaurantAdapter restaurantAdapter;
     private UserAdapterFactory userAdapterFactory;
     private UserAdapter userAdapter;
 
@@ -31,7 +41,9 @@ public class RegisterController implements Initializable {
     private TextField userDepartmentTextField;
 
 
-    public RegisterController(UserAdapterFactory userAdapterFactory) {
+    public RegisterController(RestaurantAdapterFactory restaurantAdapterFactory, UserAdapterFactory userAdapterFactory) {
+        this.restaurantAdapterFactory = restaurantAdapterFactory;
+        this.restaurantAdapter = restaurantAdapterFactory.create();
         this.userAdapterFactory = userAdapterFactory;
         this.userAdapter = userAdapterFactory.create();
     }
@@ -46,7 +58,25 @@ public class RegisterController implements Initializable {
             User user = new User(2, userNameTextField.getText(), userAccountTextField.getText(), userPasswordTextField.getText(),
                     userEmailTextField.getText(), userDepartmentTextField.getText());
             user = userAdapter.createUser(user);
+            loadRestaurantListView(event, user);
         } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void loadRestaurantListView(ActionEvent event, User currentUser) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/RestaurantList.fxml"));
+
+            RestaurantListController restaurantListController= new RestaurantListController(restaurantAdapterFactory, currentUser);
+            loader.setController(restaurantListController);
+
+            Parent restaurantListParent = loader.load();
+            Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(restaurantListParent));
+            stage.sizeToScene();
+            stage.show();
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }

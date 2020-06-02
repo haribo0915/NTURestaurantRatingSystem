@@ -6,6 +6,7 @@ import org.river.exceptions.CreateException;
 import org.river.exceptions.DeleteException;
 import org.river.exceptions.QueryException;
 import org.river.exceptions.UpdateException;
+import java.util.Random;
 
 /**
  * @author - Haribo
@@ -13,22 +14,32 @@ import org.river.exceptions.UpdateException;
 public class StubUserAdapter implements UserAdapter {
     @Override
     public User createUser(User user) throws CreateException {
-        return null;
+        Random rand = new Random();
+        Integer id = rand.nextInt(50);
+        id += 1;
+        return new User(id, user.getRoleId(), user.getName(), user.getAccount(), user.getPassword(),
+                user.getEmail(), user.getDepartment());
     }
 
     @Override
     public User updateUser(User user) throws UpdateException {
-        return null;
+        return user;
     }
 
     @Override
     public User deleteUser(User user) throws DeleteException {
-        return null;
+        return user;
     }
 
     @Override
     public User queryUser(String account, String password) throws QueryException {
-        return null;
+        if (account.equals("admin") && password.equals("admin")) {
+            return new User(1, 1, "admin", "admin", "admin",
+                    "admin@gmail.com","CSIE");
+        } else {
+            throw new QueryException("User Not Found");
+        }
+
     }
 
     @Override

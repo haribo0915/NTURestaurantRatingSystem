@@ -81,7 +81,7 @@ public class LoginController {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/Register.fxml"));
 
-            RegisterController registerController = new RegisterController(userAdapterFactory);
+            RegisterController registerController = new RegisterController(restaurantAdapterFactory, userAdapterFactory);
             loader.setController(registerController);
 
             Parent registerParent = loader.load();

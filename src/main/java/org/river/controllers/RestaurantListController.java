@@ -14,6 +14,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.river.entities.Area;
@@ -157,7 +158,7 @@ public class RestaurantListController implements Initializable {
         }
     }
 
-    public void userClickedOnRestaurantTable(ActionEvent event) {
+    public void userClickedOnRestaurantTable(MouseEvent event) {
         querySelectedRestaurantBtn.setDisable(false);
     }
 
@@ -166,8 +167,8 @@ public class RestaurantListController implements Initializable {
             Restaurant selectedRestaurant = restaurantTable.getSelectionModel().getSelectedItem();
             loadRestaurantDetailsView(event, selectedRestaurant);
             //refresh restaurant table
-            List<Restaurant> restaurantList = restaurantAdapter.queryRestaurants();
-            refreshRestaurantTable(restaurantList);
+            //List<Restaurant> restaurantList = restaurantAdapter.queryRestaurants();
+            //refreshRestaurantTable(restaurantList);
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -19,7 +19,7 @@
             <Label fx:id="restaurantRateLabel" layoutX="122.0" layoutY="100.0" prefHeight="35.0" prefWidth="42.0" text="Label" />
          </children>
       </AnchorPane>
-      <TableView fx:id="userCommentTable" layoutY="148.0" prefHeight="320.0" prefWidth="700.0">
+      <TableView fx:id="userCommentTable" layoutY="148.0" onMouseClicked="#userClickedOnUserCommentTable" prefHeight="320.0" prefWidth="700.0">
         <columns>
           <TableColumn fx:id="nameCol" prefWidth="75.0" text="Name" />
           <TableColumn fx:id="departmentCol" prefWidth="109.60001373291016" style="-fx: #88d2f7;" text="Department" />

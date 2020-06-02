@@ -3,6 +3,7 @@ package org.river.controllers;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -19,6 +20,7 @@ import org.river.entities.User;
 import org.river.entities.UserComment;
 import org.river.models.RestaurantAdapter;
 import org.river.models.RestaurantAdapterFactory;
+import org.w3c.dom.events.MouseEvent;
 
 import java.io.IOException;
 import java.net.URL;
@@ -103,6 +105,10 @@ public class RestaurantDetailsController implements Initializable {
         //querySelectedUserCommentBtn.setDisable(true);
     }
 
+    public void userClickedOnUserCommentTable(Event event) {
+        querySelectedUserCommentBtn.setDisable(false);
+    }
+
     private void initUserCommentsTable() {
         nameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
         departmentCol.setCellValueFactory(new PropertyValueFactory<>("department"));
@@ -176,9 +182,5 @@ public class RestaurantDetailsController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    public void userClickedOnUserCommentTable(ActionEvent event) {
-        querySelectedUserCommentBtn.setDisable(false);
     }
 }
