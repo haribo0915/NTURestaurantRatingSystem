@@ -9,7 +9,7 @@ import org.river.entities.Restaurant;
 import org.river.entities.Role;
 import org.river.entities.User;
 import org.river.exceptions.*;
-import org.river.utils.DBConnect;
+import org.river.models.DBConnect;
 
 public class JDBCUserAdapter implements UserAdapter {
     @Override
@@ -25,7 +25,10 @@ public class JDBCUserAdapter implements UserAdapter {
     		stat.setString(2, user.getName());
     		stat.setString(3, user.getAccount());
     		stat.setString(4, user.getPassword());
-    		stat.setString(5, user.getEmail());
+    		if (user.getEmail() == null)
+    			stat.setString(5, "");
+    		else
+    			stat.setString(5, user.getEmail());
     		stat.setString(6, user.getDepartment());
     		int reply = stat.executeUpdate();
     	}
@@ -33,20 +36,18 @@ public class JDBCUserAdapter implements UserAdapter {
     		throw new CreateException("createUser error");
     	}
     	
-    	User out = null;
     	String sqlQuery = "select u.id from user u where account=?";
     	try {
     		PreparedStatement stat = con.prepareStatement(sqlQuery);
     		stat.setString(1, user.getAccount());
     		ResultSet rs = stat.executeQuery();
     		rs.next();
-    		out = new User(rs.getInt("id"), user.getRoleId(), 
+    		return new User(rs.getInt("id"), user.getRoleId(), 
  				   user.getName(), user.getAccount(), user.getPassword(), 
  				   user.getEmail(), user.getDepartment());
     	} catch(Exception e) {
     		throw new CreateException("createRole error: fail to insert");
     	}
-    	return out;
     }
 
     @Override
@@ -62,7 +63,10 @@ public class JDBCUserAdapter implements UserAdapter {
     		stat.setString(2, user.getName());
     		stat.setString(3, user.getAccount());
     		stat.setString(4, user.getPassword());
-    		stat.setString(5, user.getEmail());
+    		if (user.getEmail() == null)
+    			stat.setString(5, "");
+    		else
+    			stat.setString(5, user.getEmail());
     		stat.setString(6, user.getDepartment());
     		stat.setInt(7, user.getId());
     		int reply = stat.executeUpdate();
@@ -111,7 +115,7 @@ public class JDBCUserAdapter implements UserAdapter {
     		rs.next();
     		
     		// check password
-	    	if (!password.matches(rs.getString("password"))) {
+	    	if (!password.equals(rs.getString("password"))) {
 	    		errMsg = "wrong password";
 	    		throw new Exception();
 	    	}
@@ -160,7 +164,7 @@ public class JDBCUserAdapter implements UserAdapter {
     	return out;
     }
 
-    @Override ///QQQQQQQQ
+    @Override 
     public Role updateRole(Role role) throws UpdateException {
     	DBConnect DBC = new DBConnect();
     	Connection con = DBC.getConnect();
