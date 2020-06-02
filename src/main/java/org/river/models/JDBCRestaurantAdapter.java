@@ -226,7 +226,7 @@ public class JDBCRestaurantAdapter implements RestaurantAdapter {
     		ResultSet rs = stat.executeQuery();
 
     		while (rs.next())
-    			if (rs.getTimestamp("date").getTime() < 1000*3600*24*7) {
+    			if (new java.util.Date().getTime() - rs.getTimestamp("date").getTime() < 1000*3600*24*7) {
     				int restaurantId = rs.getInt("restaurant_id");
     				totalRate[restaurantId] += rs.getInt("rate");
     				//rateCount[restaurantId] += 1;
