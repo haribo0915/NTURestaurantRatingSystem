@@ -7,6 +7,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.fxml.FXML;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.river.entities.User;
 import org.river.exceptions.QueryException;
@@ -63,6 +64,33 @@ public class LoginController {
             stage.setScene(new Scene(restaurantListParent));
             stage.sizeToScene();
             stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void registerHandler(ActionEvent event) {
+        try {
+            loadRegisterView(event);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void loadRegisterView(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/Register.fxml"));
+
+            RegisterController registerController = new RegisterController(userAdapterFactory);
+            loader.setController(registerController);
+
+            Parent registerParent = loader.load();
+            Stage stage = new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setScene(new Scene(registerParent));
+            stage.setTitle("Register");
+            stage.sizeToScene();
+            stage.showAndWait();
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -1,20 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="319.0" prefWidth="548.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Label alignment="CENTER" layoutX="22.0" layoutY="56.0" prefHeight="38.0" prefWidth="94.0" text="Name" />
-      <Label fx:id="userNameLabel" alignment="CENTER" layoutX="129.0" layoutY="56.0" prefHeight="38.0" prefWidth="78.0" text="Label" />
-      <Label alignment="CENTER" layoutX="22.0" layoutY="297.0" prefHeight="38.0" prefWidth="94.0" text="Time" />
-      <Label alignment="CENTER" layoutX="22.0" layoutY="136.0" prefHeight="38.0" prefWidth="94.0" text="Department" />
-      <Label alignment="CENTER" layoutX="22.0" layoutY="222.0" prefHeight="38.0" prefWidth="94.0" text="Rate" />
-      <Label fx:id="userDepartmentLabel" alignment="CENTER" layoutX="129.0" layoutY="136.0" prefHeight="38.0" prefWidth="78.0" text="Label" />
-      <Label fx:id="userRateLabel" alignment="CENTER" layoutX="129.0" layoutY="222.0" prefHeight="38.0" prefWidth="78.0" text="Label" />
-      <Label fx:id="userCommentedTimeLabel" alignment="CENTER" layoutX="129.0" layoutY="297.0" prefHeight="38.0" prefWidth="78.0" text="Label" />
-      <Label fx:id="userCommentLabel" alignment="TOP_LEFT" layoutX="253.0" layoutY="180.0" prefHeight="205.0" prefWidth="338.0" text="Label" />
-      <ImageView fx:id="userUploadImage" fitHeight="150.0" fitWidth="200.0" layoutX="300.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
+      <Label fx:id="userNameLabel" layoutX="83.0" layoutY="34.0" prefHeight="38.0" prefWidth="127.0" text="Label" />
+      <Label fx:id="userDepartmentLabel" layoutX="83.0" layoutY="98.0" prefHeight="38.0" prefWidth="127.0" text="Label" />
+      <Label fx:id="userRateLabel" layoutX="82.0" layoutY="161.0" prefHeight="38.0" prefWidth="61.0" text="Label" />
+      <Label fx:id="userCommentedTimeLabel" layoutX="82.0" layoutY="223.0" prefHeight="38.0" prefWidth="155.0" text="Label" />
+      <Label fx:id="userCommentLabel" alignment="TOP_LEFT" layoutX="247.0" layoutY="160.0" prefHeight="150.0" prefWidth="275.0" text="Label" />
+      <ImageView fx:id="userUploadImage" fitHeight="133.0" fitWidth="186.0" layoutX="233.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fitHeight="32.0" fitWidth="32.0" layoutX="31.0" layoutY="37.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/name_blue.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="32.0" fitWidth="38.0" layoutX="31.0" layoutY="101.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/tarot.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="32.0" fitWidth="32.0" layoutX="31.0" layoutY="164.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/star.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="32.0" fitWidth="32.0" layoutX="31.0" layoutY="226.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/time.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

@@ -14,6 +14,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.river.entities.Area;
 import org.river.entities.FoodCategory;
@@ -24,6 +25,7 @@ import org.river.models.RestaurantAdapterFactory;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -105,14 +107,18 @@ public class RestaurantListController implements Initializable {
         addressCol.setCellValueFactory(new PropertyValueFactory<>("address"));
     }
 
+    private void refreshRestaurantTable(List<Restaurant> restaurantList) {
+        restaurantTableObservableList.clear();
+        restaurantTableObservableList.addAll(restaurantList);
+        restaurantTable.setItems(restaurantTableObservableList);
+    }
+
     public void queryRestaurantByFoodCategoryHandler(ActionEvent event) {
         try {
             FoodCategory foodCategory = restaurantAdapter.queryFoodCategory(foodCategoryComboBox.getValue());
             List<Restaurant> restaurantList = restaurantAdapter.queryRestaurants(foodCategory);
-
-            restaurantTableObservableList.clear();
-            restaurantTableObservableList.addAll(restaurantList);
-            restaurantTable.setItems(restaurantTableObservableList);
+            //refresh restaurant table
+            refreshRestaurantTable(restaurantList);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -122,10 +128,8 @@ public class RestaurantListController implements Initializable {
         try {
             Area area = restaurantAdapter.queryArea(areaComboBox.getValue());
             List<Restaurant> restaurantList = restaurantAdapter.queryRestaurants(area);
-
-            restaurantTableObservableList.clear();
-            restaurantTableObservableList.addAll(restaurantList);
-            restaurantTable.setItems(restaurantTableObservableList);
+            //refresh restaurant table
+            refreshRestaurantTable(restaurantList);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -133,11 +137,11 @@ public class RestaurantListController implements Initializable {
 
     public void queryRestaurantByNameHandler(ActionEvent event) {
         try {
+            List<Restaurant> restaurantList = new ArrayList<>();
             Restaurant restaurant = restaurantAdapter.queryRestaurant(restaurantNameComboBox.getValue());
-
-            restaurantTableObservableList.clear();
-            restaurantTableObservableList.add(restaurant);
-            restaurantTable.setItems(restaurantTableObservableList);
+            restaurantList.add(restaurant);
+            //refresh restaurant table
+            refreshRestaurantTable(restaurantList);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -146,10 +150,8 @@ public class RestaurantListController implements Initializable {
     public void queryHottestRestaurantHandler(ActionEvent event) {
         try {
             List<Restaurant> restaurantList = restaurantAdapter.queryWeeklyHottestRestaurants();
-
-            restaurantTableObservableList.clear();
-            restaurantTableObservableList.addAll(restaurantList);
-            restaurantTable.setItems(restaurantTableObservableList);
+            //refresh restaurant table
+            refreshRestaurantTable(restaurantList);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -163,7 +165,9 @@ public class RestaurantListController implements Initializable {
         try {
             Restaurant selectedRestaurant = restaurantTable.getSelectionModel().getSelectedItem();
             loadRestaurantDetailsView(event, selectedRestaurant);
-
+            //refresh restaurant table
+            List<Restaurant> restaurantList = restaurantAdapter.queryRestaurants();
+            refreshRestaurantTable(restaurantList);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -182,6 +186,79 @@ public class RestaurantListController implements Initializable {
             stage.sizeToScene();
             stage.show();
         } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void createRestaurantHandler(ActionEvent event) {
+        try {
+            loadCreateRestaurantView(event);
+            //refresh restaurant table
+            List<Restaurant> restaurantList = restaurantAdapter.queryRestaurants();
+            refreshRestaurantTable(restaurantList);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void loadCreateRestaurantView(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/ModifyRestaurant.fxml"));
+
+            CreateRestaurantController modifyRestaurantController = new CreateRestaurantController(restaurantAdapterFactory, this.currentUser);
+            loader.setController(modifyRestaurantController);
+
+            Parent modifyRestaurantParent = loader.load();
+            Stage stage = new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setTitle("Create Restaurant");
+            stage.setScene(new Scene(modifyRestaurantParent));
+            stage.sizeToScene();
+            stage.showAndWait();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void editRestaurantHandler(ActionEvent event) {
+        try {
+            Restaurant selectedRestaurant = restaurantTable.getSelectionModel().getSelectedItem();
+            loadEditRestaurantView(event, selectedRestaurant);
+            //refresh restaurant table
+            List<Restaurant> restaurantList = restaurantAdapter.queryRestaurants();
+            refreshRestaurantTable(restaurantList);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void loadEditRestaurantView(ActionEvent event, Restaurant selectedRestaurant) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/ModifyRestaurant.fxml"));
+
+            EditRestaurantController editRestaurantController = new EditRestaurantController(restaurantAdapterFactory, this.currentUser, selectedRestaurant);
+            loader.setController(editRestaurantController);
+
+            Parent modifyRestaurantParent = loader.load();
+            Stage stage = new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setTitle("Edit Restaurant");
+            stage.setScene(new Scene(modifyRestaurantParent));
+            stage.sizeToScene();
+            stage.showAndWait();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void deleteRestaurantHandler(ActionEvent event) {
+        try {
+            Restaurant selectedRestaurant = restaurantTable.getSelectionModel().getSelectedItem();
+            selectedRestaurant = restaurantAdapter.deleteRestaurant(selectedRestaurant);
+            //refresh restaurant table
+            List<Restaurant> restaurantList = restaurantAdapter.queryRestaurants();
+            refreshRestaurantTable(restaurantList);
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

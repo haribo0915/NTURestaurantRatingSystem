@@ -12,6 +12,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.river.entities.Restaurant;
 import org.river.entities.User;
@@ -47,6 +48,9 @@ public class RestaurantDetailsController implements Initializable {
     private ImageView restaurantImage;
 
     @FXML
+    private Button querySelectedUserCommentBtn;
+
+    @FXML
     private TableView<UserComment> userCommentTable;
     @FXML
     private TableColumn<UserComment, String> nameCol;
@@ -73,13 +77,7 @@ public class RestaurantDetailsController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
-            Image mockImage = new Image("file:src/main/resources/images/fire.png");
-            Timestamp mockTimestamp = new Timestamp(System.currentTimeMillis());
-            UserComment mockUserComment = new UserComment(1, "mock", "mock account", "mock password", "mock email", "mock department", 1, 1, 3, "mock description", mockImage, mockTimestamp);
-            this.restaurant = new Restaurant(1, 1, 1, "mock restaurant", "mock description", mockImage, "mock address");
-            //List<UserComment> userCommentList = restaurantAdapter.queryUserComments(restaurant);
-            List<UserComment> userCommentList = new ArrayList<>();
-            userCommentList.add(mockUserComment);
+            List<UserComment> userCommentList = restaurantAdapter.queryUserComments(restaurant);
             userCommentTableObservableList.addAll(userCommentList);
             userCommentTable.setItems(userCommentTableObservableList);
 
@@ -102,6 +100,7 @@ public class RestaurantDetailsController implements Initializable {
         }
 
         initUserCommentsTable();
+        //querySelectedUserCommentBtn.setDisable(true);
     }
 
     private void initUserCommentsTable() {
@@ -110,6 +109,12 @@ public class RestaurantDetailsController implements Initializable {
         rateCol.setCellValueFactory(new PropertyValueFactory<>("rate"));
         commentCol.setCellValueFactory(new PropertyValueFactory<>("description"));
         dateCol.setCellValueFactory(new PropertyValueFactory<>("timestamp"));
+    }
+
+    private void refreshUserCommentTable(List<UserComment> userCommentList) {
+        userCommentTableObservableList.clear();
+        userCommentTableObservableList.addAll(userCommentList);
+        userCommentTable.setItems(userCommentTableObservableList);
     }
 
     public void querySelectedUserCommentHandler(ActionEvent event) {
@@ -126,22 +131,28 @@ public class RestaurantDetailsController implements Initializable {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/UserCommentDetails.fxml"));
 
-            UserCommentDetailsController userCommentDetailsController = new UserCommentDetailsController(selectedUserComment, this.currentUser);
+            //UserCommentDetailsController userCommentDetailsController = new UserCommentDetailsController(selectedUserComment, this.currentUser);
+            UserCommentDetailsController userCommentDetailsController = new UserCommentDetailsController(new UserComment(), this.currentUser);
             loader.setController(userCommentDetailsController);
 
             Parent UserCommentDetailsParent = loader.load();
             Stage stage = new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setTitle("User Comment Details");
             stage.setScene(new Scene(UserCommentDetailsParent));
             stage.sizeToScene();
-            stage.show();
+            stage.showAndWait();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public void createNewCommentHandler(ActionEvent event) {
+    public void createCommentHandler(ActionEvent event) {
         try {
             loadCommentDialogView(event);
+            //refresh user comment table
+            List<UserComment> userCommentList = restaurantAdapter.queryUserComments(this.restaurant);
+            refreshUserCommentTable(userCommentList);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -151,16 +162,23 @@ public class RestaurantDetailsController implements Initializable {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/CommentDialog.fxml"));
 
-            CommentDialogController commentDialogController = new CommentDialogController(restaurantAdapterFactory, this.currentUser, restaurant.getId());
+            //CommentDialogController commentDialogController = new CommentDialogController(restaurantAdapterFactory, this.currentUser, restaurant.getId());
+            CommentDialogController commentDialogController = new CommentDialogController(restaurantAdapterFactory, this.currentUser, 1);
             loader.setController(commentDialogController);
 
             Parent CommentDialogParent = loader.load();
             Stage stage = new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setTitle("Modify User Comment");
             stage.setScene(new Scene(CommentDialogParent));
             stage.sizeToScene();
-            stage.show();
+            stage.showAndWait();
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public void userClickedOnUserCommentTable(ActionEvent event) {
+        querySelectedUserCommentBtn.setDisable(false);
     }
 }

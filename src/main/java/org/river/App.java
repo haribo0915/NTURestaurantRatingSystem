@@ -10,10 +10,7 @@ import javafx.stage.Stage;
 import org.river.controllers.LoginController;
 import org.river.controllers.RestaurantListController;
 import org.river.entities.Restaurant;
-import org.river.models.JDBCRestaurantAdapter;
-import org.river.models.JDBCRestaurantAdapterFactory;
-import org.river.models.JDBCUserAdapter;
-import org.river.models.JDBCUserAdapterFactory;
+import org.river.models.*;
 
 import java.io.IOException;
 
@@ -29,8 +26,8 @@ public class App extends Application {
             Parent root = loader.load();
 
             LoginController loginController = loader.getController();
-            loginController.setUserAdapterFactory(new JDBCUserAdapterFactory());
-            loginController.setRestaurantAdapterFactory(new JDBCRestaurantAdapterFactory());
+            loginController.setUserAdapterFactory(new StubUserAdapterFactory());
+            loginController.setRestaurantAdapterFactory(new StubRestaurantAdapterFactory());
 
             stage.setTitle("NTU Restaurant Rating System");
             stage.setScene(new Scene(root));

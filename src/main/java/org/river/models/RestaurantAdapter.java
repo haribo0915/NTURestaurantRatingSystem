@@ -37,7 +37,7 @@ public interface RestaurantAdapter {
     Comment deleteComment(Comment comment) throws DeleteException;
     List<Comment> queryComments(User user) throws QueryException;
     List<Comment> queryComments(Restaurant restaurant) throws QueryException;
-
-    List<UserComment> queryUserComments(Restaurant restaurant, User user) throws QueryException;
+    List<UserComment> queryUserComments(Restaurant restaurant) throws QueryException;
+    Comment queryComment(Integer userId, Integer restaurantId) throws QueryException;
 
 }

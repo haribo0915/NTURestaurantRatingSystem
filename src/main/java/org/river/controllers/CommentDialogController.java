@@ -52,7 +52,15 @@ public class CommentDialogController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+        try {
+            comment = restaurantAdapter.queryComment(currentUser.getId(), restaurantId);
+            rateTextField.setText(String.valueOf(comment.getRate()));
+            commentTextField.setText(comment.getDescription());
+            uploadImagePathTextField.setText(comment.getImage().getUrl());
+        } catch (Exception e) {
+            comment = new Comment();
+            e.printStackTrace();
+        }
     }
 
     public void uploadImageBtnHandler(ActionEvent event) {
@@ -67,10 +75,23 @@ public class CommentDialogController implements Initializable {
             Integer rate = Integer.valueOf(rateTextField.getText());
             String description = commentTextField.getText();
 
-            comment = new Comment(currentUser.getId(), restaurantId, rate, description, this.image, new Timestamp(System.currentTimeMillis()));
-            comment = restaurantAdapter.createComment(comment);
+            setComment(currentUser.getId(), restaurantId, description, image, new Timestamp(System.currentTimeMillis()));
+            if (comment.getId() == null) {
+                comment = restaurantAdapter.createComment(comment);
+            } else {
+                comment = restaurantAdapter.updateComment(comment);
+            }
+
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private void setComment(Integer userId, Integer restaurantId, String description, Image image, Timestamp timestamp) {
+        comment.setUserId(userId);
+        comment.setRestaurantId(restaurantId);
+        comment.setDescription(description);
+        comment.setImage(image);
+        comment.setTimestamp(timestamp);
     }
 }

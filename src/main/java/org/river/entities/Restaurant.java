@@ -17,6 +17,15 @@ public class Restaurant {
     public Restaurant() {
     }
 
+    public Restaurant(Integer areaId, Integer foodCategoryId, String name, String description, Image image, String address) {
+        this.areaId = areaId;
+        this.foodCategoryId = foodCategoryId;
+        this.name = name;
+        this.description = description;
+        this.image = image;
+        this.address = address;
+    }
+
     public Restaurant(Integer id, Integer areaId, Integer foodCategoryId, String name, String description, Image image, String address) {
         this.id = id;
         this.areaId = areaId;

@@ -35,7 +35,7 @@
    <center>
       <AnchorPane prefHeight="200.0" prefWidth="350.0" style="-fx-background-color: #ffffff;" BorderPane.alignment="CENTER">
          <children>
-            <TextField fx:id="userName" layoutX="95.0" layoutY="211.0" promptText="User Name" style="-fx-background-color: transparent; -fx-border-color: #0598ff; -fx-border-width: 0px 0px 2px 0px;" />
+            <TextField fx:id="userName" layoutX="95.0" layoutY="211.0" promptText="Account" style="-fx-background-color: transparent; -fx-border-color: #0598ff; -fx-border-width: 0px 0px 2px 0px;" />
             <PasswordField fx:id="password" layoutX="95.0" layoutY="265.0" promptText="Password" style="-fx-background-color: transparent; -fx-border-width: 0px 0px 2px 0px; -fx-border-color: #0598ff;" />
             <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="66.0" layoutY="215.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -58,7 +58,7 @@
                   <Font name="Arial" size="23.0" />
                </font>
             </Text>
-            <Hyperlink layoutX="247.0" layoutY="458.0" text="Sign up">
+            <Hyperlink fx:id="registerLink" layoutX="247.0" layoutY="458.0" onAction="#registerHandler" text="Sign up">
                <font>
                   <Font size="13.0" />
                </font>

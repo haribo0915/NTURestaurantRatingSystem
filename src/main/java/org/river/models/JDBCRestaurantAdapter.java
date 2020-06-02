@@ -661,31 +661,37 @@ public class JDBCRestaurantAdapter implements RestaurantAdapter {
     }
 
     @Override
-    public List<UserComment> queryUserComments(Restaurant restaurant, User user) throws QueryException {
-    	DBConnect DBC = new DBConnect();
-    	Connection con = DBC.getConnect();
-    	String sqlQuery = "select * from comment where user_id=? and restaurant_id=?";
-    	
-    	List<UserComment> out = new ArrayList<UserComment>();
-    	try {
-    		PreparedStatement stat = con.prepareStatement(sqlQuery);
-    		stat.setInt(1, user.getId());
-    		stat.setInt(2, restaurant.getId());
-    		ResultSet rs = stat.executeQuery();
-    		
-    		while (rs.next()) 
-	    		out.add(new UserComment(user.getRoleId(), user.getName(), 
-	    				user.getAccount(), user.getPassword(), 
-	    				user.getEmail(), user.getDepartment(), 
-	    				user.getId(), restaurant.getId(), 
-	    				rs.getInt("rate"), rs.getString("description"), 
-	    				ImageTransform.BlobToImage(rs.getBlob("image")), 
-	    				rs.getTimestamp("date")));
-    		
-    	}
-    	catch(Exception e) {
-    		throw new QueryException("queryUserComments: error: List");
-    	}
-    	return out;
+    public List<UserComment> queryUserComments(Restaurant restaurant) throws QueryException {
+//    	DBConnect DBC = new DBConnect();
+//    	Connection con = DBC.getConnect();
+//    	String sqlQuery = "select * from comment where user_id=? and restaurant_id=?";
+//
+//    	List<UserComment> out = new ArrayList<UserComment>();
+//    	try {
+//    		PreparedStatement stat = con.prepareStatement(sqlQuery);
+//    		stat.setInt(1, user.getId());
+//    		stat.setInt(2, restaurant.getId());
+//    		ResultSet rs = stat.executeQuery();
+//
+//    		while (rs.next())
+//	    		out.add(new UserComment(user.getRoleId(), user.getName(),
+//	    				user.getAccount(), user.getPassword(),
+//	    				user.getEmail(), user.getDepartment(),
+//	    				user.getId(), restaurant.getId(),
+//	    				rs.getInt("rate"), rs.getString("description"),
+//	    				ImageTransform.BlobToImage(rs.getBlob("image")),
+//	    				rs.getTimestamp("date")));
+//
+//    	}
+//    	catch(Exception e) {
+//    		throw new QueryException("queryUserComments: error: List");
+//    	}
+//    	return out;
+		return null;
     }
+
+	@Override
+	public Comment queryComment(Integer userId, Integer restaurantId) throws QueryException {
+		return null;
+	}
 }

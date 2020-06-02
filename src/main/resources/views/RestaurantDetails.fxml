@@ -15,20 +15,20 @@
             <Label fx:id="restaurantAddressLabel" layoutX="14.0" layoutY="58.0" prefHeight="35.0" prefWidth="243.0" text="Label" />
             <Label layoutX="14.0" layoutY="100.0" prefHeight="35.0" prefWidth="99.0" text="Average  Rate: " />
             <ImageView fx:id="restaurantImage" fitHeight="134.0" fitWidth="212.0" layoutX="437.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true" />
-            <Label fx:id="restaurantDescriptionLabel" alignment="CENTER" layoutX="208.0" layoutY="8.0" prefHeight="134.0" prefWidth="218.0" text="Label" />
+            <Label fx:id="restaurantDescriptionLabel" alignment="TOP_LEFT" layoutX="208.0" layoutY="8.0" prefHeight="134.0" prefWidth="218.0" text="Label" />
             <Label fx:id="restaurantRateLabel" layoutX="122.0" layoutY="100.0" prefHeight="35.0" prefWidth="42.0" text="Label" />
          </children>
       </AnchorPane>
       <TableView fx:id="userCommentTable" layoutY="148.0" prefHeight="320.0" prefWidth="700.0">
         <columns>
           <TableColumn fx:id="nameCol" prefWidth="75.0" text="Name" />
-          <TableColumn fx:id="departmentCol" prefWidth="109.60001373291016" text="Department" />
+          <TableColumn fx:id="departmentCol" prefWidth="109.60001373291016" style="-fx: #88d2f7;" text="Department" />
             <TableColumn fx:id="rateCol" prefWidth="44.00006103515625" text="Rate" />
             <TableColumn fx:id="commentCol" minWidth="4.0" prefWidth="287.9999694824219" text="Comment" />
             <TableColumn fx:id="dateCol" minWidth="0.0" prefWidth="180.800048828125" text="Date" />
         </columns>
       </TableView>
       <Button fx:id="querySelectedUserCommentBtn" layoutX="616.0" layoutY="474.0" mnemonicParsing="false" onAction="#querySelectedUserCommentHandler" text="See Details" />
-      <Button fx:id="createNewCommentBtn" layoutX="469.0" layoutY="474.0" mnemonicParsing="false" onAction="#createNewCommentHandler" text="Upload Comment" />
+      <Button fx:id="createCommentBtn" layoutX="469.0" layoutY="474.0" mnemonicParsing="false" onAction="#createCommentHandler" text="Upload Comment" />
    </children>
 </AnchorPane>

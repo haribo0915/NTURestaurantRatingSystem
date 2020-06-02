@@ -15,6 +15,15 @@ public class User {
     public User() {
     }
 
+    public User(Integer roleId, String name, String account, String password, String email, String department) {
+        this.roleId = roleId;
+        this.name = name;
+        this.account = account;
+        this.password = password;
+        this.email = email;
+        this.department = department;
+    }
+
     public User(Integer id, Integer roleId, String name, String account, String password, String email, String department) {
         this.id = id;
         this.roleId = roleId;

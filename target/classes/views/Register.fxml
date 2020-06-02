@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="446.0" prefWidth="257.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <AnchorPane prefHeight="456.0" prefWidth="256.0" style="-fx-background-color: #ffffff;">
+         <children>
+            <ImageView fitHeight="26.0" fitWidth="37.0" layoutX="18.0" layoutY="159.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/user.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="26.0" fitWidth="41.0" layoutX="18.0" layoutY="212.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/password.png" />
+               </image>
+            </ImageView>
+            <Label alignment="CENTER" layoutX="33.0" layoutY="37.0" prefHeight="51.0" prefWidth="184.0" text="User Information" textFill="#3668e3">
+               <font>
+                  <Font name="Arial" size="18.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="26.0" fitWidth="41.0" layoutX="18.0" layoutY="267.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/mail.png" />
+               </image>
+            </ImageView>
+            <Button fx:id="registerBtn" layoutX="95.0" layoutY="394.0" mnemonicParsing="false" onAction="#registerHandler" style="-fx-background-radius: 50; -fx-background-color: #0598ff;" text="Sign Up" textFill="WHITE" />
+            <ImageView fitHeight="33.0" fitWidth="35.0" layoutX="17.0" layoutY="322.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/department.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="26.0" fitWidth="37.0" layoutX="18.0" layoutY="103.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/name.png" />
+               </image>
+            </ImageView>
+            <TextField fx:id="userNameTextField" layoutX="69.0" layoutY="103.0" promptText="User Name" style="-fx-background-color: transparent; -fx-border-color: #0598ff; -fx-border-width: 0px 0px 2px 0px;" />
+            <TextField fx:id="userAccountTextField" layoutX="69.0" layoutY="159.0" promptText="Account" style="-fx-background-color: transparent; -fx-border-color: #0598ff; -fx-border-width: 0px 0px 2px 0px;" />
+            <TextField fx:id="userDepartmentTextField" layoutX="69.0" layoutY="326.0" promptText="Department" style="-fx-background-color: transparent; -fx-border-color: #0598ff; -fx-border-width: 0px 0px 2px 0px;" />
+            <TextField fx:id="userEmailTextField" layoutX="69.0" layoutY="267.0" promptText="Email Address" style="-fx-background-color: transparent; -fx-border-color: #0598ff; -fx-border-width: 0px 0px 2px 0px;" />
+            <PasswordField fx:id="userPasswordTextField" layoutX="69.0" layoutY="212.0" promptText="Password" style="-fx-background-color: transparent; -fx-border-width: 0px 0px 2px 0px; -fx-border-color: #0598ff;" />
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>
