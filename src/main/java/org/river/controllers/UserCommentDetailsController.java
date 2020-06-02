@@ -1,0 +1,47 @@
+package org.river.controllers;
+
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
+import org.river.entities.User;
+import org.river.entities.UserComment;
+import org.river.models.RestaurantAdapter;
+import org.river.models.RestaurantAdapterFactory;
+
+import java.net.URL;
+import java.sql.Timestamp;
+import java.util.ResourceBundle;
+
+/**
+ * @author - Haribo
+ */
+public class UserCommentDetailsController implements Initializable {
+    private UserComment userComment;
+    private User currentUser;
+
+    @FXML
+    private Label userNameLabel;
+    @FXML
+    private Label userDepartmentLabel;
+    @FXML
+    private Label userRateLabel;
+    @FXML
+    private Label userCommentedTimeLabel;
+    @FXML
+    private ImageView userUploadImage;
+
+    public UserCommentDetailsController(UserComment userComment, User currentUser) {
+        this.userComment = userComment;
+        this.currentUser = currentUser;
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        userNameLabel.setText(userComment.getName());
+        userDepartmentLabel.setText(userComment.getDepartment());
+        userRateLabel.setText(String.valueOf(userComment.getRate()));
+        userCommentedTimeLabel.setText(String.valueOf(userComment.getTimestamp()));
+        userUploadImage.setImage(userComment.getImage());
+    }
+}

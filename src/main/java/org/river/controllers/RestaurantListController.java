@@ -18,6 +18,7 @@ import javafx.stage.Stage;
 import org.river.entities.Area;
 import org.river.entities.FoodCategory;
 import org.river.entities.Restaurant;
+import org.river.entities.User;
 import org.river.models.RestaurantAdapter;
 import org.river.models.RestaurantAdapterFactory;
 
@@ -32,6 +33,7 @@ import java.util.ResourceBundle;
 public class RestaurantListController implements Initializable {
     private RestaurantAdapterFactory restaurantAdapterFactory;
     private RestaurantAdapter restaurantAdapter;
+    private User currentUser;
 
     @FXML
     private ComboBox<String> foodCategoryComboBox;
@@ -59,9 +61,10 @@ public class RestaurantListController implements Initializable {
     @FXML
     private ObservableList<String> restaurantNameComboboxObservableList = FXCollections.observableArrayList();
 
-    public RestaurantListController(RestaurantAdapterFactory RestaurantAdapterFactory) {
+    public RestaurantListController(RestaurantAdapterFactory RestaurantAdapterFactory, User currentUser) {
         this.restaurantAdapterFactory = RestaurantAdapterFactory;
         this.restaurantAdapter = restaurantAdapterFactory.create();
+        this.currentUser = currentUser;
     }
 
     @Override
@@ -159,7 +162,6 @@ public class RestaurantListController implements Initializable {
     public void querySelectedRestaurantHandler(ActionEvent event) {
         try {
             Restaurant selectedRestaurant = restaurantTable.getSelectionModel().getSelectedItem();
-            //loadRestaurantDetailsView(event, selectedRestaurant);
             loadRestaurantDetailsView(event, selectedRestaurant);
 
         } catch (Exception e) {
@@ -171,7 +173,7 @@ public class RestaurantListController implements Initializable {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/RestaurantDetails.fxml"));
 
-            RestaurantDetailsController restaurantDetailsController = new RestaurantDetailsController(restaurantAdapterFactory, selectedRestaurant);
+            RestaurantDetailsController restaurantDetailsController = new RestaurantDetailsController(restaurantAdapterFactory, selectedRestaurant, this.currentUser);
             loader.setController(restaurantDetailsController);
 
             Parent restaurantDetailsParent = loader.load();
@@ -183,4 +185,5 @@ public class RestaurantListController implements Initializable {
             e.printStackTrace();
         }
     }
+
 }

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label alignment="CENTER" layoutX="22.0" layoutY="56.0" prefHeight="38.0" prefWidth="94.0" text="Name" />
+      <Label fx:id="userNameLabel" alignment="CENTER" layoutX="129.0" layoutY="56.0" prefHeight="38.0" prefWidth="78.0" text="Label" />
+      <Label alignment="CENTER" layoutX="22.0" layoutY="297.0" prefHeight="38.0" prefWidth="94.0" text="Time" />
+      <Label alignment="CENTER" layoutX="22.0" layoutY="136.0" prefHeight="38.0" prefWidth="94.0" text="Department" />
+      <Label alignment="CENTER" layoutX="22.0" layoutY="222.0" prefHeight="38.0" prefWidth="94.0" text="Rate" />
+      <Label fx:id="userDepartmentLabel" alignment="CENTER" layoutX="129.0" layoutY="136.0" prefHeight="38.0" prefWidth="78.0" text="Label" />
+      <Label fx:id="userRateLabel" alignment="CENTER" layoutX="129.0" layoutY="222.0" prefHeight="38.0" prefWidth="78.0" text="Label" />
+      <Label fx:id="userCommentedTimeLabel" alignment="CENTER" layoutX="129.0" layoutY="297.0" prefHeight="38.0" prefWidth="78.0" text="Label" />
+      <Label fx:id="userCommentLabel" alignment="TOP_LEFT" layoutX="253.0" layoutY="180.0" prefHeight="205.0" prefWidth="338.0" text="Label" />
+      <ImageView fx:id="userUploadImage" fitHeight="150.0" fitWidth="200.0" layoutX="300.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
+   </children>
+</AnchorPane>

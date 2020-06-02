@@ -2,7 +2,6 @@ package org.river.controllers;
 
 import javafx.event.*;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -11,14 +10,11 @@ import javafx.fxml.FXML;
 import javafx.stage.Stage;
 import org.river.entities.User;
 import org.river.exceptions.QueryException;
-import org.river.models.RestaurantAdapter;
 import org.river.models.RestaurantAdapterFactory;
 import org.river.models.UserAdapter;
 import org.river.models.UserAdapterFactory;
 
 import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
 
 /**
  * @author - Haribo
@@ -32,6 +28,9 @@ public class LoginController {
     @FXML
     private PasswordField password;
 
+    public LoginController() {
+    }
+
     public void setUserAdapterFactory(UserAdapterFactory userAdapterFactory) {
         this.userAdapterFactory = userAdapterFactory;
     }
@@ -44,19 +43,19 @@ public class LoginController {
 
         try {
             UserAdapter userAdapter = userAdapterFactory.create();
-            User user = userAdapter.queryUser(userName.getText(), password.getText());
+            User currentUser = userAdapter.queryUser(userName.getText(), password.getText());
             System.out.println("login success!!");
-            loadRestaurantListView(event);
+            loadRestaurantListView(event, currentUser);
         } catch (QueryException e) {
             System.out.println(e.getMessage());
         }
     }
 
-    private void loadRestaurantListView(ActionEvent event) {
+    private void loadRestaurantListView(ActionEvent event, User currentUser) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/RestaurantList.fxml"));
 
-            RestaurantListController restaurantListController= new RestaurantListController(restaurantAdapterFactory);
+            RestaurantListController restaurantListController= new RestaurantListController(restaurantAdapterFactory, currentUser);
             loader.setController(restaurantListController);
 
             Parent restaurantListParent = loader.load();

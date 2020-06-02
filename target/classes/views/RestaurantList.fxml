@@ -11,6 +11,7 @@
 <?import javafx.scene.text.Font?>
 
 <!-- Don't need to add fx:controller="org.river.controllers.RestaurantListController", I've set it from FXMLLoader -->
+
 <AnchorPane prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <AnchorPane layoutY="-1.0" prefHeight="502.0" prefWidth="273.0" style="-fx-background-color: #88d2f7;">
@@ -70,7 +71,7 @@
       </AnchorPane>
       <AnchorPane layoutX="273.0" layoutY="-1.0" prefHeight="500.0" prefWidth="427.0">
          <children>
-            <TableView fx:id="restaurantTable" layoutY="100.0" prefHeight="402.0" prefWidth="427.0">
+            <TableView fx:id="restaurantTable" layoutY="100.0" onMouseClicked="#userClickedOnRestaurantTable" prefHeight="402.0" prefWidth="427.0">
               <columns>
                 <TableColumn fx:id="nameCol" prefWidth="171.199951171875" style="-fx-background-color: #88d2f7;" text="Name" />
                   <TableColumn fx:id="addressCol" minWidth="0.0" prefWidth="255.2000305175781" style="-fx-background-color: #88d2f7;" text="Address" />

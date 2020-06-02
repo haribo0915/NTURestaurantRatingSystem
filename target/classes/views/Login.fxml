@@ -55,7 +55,7 @@
             </ImageView>
             <Text fill="#0598ff" layoutX="113.0" layoutY="163.0" strokeType="OUTSIDE" strokeWidth="0.0" text="User Login">
                <font>
-                  <Font size="23.0" />
+                  <Font name="Arial" size="23.0" />
                </font>
             </Text>
             <Hyperlink layoutX="247.0" layoutY="458.0" text="Sign up">

@@ -18,6 +18,15 @@ public class Comment {
     public Comment() {
     }
 
+    public Comment(Integer userId, Integer restaurantId, Integer rate, String description, Image image, Timestamp timestamp) {
+        this.userId = userId;
+        this.restaurantId = restaurantId;
+        this.rate = rate;
+        this.description = description;
+        this.image = image;
+        this.timestamp = timestamp;
+    }
+
     public Comment(Integer id, Integer userId, Integer restaurantId, Integer rate, String description, Image image, Timestamp timestamp) {
         this.id = id;
         this.userId = userId;
