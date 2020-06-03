@@ -5,7 +5,6 @@ import java.sql.Statement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 
-import org.river.entities.Restaurant;
 import org.river.entities.Role;
 import org.river.entities.User;
 import org.river.exceptions.*;
@@ -182,7 +181,7 @@ public class JDBCUserAdapter implements UserAdapter {
     	return new Role(role.getId(), role.getTitle());
     }
 
-    @Override ///QQQQQQQQQQQQ
+    @Override 
     public Role deleteRole(Role role) throws DeleteException {
     	DBConnect DBC = new DBConnect();
     	Connection con = DBC.getConnect();
