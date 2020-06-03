@@ -9,7 +9,6 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane prefHeight="446.0" prefWidth="257.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <AnchorPane prefHeight="456.0" prefWidth="256.0" style="-fx-background-color: #ffffff;">
@@ -37,7 +36,7 @@
             <Button fx:id="registerBtn" layoutX="95.0" layoutY="394.0" mnemonicParsing="false" onAction="#registerHandler" style="-fx-background-radius: 50; -fx-background-color: #0598ff;" text="Sign Up" textFill="WHITE" />
             <ImageView fitHeight="33.0" fitWidth="35.0" layoutX="17.0" layoutY="322.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../images/department.png" />
+                  <Image url="@../images/school.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="26.0" fitWidth="37.0" layoutX="18.0" layoutY="103.0" pickOnBounds="true" preserveRatio="true">

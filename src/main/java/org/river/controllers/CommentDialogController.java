@@ -74,6 +74,7 @@ public class CommentDialogController implements Initializable {
         try {
             Integer rate = Integer.valueOf(rateTextField.getText());
             String description = commentTextField.getText();
+            Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 
             setComment(currentUser.getId(), restaurantId, description, image, new Timestamp(System.currentTimeMillis()));
             if (comment.getId() == null) {
@@ -81,6 +82,8 @@ public class CommentDialogController implements Initializable {
             } else {
                 comment = restaurantAdapter.updateComment(comment);
             }
+            
+            stage.close();
 
         } catch (Exception e) {
             e.printStackTrace();

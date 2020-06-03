@@ -96,6 +96,9 @@ public class CreateRestaurantController implements Initializable {
             restaurant.setAreaId(area.getId());
 
             restaurant = restaurantAdapter.createRestaurant(restaurant);
+
+            Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+            stage.close();
         } catch (Exception e) {
             e.printStackTrace();
         }

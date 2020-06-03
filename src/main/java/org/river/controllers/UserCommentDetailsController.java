@@ -27,6 +27,8 @@ public class UserCommentDetailsController implements Initializable {
     @FXML
     private Label userRateLabel;
     @FXML
+    private Label userCommentLabel;
+    @FXML
     private Label userCommentedTimeLabel;
     @FXML
     private ImageView userUploadImage;
@@ -41,6 +43,7 @@ public class UserCommentDetailsController implements Initializable {
         userNameLabel.setText(userComment.getName());
         userDepartmentLabel.setText(userComment.getDepartment());
         userRateLabel.setText(String.valueOf(userComment.getRate()));
+        userCommentLabel.setText(userComment.getDescription());
         userCommentedTimeLabel.setText(String.valueOf(userComment.getTimestamp()));
         userUploadImage.setImage(userComment.getImage());
     }

@@ -8,7 +8,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="370.0" prefWidth="394.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="370.0" prefWidth="394.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <TextField fx:id="rateTextField" layoutX="87.0" layoutY="45.0" prefHeight="23.0" prefWidth="207.0" promptText="Please give a rate between 1 to 5" />
       <TextField fx:id="commentTextField" alignment="TOP_LEFT" layoutX="87.0" layoutY="106.0" prefHeight="163.0" prefWidth="270.0" />

@@ -7,6 +7,7 @@ import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -102,7 +103,7 @@ public class RestaurantDetailsController implements Initializable {
         }
 
         initUserCommentsTable();
-        //querySelectedUserCommentBtn.setDisable(true);
+        querySelectedUserCommentBtn.setDisable(true);
     }
 
     public void userClickedOnUserCommentTable(Event event) {
@@ -137,8 +138,7 @@ public class RestaurantDetailsController implements Initializable {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/UserCommentDetails.fxml"));
 
-            //UserCommentDetailsController userCommentDetailsController = new UserCommentDetailsController(selectedUserComment, this.currentUser);
-            UserCommentDetailsController userCommentDetailsController = new UserCommentDetailsController(new UserComment(), this.currentUser);
+            UserCommentDetailsController userCommentDetailsController = new UserCommentDetailsController(selectedUserComment, this.currentUser);
             loader.setController(userCommentDetailsController);
 
             Parent UserCommentDetailsParent = loader.load();
@@ -179,6 +179,31 @@ public class RestaurantDetailsController implements Initializable {
             stage.setScene(new Scene(CommentDialogParent));
             stage.sizeToScene();
             stage.showAndWait();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void goBackHandler(ActionEvent event) {
+        try {
+            loadRestaurantListView(event, currentUser);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void loadRestaurantListView(ActionEvent event, User currentUser) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/RestaurantList.fxml"));
+
+            RestaurantListController restaurantListController= new RestaurantListController(restaurantAdapterFactory, currentUser);
+            loader.setController(restaurantListController);
+
+            Parent restaurantListParent = loader.load();
+            Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(restaurantListParent));
+            stage.sizeToScene();
+            stage.show();
         } catch (IOException e) {
             e.printStackTrace();
         }

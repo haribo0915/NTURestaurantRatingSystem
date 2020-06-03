@@ -85,12 +85,12 @@ public class LoginController {
             loader.setController(registerController);
 
             Parent registerParent = loader.load();
-            Stage stage = new Stage();
-            stage.initModality(Modality.APPLICATION_MODAL);
+            Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+            //stage.initModality(Modality.APPLICATION_MODAL);
             stage.setScene(new Scene(registerParent));
             stage.setTitle("Register");
             stage.sizeToScene();
-            stage.showAndWait();
+            stage.show();
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -11,38 +11,38 @@
 
 <AnchorPane prefHeight="541.0" prefWidth="442.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <AnchorPane layoutY="-10.0" prefHeight="551.0" prefWidth="442.0" style="-fx-background-color: #88d2f7;">
+      <AnchorPane layoutY="-10.0" prefHeight="551.0" prefWidth="442.0" style="-fx-background-color: #ffffff;">
          <children>
-            <ComboBox fx:id="foodCategoryComboBox" layoutX="58.0" layoutY="190.0" prefWidth="150.0" promptText="Food Category" style="-fx-background-color: #88d2f7; -fx-border-color: #ffffff; -fx-border-width: 0px 0px 2px 0px;" />
-            <ComboBox fx:id="areaComboBox" layoutX="58.0" layoutY="238.0" prefWidth="150.0" promptText="Area" style="-fx-background-color: #88d2f7; -fx-border-width: 0px 0px 2px 0px; -fx-border-color: #ffffff;" />
-            <ImageView fitHeight="26.0" fitWidth="37.0" layoutX="7.0" layoutY="190.0" pickOnBounds="true" preserveRatio="true">
+            <ComboBox fx:id="foodCategoryComboBox" layoutX="58.0" layoutY="190.0" prefWidth="150.0" promptText="Food Category" style="-fx-background-color: #ffffff; -fx-border-color: #0598ff; -fx-border-width: 0px 0px 2px 0px;" />
+            <ComboBox fx:id="areaComboBox" layoutX="58.0" layoutY="238.0" prefWidth="150.0" promptText="Area" style="-fx-background-color: #ffffff; -fx-border-width: 0px 0px 2px 0px; -fx-border-color: #0598ff;" />
+            <ImageView fitHeight="26.0" fitWidth="37.0" layoutX="12.0" layoutY="190.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../images/food_icon.PNG" />
+                  <Image url="@../images/healthy-food.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="26.0" fitWidth="41.0" layoutX="10.0" layoutY="235.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="26.0" fitWidth="41.0" layoutX="12.0" layoutY="238.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../images/area_icon.png" />
+                  <Image url="@../images/covid.png" />
                </image>
             </ImageView>
-            <Label alignment="CENTER" layoutY="14.0" prefHeight="51.0" prefWidth="266.0" text="Restaurant Information" textFill="#0808c9">
+            <Label alignment="CENTER" layoutX="97.0" layoutY="14.0" prefHeight="51.0" prefWidth="266.0" text="Restaurant Information" textFill="#0583ff">
                <font>
                   <Font name="Arial" size="24.0" />
                </font>
             </Label>
             <ImageView fitHeight="26.0" fitWidth="41.0" layoutX="12.0" layoutY="74.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../images/title.png" />
+                  <Image url="@../images/newspaper.png" />
                </image>
             </ImageView>
             <Button fx:id="saveRestaurantBtn" layoutX="373.0" layoutY="504.0" mnemonicParsing="false" onAction="#saveRestaurantHandler" style="-fx-background-color: #0598ff;" text="Save" textFill="WHITE" />
             <TextField fx:id="restaurantNameTextField" layoutX="58.0" layoutY="74.0" prefHeight="32.0" prefWidth="203.0" promptText="Restaurant Name" />
-            <TextField fx:id="restaurantDescriptionTextField" layoutX="10.0" layoutY="282.0" prefHeight="170.0" prefWidth="350.0" />
+            <TextField fx:id="restaurantDescriptionTextField" alignment="TOP_LEFT" layoutX="10.0" layoutY="282.0" prefHeight="170.0" prefWidth="350.0" />
             <Button fx:id="uploadImageBtn" layoutX="15.0" layoutY="467.0" mnemonicParsing="false" onAction="#uploadImageBtnHandler" style="-fx-background-color: #0598ff;" text="Upload Image" textFill="WHITE" />
             <TextField fx:id="uploadImagePathTextField" layoutX="119.0" layoutY="467.0" prefHeight="23.0" prefWidth="222.0" />
             <ImageView fitHeight="26.0" fitWidth="41.0" layoutX="12.0" layoutY="129.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../images/home.png" />
+                  <Image url="@../images/real-estate.png" />
                </image>
             </ImageView>
             <TextField fx:id="restaurantAddressTextField" layoutX="58.0" layoutY="129.0" prefHeight="32.0" prefWidth="350.0" promptText="Address" />

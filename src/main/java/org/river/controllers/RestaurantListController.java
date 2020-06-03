@@ -47,6 +47,12 @@ public class RestaurantListController implements Initializable {
 
     @FXML
     private Button querySelectedRestaurantBtn;
+    @FXML
+    private Button createRestaurantBtn;
+    @FXML
+    private Button editRestaurantBtn;
+    @FXML
+    private Button deleteRestaurantBtn;
 
     @FXML
     private TableView<Restaurant> restaurantTable;
@@ -99,13 +105,21 @@ public class RestaurantListController implements Initializable {
         }
 
         initRestaurantTable();
-        //querySelectedRestaurantBtn.setDisable(true);
+        querySelectedRestaurantBtn.setDisable(true);
+        editRestaurantBtn.setDisable(true);
+        deleteRestaurantBtn.setDisable(true);
 
     }
 
     private void initRestaurantTable() {
         nameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
         addressCol.setCellValueFactory(new PropertyValueFactory<>("address"));
+    }
+
+    public void userClickedOnRestaurantTable(MouseEvent event) {
+        querySelectedRestaurantBtn.setDisable(false);
+        editRestaurantBtn.setDisable(false);
+        deleteRestaurantBtn.setDisable(false);
     }
 
     private void refreshRestaurantTable(List<Restaurant> restaurantList) {
@@ -156,10 +170,6 @@ public class RestaurantListController implements Initializable {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-    public void userClickedOnRestaurantTable(MouseEvent event) {
-        querySelectedRestaurantBtn.setDisable(false);
     }
 
     public void querySelectedRestaurantHandler(ActionEvent event) {

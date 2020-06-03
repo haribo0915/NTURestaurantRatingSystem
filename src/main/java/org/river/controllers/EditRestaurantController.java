@@ -117,6 +117,9 @@ public class EditRestaurantController implements Initializable {
             restaurant.setAreaId(area.getId());
 
             restaurant = restaurantAdapter.updateRestaurant(restaurant);
+
+            Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+            stage.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
