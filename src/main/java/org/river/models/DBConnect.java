@@ -14,8 +14,8 @@ public class DBConnect {
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			con = 
-			DriverManager.getConnection("jdbc:mysql://localhost:3306/testdb?serverTimezone=UTC"
-					, "root", "b06902127");
+			DriverManager.getConnection("jdbc:mysql://localhost:3306/ntu_restaurant_rating_system?serverTimezone=UTC"
+					, "root", "root");
 			st = con.createStatement();
 		}catch (Exception e) {}
 	}
