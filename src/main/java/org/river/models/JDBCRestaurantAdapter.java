@@ -9,7 +9,7 @@ import java.sql.*;
 
 
 public class JDBCRestaurantAdapter implements RestaurantAdapter {
-    @Override ///undone
+    @Override
     public Restaurant createRestaurant(Restaurant restaurant) throws CreateException {
     	DBConnect DBC = new DBConnect();
     	Connection con = DBC.getConnect();
@@ -18,42 +18,49 @@ public class JDBCRestaurantAdapter implements RestaurantAdapter {
     	try {
     		String sqlUpdata = "INSERT INTO restaurant (area_id, food_category_id, "
         			+ "name, description, "
-        			//+ "image, "
+        			+ "image, "
         			+ "address) VALUES "
-        			+ "(?, ?, ?, ?, ?)";
+        			+ "(?, ?, ?, ?, ?, ?)";
     		PreparedStatement stat = con.prepareStatement(sqlUpdata);
     		stat.setInt(1, restaurant.getAreaId());
     		stat.setInt(2, restaurant.getFoodCategoryId());
     		stat.setString(3, restaurant.getName());
-    		stat.setString(4, restaurant.getDescription());
-    		//stat.setBlob(5, new Blob());
-    		stat.setString(5, restaurant.getAddress());
+    		if (restaurant.getDescription() == null)
+    			stat.setString(4, "");
+    		else
+    			stat.setString(4, restaurant.getDescription());
+    		if (restaurant.getImage() == null)
+    			stat.setNull(5, Types.BLOB);
+    		else
+    			stat.setBlob(5, ImageUtils.ImageToInputStream(restaurant.getImage()));
+    		stat.setString(6, restaurant.getAddress());
     		stat.executeUpdate();
     	} catch(Exception e) {
     		throw new CreateException("createRestaurant error");
     	}
     	
     	// Fetch restaurant_id
+    	int id = -1;
     	try {
     		String sqlQuery = "select r.id from restaurant r where name=?";
     		PreparedStatement stat = con.prepareStatement(sqlQuery);
     		stat.setString(1, restaurant.getName());
     		ResultSet rs = stat.executeQuery();
     		rs.next();
-    		int id = rs.getInt("id");
+    		id = rs.getInt("id");
     		restaurant.setId(id);
     	} 
     	catch(Exception e) {
     		throw new CreateException("createRestaurant error: retrieve error");
     	}
     	
-    	return new Restaurant(restaurant.getId(), restaurant.getAreaId(), 
+    	return new Restaurant(id, restaurant.getAreaId(), 
     			restaurant.getFoodCategoryId(),	restaurant.getName(), 
     			restaurant.getDescription(), restaurant.getImage(), 
     			restaurant.getAddress());
     }
 
-    @Override // undone
+    @Override 
     public Restaurant updateRestaurant(Restaurant restaurant) throws UpdateException {
     	DBConnect DBC = new DBConnect();
     	Connection con = DBC.getConnect();
@@ -69,11 +76,11 @@ public class JDBCRestaurantAdapter implements RestaurantAdapter {
     			stat.setString(4, "");
     		else
     			stat.setString(4, restaurant.getDescription());
-    		if (restaurant.getAddress() == null)
-    			stat.setString(5, "");
+    		stat.setString(5, restaurant.getAddress());
+    		if (restaurant.getImage() == null)
+    			stat.setNull(5, Types.BLOB);
     		else
-    			stat.setString(5, restaurant.getAddress());
-    		stat.setBlob(6, new ByteArrayInputStream(new byte[4]));
+    			stat.setBlob(5, ImageUtils.ImageToInputStream(restaurant.getImage()));
     		stat.setInt(7, restaurant.getId());
     		int reply = stat.executeUpdate();
     	}
@@ -83,7 +90,7 @@ public class JDBCRestaurantAdapter implements RestaurantAdapter {
     	return restaurant;
     }
 
-    @Override // undone
+    @Override
     public Restaurant deleteRestaurant(Restaurant restaurant) throws DeleteException {
     	DBConnect DBC = new DBConnect();
     	Connection con = DBC.getConnect();
@@ -110,19 +117,21 @@ public class JDBCRestaurantAdapter implements RestaurantAdapter {
     	try {
     		String sqlQuery = "select * from restaurant";
     		PreparedStatement stat = con.prepareStatement(sqlQuery);
-    		ResultSet rs = stat.executeQuery(sqlQuery);
+    		ResultSet rs = stat.executeQuery();
     		
     		while (rs.next())
-	    		if (Compare.isSame(name, rs.getString("name")))
+	    		if (name.equals(rs.getString("name")))
     				return new Restaurant(rs.getInt("id"), rs.getInt("area_id"), 
 		    				rs.getInt("food_category_id"),	rs.getString("name"), 
-		    				rs.getString("description"), ImageTransform.BlobToImage(rs.getBlob("image")), 
+		    				rs.getString("description"), ImageUtils.BlobToImage(rs.getBlob("image")), 
 		        			rs.getString("address"));
     	} catch (Exception r) {
     		throw new QueryException("queryRestaurants error");
     	}
-    	
-    	return out;
+    	if (out == null)
+    		throw new QueryException("queryRestaurants error");
+    	else
+    		return out;
     }
 
     /**
@@ -134,7 +143,7 @@ public class JDBCRestaurantAdapter implements RestaurantAdapter {
     public List<Restaurant> queryRestaurants() throws QueryException {
     	DBConnect DBC = new DBConnect();
     	Connection con = DBC.getConnect();
-    	List<Restaurant> out = new ArrayList<>();
+    	List<Restaurant> out = new ArrayList<Restaurant>();
     	
     	try {
     		String sqlQuery = "select * from restaurant";
@@ -144,7 +153,7 @@ public class JDBCRestaurantAdapter implements RestaurantAdapter {
     		while (rs.next())
 	    		out.add(new Restaurant(rs.getInt("id"), rs.getInt("area_id"), 
 		    				rs.getInt("food_category_id"),	rs.getString("name"), 
-		    				rs.getString("description"), ImageTransform.BlobToImage(rs.getBlob("image")), 
+		    				rs.getString("description"), ImageUtils.BlobToImage(rs.getBlob("image")), 
 		        			rs.getString("address")));
     	} catch (Exception r) {
     		throw new QueryException("queryRestaurants error");
@@ -168,7 +177,7 @@ public class JDBCRestaurantAdapter implements RestaurantAdapter {
     		while (rs.next())
 	    		out.add(new Restaurant(rs.getInt("id"), rs.getInt("area_id"), 
 		    				rs.getInt("food_category_id"),	rs.getString("name"), 
-		    				rs.getString("description"), ImageTransform.BlobToImage(rs.getBlob("image")), 
+		    				rs.getString("description"), ImageUtils.BlobToImage(rs.getBlob("image")), 
 		        			rs.getString("address")));
     	} catch (Exception r) {
     		throw new QueryException("queryRestaurants error");
@@ -192,7 +201,7 @@ public class JDBCRestaurantAdapter implements RestaurantAdapter {
     		while (rs.next())
 	    		out.add(new Restaurant(rs.getInt("id"), rs.getInt("area_id"), 
 		    				rs.getInt("food_category_id"),	rs.getString("name"), 
-		    				rs.getString("description"), ImageTransform.BlobToImage(rs.getBlob("image")), 
+		    				rs.getString("description"), ImageUtils.BlobToImage(rs.getBlob("image")), 
 		        			rs.getString("address")));
     	} catch (Exception r) {
     		throw new QueryException("queryRestaurants error");
@@ -201,9 +210,45 @@ public class JDBCRestaurantAdapter implements RestaurantAdapter {
     	return out;
     }
 
-    @Override
+    @Override //to test
     public List<Restaurant> queryWeeklyHottestRestaurants() throws QueryException {
-        return null;
+    	DBConnect DBC = new DBConnect();
+    	Connection con = DBC.getConnect();
+    	String sqlQuery = "select * from comment";
+
+    	List<Restaurant> out = new ArrayList<Restaurant>();
+    	int restaurantCount = SQLUtils.countSQL(con, "restaurant");
+    	int[] totalRate = new int [restaurantCount];
+    	//int[] rateCount = new int [restaurantCount];
+    	
+    	try {
+    		PreparedStatement stat = con.prepareStatement(sqlQuery);
+    		ResultSet rs = stat.executeQuery();
+
+    		while (rs.next())
+    			if (new java.util.Date().getTime() - rs.getTimestamp("date").getTime() < 1000*3600*24*7) {
+    				int restaurantId = rs.getInt("restaurant_id");
+    				totalRate[restaurantId] += rs.getInt("rate");
+    				//rateCount[restaurantId] += 1;
+    			}
+
+    	}
+    	catch(Exception e) {
+    		throw new QueryException("queryWeeklyHottestRestaurants error");
+    	}
+    	
+    	// find hottest
+    	int max = 0;
+    	for (int i = 0; i < restaurantCount; i++) {
+    		if (max < totalRate[i]) {
+    			max = totalRate[i];
+    			out = new ArrayList<Restaurant>();
+    			out.add(SQLUtils.queryRestaurant(i));
+    		}
+    		else if (max == totalRate[i])
+    			out.add(SQLUtils.queryRestaurant(i));
+    	}
+    	return out;
     }
 
     @Override
@@ -535,9 +580,9 @@ public class JDBCRestaurantAdapter implements RestaurantAdapter {
     		else
     			stat.setString(4, comment.getDescription());
     		if (comment.getImage() == null)
-    			stat.setBlob(5, new ByteArrayInputStream(new byte[4]));
+    			stat.setNull(5, Types.BLOB);
     		else
-    			stat.setBlob(5, ImageTransform.ImageToInputStream(comment.getImage()));
+    			stat.setBlob(5, ImageUtils.ImageToInputStream(comment.getImage()));
     		if (comment.getTimestamp() == null)
     			stat.setDate(6, new java.sql.Date(new java.util.Date().getTime()));
     		else
@@ -548,7 +593,7 @@ public class JDBCRestaurantAdapter implements RestaurantAdapter {
     	}
     	
     	try {
-    		int sqlCount = Compare.countSQL(con, "comment");
+    		int sqlCount = SQLUtils.countSQL(con, "comment");
     		return new Comment(sqlCount, comment.getUserId(), comment.getRestaurantId(), 
     				comment.getRate(), comment.getDescription(), 
     				comment.getImage(), comment.getTimestamp());
@@ -575,9 +620,9 @@ public class JDBCRestaurantAdapter implements RestaurantAdapter {
     		else
     			stat.setString(4, comment.getDescription());
     		if (comment.getImage() == null)
-    			stat.setBlob(5, new ByteArrayInputStream(new byte[4]));
+    			stat.setNull(5, Types.BLOB);
     		else
-    			stat.setBlob(5, ImageTransform.ImageToInputStream(comment.getImage()));
+    			stat.setBlob(5, ImageUtils.ImageToInputStream(comment.getImage()));
     		if (comment.getTimestamp() == null)
     			stat.setDate(6, new java.sql.Date(new java.util.Date().getTime()));
     		else
@@ -623,7 +668,7 @@ public class JDBCRestaurantAdapter implements RestaurantAdapter {
     		while (rs.next()) 
 	    		out.add(new Comment(rs.getInt("id"), rs.getInt("user_id"), 
 	    				rs.getInt("restaurant_id"), rs.getInt("rate"),
-	    				rs.getString("description"), ImageTransform.BlobToImage(rs.getBlob("image")),
+	    				rs.getString("description"), ImageUtils.BlobToImage(rs.getBlob("image")),
 	    				rs.getTimestamp("date")));
     		
     	}
@@ -649,7 +694,7 @@ public class JDBCRestaurantAdapter implements RestaurantAdapter {
     		while (rs.next()) 
 	    		out.add(new Comment(rs.getInt("id"), rs.getInt("user_id"), 
 	    				rs.getInt("restaurant_id"), rs.getInt("rate"),
-	    				rs.getString("description"), ImageTransform.BlobToImage(rs.getBlob("image")),
+	    				rs.getString("description"), ImageUtils.BlobToImage(rs.getBlob("image")),
 	    				rs.getTimestamp("date")));
     		
     	}
@@ -660,38 +705,61 @@ public class JDBCRestaurantAdapter implements RestaurantAdapter {
     	return out;
     }
 
-    @Override
+    @Override // to test
     public List<UserComment> queryUserComments(Restaurant restaurant) throws QueryException {
-//    	DBConnect DBC = new DBConnect();
-//    	Connection con = DBC.getConnect();
-//    	String sqlQuery = "select * from comment where user_id=? and restaurant_id=?";
-//
-//    	List<UserComment> out = new ArrayList<UserComment>();
-//    	try {
-//    		PreparedStatement stat = con.prepareStatement(sqlQuery);
-//    		stat.setInt(1, user.getId());
-//    		stat.setInt(2, restaurant.getId());
-//    		ResultSet rs = stat.executeQuery();
-//
-//    		while (rs.next())
-//	    		out.add(new UserComment(user.getRoleId(), user.getName(),
-//	    				user.getAccount(), user.getPassword(),
-//	    				user.getEmail(), user.getDepartment(),
-//	    				user.getId(), restaurant.getId(),
-//	    				rs.getInt("rate"), rs.getString("description"),
-//	    				ImageTransform.BlobToImage(rs.getBlob("image")),
-//	    				rs.getTimestamp("date")));
-//
-//    	}
-//    	catch(Exception e) {
-//    		throw new QueryException("queryUserComments: error: List");
-//    	}
-//    	return out;
-		return null;
+    	DBConnect DBC = new DBConnect();
+    	Connection con = DBC.getConnect();
+    	String sqlQuery = "select * from comment inner join user on restaurant_id=?";
+
+    	List<UserComment> out = new ArrayList<UserComment>();
+    	try {
+    		PreparedStatement stat = con.prepareStatement(sqlQuery);
+    		stat.setInt(1, restaurant.getId());
+    		ResultSet rs = stat.executeQuery();
+
+    		while (rs.next())
+	    		out.add(new UserComment(rs.getInt("role_id"), rs.getString("name"),
+	    				rs.getString("account"), rs.getString("password"),
+	    				rs.getString("email"), rs.getString("department"),
+	    				rs.getInt("user_id"), restaurant.getId(),
+	    				rs.getInt("rate"), rs.getString("description"),
+	    				ImageUtils.BlobToImage(rs.getBlob("image")),
+	    				rs.getTimestamp("date")));
+
+    	}
+    	catch(Exception e) {
+    		throw new QueryException("queryUserComments: error: List");
+    	}
+    	return out;
     }
 
 	@Override
 	public Comment queryComment(Integer userId, Integer restaurantId) throws QueryException {
-		return null;
+		DBConnect DBC = new DBConnect();
+    	Connection con = DBC.getConnect();
+    	String sqlQuery = "select * from comment where user_id=? and restaurant_id=?";
+
+    	Comment out = null;
+    	try {
+    		PreparedStatement stat = con.prepareStatement(sqlQuery);
+    		stat.setInt(1, userId);
+    		stat.setInt(2, restaurantId);
+    		ResultSet rs = stat.executeQuery();
+
+    		while (rs.next())
+    			out = (new Comment(rs.getInt("id"), rs.getInt("user_id"), 
+	    				rs.getInt("restaurant_id"), rs.getInt("rate"),
+	    				rs.getString("description"), ImageUtils.BlobToImage(rs.getBlob("image")),
+	    				rs.getTimestamp("date")));
+
+    	}
+    	catch(Exception e) {
+    		throw new QueryException("queryComment error");
+    	}
+    	
+    	if (out == null)
+    		throw new QueryException("queryComment error");
+    	else
+    		return out;
 	}
 }
