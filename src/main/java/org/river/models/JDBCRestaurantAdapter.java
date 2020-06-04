@@ -78,9 +78,9 @@ public class JDBCRestaurantAdapter implements RestaurantAdapter {
     			stat.setString(4, restaurant.getDescription());
     		stat.setString(5, restaurant.getAddress());
     		if (restaurant.getImage() == null)
-    			stat.setNull(5, Types.BLOB);
+    			stat.setNull(6, Types.BLOB);
     		else
-    			stat.setBlob(5, ImageUtils.ImageToInputStream(restaurant.getImage()));
+    			stat.setBlob(6, ImageUtils.ImageToInputStream(restaurant.getImage()));
     		stat.setInt(7, restaurant.getId());
     		int reply = stat.executeUpdate();
     	}
@@ -225,8 +225,8 @@ public class JDBCRestaurantAdapter implements RestaurantAdapter {
 
     	List<Restaurant> out = new ArrayList<Restaurant>();
     	int restaurantCount = SQLUtils.countSQL(con, "restaurant");
-    	int[] totalRate = new int [restaurantCount];
-    	//int[] rateCount = new int [restaurantCount];
+    	int[] totalRate = new int [restaurantCount + 2];
+    	//int[] rateCount = new int [restaurantCount + 2];
     	
     	try {
     		PreparedStatement stat = con.prepareStatement(sqlQuery);
@@ -246,7 +246,7 @@ public class JDBCRestaurantAdapter implements RestaurantAdapter {
     	
     	// find hottest
     	int max = 0;
-    	for (int i = 0; i < restaurantCount; i++) {
+    	for (int i = 1; i < restaurantCount + 1; i++) {
     		if (max < totalRate[i]) {
     			max = totalRate[i];
     			out = new ArrayList<Restaurant>();
