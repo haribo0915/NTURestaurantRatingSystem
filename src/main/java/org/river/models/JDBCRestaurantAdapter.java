@@ -108,107 +108,114 @@ public class JDBCRestaurantAdapter implements RestaurantAdapter {
     	return restaurant;
     }
 
-    @Override
-    public Restaurant queryRestaurant(String name) throws QueryException {
-    	DBConnect DBC = new DBConnect();
-    	Connection con = DBC.getConnect();
-    	Restaurant out = null;
-    	
-    	try {
-    		String sqlQuery = "select * from restaurant";
-    		PreparedStatement stat = con.prepareStatement(sqlQuery);
-    		ResultSet rs = stat.executeQuery();
-    		
-    		while (rs.next())
-	    		if (name.equals(rs.getString("name")))
-    				return new Restaurant(rs.getInt("id"), rs.getInt("area_id"), 
-		    				rs.getInt("food_category_id"),	rs.getString("name"), 
-		    				rs.getString("description"), ImageUtils.BlobToImage(rs.getBlob("image")), 
-		        			rs.getString("address"));
-    	} catch (Exception r) {
-    		throw new QueryException("queryRestaurants error");
-    	}
-    	if (out == null)
-    		throw new QueryException("queryRestaurants error");
-    	else
-    		return out;
-    }
+//    @Override
+//    public Restaurant queryRestaurant(String name) throws QueryException {
+//    	DBConnect DBC = new DBConnect();
+//    	Connection con = DBC.getConnect();
+//    	Restaurant out = null;
+//
+//    	try {
+//    		String sqlQuery = "select * from restaurant";
+//    		PreparedStatement stat = con.prepareStatement(sqlQuery);
+//    		ResultSet rs = stat.executeQuery();
+//
+//    		while (rs.next())
+//	    		if (name.equals(rs.getString("name")))
+//    				return new Restaurant(rs.getInt("id"), rs.getInt("area_id"),
+//		    				rs.getInt("food_category_id"),	rs.getString("name"),
+//		    				rs.getString("description"), ImageUtils.BlobToImage(rs.getBlob("image")),
+//		        			rs.getString("address"));
+//    	} catch (Exception r) {
+//    		throw new QueryException("queryRestaurants error");
+//    	}
+//    	if (out == null)
+//    		throw new QueryException("queryRestaurants error");
+//    	else
+//    		return out;
+//    }
 
-    /**
+	@Override
+	public List<Restaurant> queryRestaurants(String restaurantName, Area area, FoodCategory foodCategory) throws QueryException {
+		return null;
+	}
+
+	/**
      *
      * @return all restaurants
      * @throws QueryException
      */
-    @Override
-    public List<Restaurant> queryRestaurants() throws QueryException {
-    	DBConnect DBC = new DBConnect();
-    	Connection con = DBC.getConnect();
-    	List<Restaurant> out = new ArrayList<Restaurant>();
-    	
-    	try {
-    		String sqlQuery = "select * from restaurant";
-    		PreparedStatement stat = con.prepareStatement(sqlQuery);
-    		ResultSet rs = stat.executeQuery(sqlQuery);
-    		
-    		while (rs.next())
-	    		out.add(new Restaurant(rs.getInt("id"), rs.getInt("area_id"), 
-		    				rs.getInt("food_category_id"),	rs.getString("name"), 
-		    				rs.getString("description"), ImageUtils.BlobToImage(rs.getBlob("image")), 
-		        			rs.getString("address")));
-    	} catch (Exception r) {
-    		throw new QueryException("queryRestaurants error");
-    	}
-    	
-    	return out;
-    }
+//    @Override
+//    public List<Restaurant> queryRestaurants() throws QueryException {
+//    	DBConnect DBC = new DBConnect();
+//    	Connection con = DBC.getConnect();
+//    	List<Restaurant> out = new ArrayList<Restaurant>();
+//
+//    	try {
+//    		String sqlQuery = "select * from restaurant";
+//    		PreparedStatement stat = con.prepareStatement(sqlQuery);
+//    		ResultSet rs = stat.executeQuery(sqlQuery);
+//
+//    		while (rs.next())
+//	    		out.add(new Restaurant(rs.getInt("id"), rs.getInt("area_id"),
+//		    				rs.getInt("food_category_id"),	rs.getString("name"),
+//		    				rs.getString("description"), ImageUtils.BlobToImage(rs.getBlob("image")),
+//		        			rs.getString("address")));
+//    	} catch (Exception r) {
+//    		throw new QueryException("queryRestaurants error");
+//    	}
+//
+//    	return out;
+//    }
 
-    @Override
-    public List<Restaurant> queryRestaurants(Area area) throws QueryException {
-    	DBConnect DBC = new DBConnect();
-    	Connection con = DBC.getConnect();
-    	List<Restaurant> out = new ArrayList<>();
-    	
-    	try {
-    		String sqlQuery = "select * from restaurant where area_id=?";
-    		PreparedStatement stat = con.prepareStatement(sqlQuery);
-    		stat.setInt(1, area.getId());
-    		ResultSet rs = stat.executeQuery();
-    		
-    		while (rs.next())
-	    		out.add(new Restaurant(rs.getInt("id"), rs.getInt("area_id"), 
-		    				rs.getInt("food_category_id"),	rs.getString("name"), 
-		    				rs.getString("description"), ImageUtils.BlobToImage(rs.getBlob("image")), 
-		        			rs.getString("address")));
-    	} catch (Exception r) {
-    		throw new QueryException("queryRestaurants error");
-    	}
-    	
-    	return out;
-    }
+//    @Override
+//    public List<Restaurant> queryRestaurants(Area area) throws QueryException {
+//    	DBConnect DBC = new DBConnect();
+//    	Connection con = DBC.getConnect();
+//    	List<Restaurant> out = new ArrayList<>();
+//
+//    	try {
+//    		String sqlQuery = "select * from restaurant where area_id=?";
+//    		PreparedStatement stat = con.prepareStatement(sqlQuery);
+//    		stat.setInt(1, area.getId());
+//    		ResultSet rs = stat.executeQuery();
+//
+//    		while (rs.next())
+//	    		out.add(new Restaurant(rs.getInt("id"), rs.getInt("area_id"),
+//		    				rs.getInt("food_category_id"),	rs.getString("name"),
+//		    				rs.getString("description"), ImageUtils.BlobToImage(rs.getBlob("image")),
+//		        			rs.getString("address")));
+//    	} catch (Exception r) {
+//    		throw new QueryException("queryRestaurants error");
+//    	}
+//
+//    	return out;
+//    }
 
-    @Override
-    public List<Restaurant> queryRestaurants(FoodCategory foodCategory) throws QueryException {
-    	DBConnect DBC = new DBConnect();
-    	Connection con = DBC.getConnect();
-    	List<Restaurant> out = new ArrayList<>();
-    	
-    	try {
-    		String sqlQuery = "select * from restaurant where food_category_id=?";
-    		PreparedStatement stat = con.prepareStatement(sqlQuery);
-    		stat.setInt(1, foodCategory.getId());
-    		ResultSet rs = stat.executeQuery();
-    		
-    		while (rs.next())
-	    		out.add(new Restaurant(rs.getInt("id"), rs.getInt("area_id"), 
-		    				rs.getInt("food_category_id"),	rs.getString("name"), 
-		    				rs.getString("description"), ImageUtils.BlobToImage(rs.getBlob("image")), 
-		        			rs.getString("address")));
-    	} catch (Exception r) {
-    		throw new QueryException("queryRestaurants error");
-    	}
-    	
-    	return out;
-    }
+//    @Override
+//    public List<Restaurant> queryRestaurants(FoodCategory foodCategory) throws QueryException {
+//    	DBConnect DBC = new DBConnect();
+//    	Connection con = DBC.getConnect();
+//    	List<Restaurant> out = new ArrayList<>();
+//
+//    	try {
+//    		String sqlQuery = "select * from restaurant where food_category_id=?";
+//    		PreparedStatement stat = con.prepareStatement(sqlQuery);
+//    		stat.setInt(1, foodCategory.getId());
+//    		ResultSet rs = stat.executeQuery();
+//
+//    		while (rs.next())
+//	    		out.add(new Restaurant(rs.getInt("id"), rs.getInt("area_id"),
+//		    				rs.getInt("food_category_id"),	rs.getString("name"),
+//		    				rs.getString("description"), ImageUtils.BlobToImage(rs.getBlob("image")),
+//		        			rs.getString("address")));
+//    	} catch (Exception r) {
+//    		throw new QueryException("queryRestaurants error");
+//    	}
+//
+//    	return out;
+//    }
+
+
 
     @Override //to test
     public List<Restaurant> queryWeeklyHottestRestaurants() throws QueryException {

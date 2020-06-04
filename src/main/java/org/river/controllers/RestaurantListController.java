@@ -21,8 +21,7 @@ import org.river.entities.Area;
 import org.river.entities.FoodCategory;
 import org.river.entities.Restaurant;
 import org.river.entities.User;
-import org.river.models.RestaurantAdapter;
-import org.river.models.RestaurantAdapterFactory;
+import org.river.models.*;
 
 import java.io.IOException;
 import java.net.URL;
@@ -79,7 +78,7 @@ public class RestaurantListController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
-            List<Restaurant> restaurantList = restaurantAdapter.queryRestaurants();
+            List<Restaurant> restaurantList = restaurantAdapter.queryRestaurants(null, null, null);
             //TODO if the return list is null, JDBCRestaurantAdapter needs to throw Resource not found exception, or it'll throw nullPointerException
             restaurantTableObservableList.addAll(restaurantList);
             restaurantTable.setItems(restaurantTableObservableList);
@@ -128,34 +127,16 @@ public class RestaurantListController implements Initializable {
         restaurantTable.setItems(restaurantTableObservableList);
     }
 
-    public void queryRestaurantByFoodCategoryHandler(ActionEvent event) {
+    public void queryRestaurantsHandler(ActionEvent event) {
         try {
-            FoodCategory foodCategory = restaurantAdapter.queryFoodCategory(foodCategoryComboBox.getValue());
-            List<Restaurant> restaurantList = restaurantAdapter.queryRestaurants(foodCategory);
-            //refresh restaurant table
-            refreshRestaurantTable(restaurantList);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+            String restaurantName = restaurantNameComboBox.getValue();
+            String areaName = areaComboBox.getValue();
+            String foodCategoryName = foodCategoryComboBox.getValue();
+            restaurantName = (restaurantName == null || restaurantName.equals(""))? null : restaurantName;
+            Area area = (areaName == null || areaName.equals(""))? null : restaurantAdapter.queryArea(areaName);
+            FoodCategory foodCategory = (foodCategoryName == null || foodCategoryName.equals(""))? null : restaurantAdapter.queryFoodCategory(foodCategoryName);
+            List<Restaurant> restaurantList = restaurantAdapter.queryRestaurants(restaurantName, area, foodCategory);
 
-    public void queryRestaurantByAreaHandler(ActionEvent event) {
-        try {
-            Area area = restaurantAdapter.queryArea(areaComboBox.getValue());
-            List<Restaurant> restaurantList = restaurantAdapter.queryRestaurants(area);
-            //refresh restaurant table
-            refreshRestaurantTable(restaurantList);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void queryRestaurantByNameHandler(ActionEvent event) {
-        try {
-            List<Restaurant> restaurantList = new ArrayList<>();
-            Restaurant restaurant = restaurantAdapter.queryRestaurant(restaurantNameComboBox.getValue());
-            restaurantList.add(restaurant);
-            //refresh restaurant table
             refreshRestaurantTable(restaurantList);
         } catch (Exception e) {
             e.printStackTrace();
@@ -193,6 +174,7 @@ public class RestaurantListController implements Initializable {
 
             Parent restaurantDetailsParent = loader.load();
             Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+            stage.setTitle("Restaurant Details");
             stage.setScene(new Scene(restaurantDetailsParent));
             stage.sizeToScene();
             stage.show();
@@ -205,7 +187,7 @@ public class RestaurantListController implements Initializable {
         try {
             loadCreateRestaurantView(event);
             //refresh restaurant table
-            List<Restaurant> restaurantList = restaurantAdapter.queryRestaurants();
+            List<Restaurant> restaurantList = restaurantAdapter.queryRestaurants(null, null, null);
             refreshRestaurantTable(restaurantList);
         } catch (Exception e) {
             e.printStackTrace();
@@ -236,7 +218,7 @@ public class RestaurantListController implements Initializable {
             Restaurant selectedRestaurant = restaurantTable.getSelectionModel().getSelectedItem();
             loadEditRestaurantView(event, selectedRestaurant);
             //refresh restaurant table
-            List<Restaurant> restaurantList = restaurantAdapter.queryRestaurants();
+            List<Restaurant> restaurantList = restaurantAdapter.queryRestaurants(null, null, null);
             refreshRestaurantTable(restaurantList);
         } catch (Exception e) {
             e.printStackTrace();
@@ -267,7 +249,7 @@ public class RestaurantListController implements Initializable {
             Restaurant selectedRestaurant = restaurantTable.getSelectionModel().getSelectedItem();
             selectedRestaurant = restaurantAdapter.deleteRestaurant(selectedRestaurant);
             //refresh restaurant table
-            List<Restaurant> restaurantList = restaurantAdapter.queryRestaurants();
+            List<Restaurant> restaurantList = restaurantAdapter.queryRestaurants(null, null, null);
             refreshRestaurantTable(restaurantList);
         } catch (Exception e) {
             e.printStackTrace();

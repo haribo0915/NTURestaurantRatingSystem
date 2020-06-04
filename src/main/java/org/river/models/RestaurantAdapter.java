@@ -12,10 +12,7 @@ public interface RestaurantAdapter {
     Restaurant createRestaurant(Restaurant restaurant) throws CreateException;
     Restaurant updateRestaurant(Restaurant restaurant) throws UpdateException;
     Restaurant deleteRestaurant(Restaurant restaurant) throws DeleteException;
-    Restaurant queryRestaurant(String name) throws QueryException;
-    List<Restaurant> queryRestaurants() throws QueryException;
-    List<Restaurant> queryRestaurants(Area area) throws QueryException;
-    List<Restaurant> queryRestaurants(FoodCategory foodCategory) throws QueryException;
+    List<Restaurant> queryRestaurants(String restaurantName, Area area, FoodCategory foodCategory) throws QueryException;
     List<Restaurant> queryWeeklyHottestRestaurants() throws QueryException;
 
     Area createArea(Area area) throws CreateException;

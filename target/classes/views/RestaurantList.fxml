@@ -16,8 +16,8 @@
    <children>
       <AnchorPane layoutY="-1.0" prefHeight="502.0" prefWidth="273.0" style="-fx-background-color: #ffffff;">
          <children>
-            <ComboBox fx:id="foodCategoryComboBox" layoutX="58.0" layoutY="130.0" prefWidth="150.0" promptText="Food Category" style="-fx-background-color: #ffffff; -fx-border-color: #0598ff; -fx-border-width: 0px 0px 2px 0px;" />
-            <ComboBox fx:id="areaComboBox" layoutX="58.0" layoutY="200.0" prefWidth="150.0" promptText="Area" style="-fx-background-color: #ffffff; -fx-border-width: 0px 0px 2px 0px; -fx-border-color: #0598ff;" />
+            <ComboBox fx:id="foodCategoryComboBox" editable="true" layoutX="58.0" layoutY="130.0" prefWidth="150.0" promptText="Food Category" style="-fx-background-color: #ffffff; -fx-border-color: #0598ff; -fx-border-width: 0px 0px 2px 0px;" />
+            <ComboBox fx:id="areaComboBox" editable="true" layoutX="58.0" layoutY="200.0" prefWidth="150.0" promptText="Area" style="-fx-background-color: #ffffff; -fx-border-width: 0px 0px 2px 0px; -fx-border-color: #0598ff;" />
             <ImageView fitHeight="26.0" fitWidth="37.0" layoutX="14.0" layoutY="130.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/healthy-food.png" />
@@ -44,18 +44,16 @@
                <font>
                   <Font name="Arial" size="18.0" />
                </font></Button>
-            <Button fx:id="queryRestaurantByFoodCategoryBtn" layoutX="223.0" layoutY="130.0" mnemonicParsing="false" onAction="#queryRestaurantByFoodCategoryHandler" prefHeight="21.0" prefWidth="37.0" style="-fx-background-radius: 30; -fx-background-color: #0598ff;" text="Go" textFill="WHITE" />
-            <Button fx:id="queryRestaurantByAreaBtn" layoutX="223.0" layoutY="200.0" mnemonicParsing="false" onAction="#queryRestaurantByAreaHandler" prefHeight="21.0" prefWidth="37.0" style="-fx-background-radius: 30; -fx-background-color: #0598ff;" text="Go" textFill="WHITE" />
+            <Button fx:id="queryRestaurantsBtn" layoutX="223.0" layoutY="130.0" mnemonicParsing="false" onAction="#queryRestaurantsHandler" prefHeight="21.0" prefWidth="37.0" style="-fx-background-radius: 30; -fx-background-color: #0598ff;" text="Go" textFill="WHITE" />
             <ImageView fitHeight="26.0" fitWidth="41.0" layoutX="14.0" layoutY="277.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/newspaper.png" />
                </image>
             </ImageView>
-            <ComboBox fx:id="restaurantNameComboBox" layoutX="59.0" layoutY="270.0" prefWidth="150.0" promptText="Restaurant Name" style="-fx-background-color: #ffffff; -fx-border-width: 0px 0px 2px 0px; -fx-border-color: #0598ff;" />
-            <Button fx:id="queryRestaurantByNameBtn" layoutX="223.0" layoutY="270.0" mnemonicParsing="false" onAction="#queryRestaurantByNameHandler" prefHeight="21.0" prefWidth="37.0" style="-fx-background-radius: 30; -fx-background-color: #0598ff;" text="Go" textFill="WHITE" />
-            <Button fx:id="createRestaurantBtn" layoutX="16.0" layoutY="456.0" mnemonicParsing="false" onAction="#createRestaurantHandler" prefWidth="45.0" style="-fx-background-color: #f7ec4f; -fx-background-radius: 100;" text="New" />
-            <Button fx:id="editRestaurantBtn" layoutX="76.0" layoutY="456.0" mnemonicParsing="false" onAction="#editRestaurantHandler" style="-fx-background-color: #7fff6e; -fx-background-radius: 10;" text="Edit" />
-            <Button fx:id="deleteRestaurantBtn" layoutX="130.0" layoutY="456.0" mnemonicParsing="false" onAction="#deleteRestaurantHandler" style="-fx-background-color: #fa5a5a; -fx-background-radius: 100;" text="Delete" />
+            <ComboBox fx:id="restaurantNameComboBox" editable="true" layoutX="59.0" layoutY="270.0" prefWidth="150.0" promptText="Restaurant Name" style="-fx-background-color: #ffffff; -fx-border-width: 0px 0px 2px 0px; -fx-border-color: #0598ff;" />
+            <Button fx:id="createRestaurantBtn" layoutX="99.0" layoutY="456.0" mnemonicParsing="false" onAction="#createRestaurantHandler" prefWidth="45.0" style="-fx-background-color: #f7ec4f; -fx-background-radius: 100;" text="New" />
+            <Button fx:id="editRestaurantBtn" layoutX="156.0" layoutY="456.0" mnemonicParsing="false" onAction="#editRestaurantHandler" style="-fx-background-color: #7fff6e; -fx-background-radius: 10;" text="Edit" />
+            <Button fx:id="deleteRestaurantBtn" layoutX="208.0" layoutY="456.0" mnemonicParsing="false" onAction="#deleteRestaurantHandler" style="-fx-background-color: #fa5a5a; -fx-background-radius: 100;" text="Delete" />
          </children>
       </AnchorPane>
       <AnchorPane layoutX="274.0" layoutY="-1.0" prefHeight="500.0" prefWidth="427.0">

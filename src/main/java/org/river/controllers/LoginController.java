@@ -61,6 +61,7 @@ public class LoginController {
 
             Parent restaurantListParent = loader.load();
             Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+            stage.setTitle("Restaurant List");
             stage.setScene(new Scene(restaurantListParent));
             stage.sizeToScene();
             stage.show();

@@ -11,6 +11,7 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.stream.Collectors;
 
 /**
  * @author - Haribo
@@ -36,53 +37,34 @@ public class StubRestaurantAdapter implements RestaurantAdapter {
     }
 
     @Override
-    public Restaurant queryRestaurant(String name) throws QueryException {
-        Random rand = new Random();
-        Integer id = rand.nextInt(50);
-        id += 1;
-        return new Restaurant(id, 1, 1, name,
-                "test restaurant description", new Image("file:./src/main/resources/images/fire.png"), "restaurant address");
-    }
-
-    @Override
-    public List<Restaurant> queryRestaurants() throws QueryException {
+    public List<Restaurant> queryRestaurants(String restaurantName, Area area, FoodCategory foodCategory) throws QueryException {
         List<Restaurant> restaurantList = new ArrayList<>();
-        for (int i = 0; i < 5; i++) {
+
+        for (int i = 1; i <= 50; i++) {
             Random rand = new Random();
             Integer id = rand.nextInt(50);
             id += 1;
-            Restaurant restaurant = new Restaurant(id, 1, 1, "testRestaurant"+id,
-                    "test restaurant description "+id, new Image("file:./src/main/resources/images/fire.png"), "restaurant address "+id);
+            Restaurant restaurant = new Restaurant(i, id, id, "testRestaurant"+id,
+                    "test restaurant description "+i, new Image("file:./src/main/resources/images/fire.png"), "restaurant address "+i);
             restaurantList.add(restaurant);
         }
-        return restaurantList;
-    }
 
-    @Override
-    public List<Restaurant> queryRestaurants(Area area) throws QueryException {
-        List<Restaurant> restaurantList = new ArrayList<>();
-        for (int i = 0; i < 5; i++) {
-            Random rand = new Random();
-            Integer id = rand.nextInt(50);
-            id += 1;
-            Restaurant restaurant = new Restaurant(id, area.getId(), 1, "testRestaurant"+id,
-                    "test restaurant description "+id, new Image("file:./src/main/resources/images/fire.png"), "restaurant address "+id);
-            restaurantList.add(restaurant);
+        if (restaurantName != null) {
+            restaurantList = restaurantList.stream()
+                    .filter((Restaurant restaurant) -> (restaurant.getName().equals(restaurantName)))
+                    .collect(Collectors.toList());
         }
-        return restaurantList;
-    }
+        if (area != null) {
+            restaurantList = restaurantList.stream()
+                    .filter((Restaurant restaurant) -> (restaurant.getAreaId().equals(area.getId())))
+                    .collect(Collectors.toList());
+        }
+        if (foodCategory != null) {
+            restaurantList = restaurantList.stream()
+                    .filter((Restaurant restaurant) -> (restaurant.getFoodCategoryId().equals(foodCategory.getId())))
+                    .collect(Collectors.toList());
+        }
 
-    @Override
-    public List<Restaurant> queryRestaurants(FoodCategory foodCategory) throws QueryException {
-        List<Restaurant> restaurantList = new ArrayList<>();
-        for (int i = 0; i < 5; i++) {
-            Random rand = new Random();
-            Integer id = rand.nextInt(50);
-            id += 1;
-            Restaurant restaurant = new Restaurant(id, 1, foodCategory.getId(), "testRestaurant"+id,
-                    "test restaurant description "+id, new Image("file:./src/main/resources/images/fire.png"), "restaurant address "+id);
-            restaurantList.add(restaurant);
-        }
         return restaurantList;
     }
 

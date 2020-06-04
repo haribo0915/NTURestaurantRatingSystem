@@ -168,15 +168,15 @@ public class RestaurantDetailsController implements Initializable {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/CommentDialog.fxml"));
 
-            //CommentDialogController commentDialogController = new CommentDialogController(restaurantAdapterFactory, this.currentUser, restaurant.getId());
-            CommentDialogController commentDialogController = new CommentDialogController(restaurantAdapterFactory, this.currentUser, 1);
+            CommentDialogController commentDialogController = new CommentDialogController(restaurantAdapterFactory, this.currentUser, restaurant.getId());
+            //CommentDialogController commentDialogController = new CommentDialogController(restaurantAdapterFactory, this.currentUser, 1);
             loader.setController(commentDialogController);
 
-            Parent CommentDialogParent = loader.load();
+            Parent commentDialogParent = loader.load();
             Stage stage = new Stage();
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.setTitle("Modify User Comment");
-            stage.setScene(new Scene(CommentDialogParent));
+            stage.setScene(new Scene(commentDialogParent));
             stage.sizeToScene();
             stage.showAndWait();
         } catch (IOException e) {
@@ -201,6 +201,7 @@ public class RestaurantDetailsController implements Initializable {
 
             Parent restaurantListParent = loader.load();
             Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+            stage.setTitle("Restaurant List");
             stage.setScene(new Scene(restaurantListParent));
             stage.sizeToScene();
             stage.show();

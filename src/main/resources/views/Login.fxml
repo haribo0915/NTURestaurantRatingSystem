@@ -15,9 +15,9 @@
    <left>
       <AnchorPane prefHeight="200.0" prefWidth="345.0" style="-fx-background-color: #0598ff;" BorderPane.alignment="CENTER">
          <children>
-            <Text fill="WHITE" layoutX="28.0" layoutY="335.0" strokeType="OUTSIDE" strokeWidth="0.0" text="NTU Restaurant Rating">
+            <Text fill="WHITE" layoutX="18.0" layoutY="326.0" strokeType="OUTSIDE" strokeWidth="0.0" text="NTU Restaurant Rating System">
                <font>
-                  <Font name="Elephant" size="24.0" />
+                  <Font name="Arial" size="22.0" />
                </font>
             </Text>
             <ImageView fitHeight="88.0" fitWidth="112.0" layoutX="125.0" layoutY="132.0" pickOnBounds="true" preserveRatio="true">
@@ -27,7 +27,7 @@
             </ImageView>
             <Text fill="WHITE" layoutX="104.0" layoutY="271.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome to">
                <font>
-                  <Font name="Bodoni MT Black" size="23.0" />
+                  <Font name="Arial" size="23.0" />
                </font>
             </Text>
          </children></AnchorPane>
