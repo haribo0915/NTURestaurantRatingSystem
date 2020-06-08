@@ -22,7 +22,7 @@
             </Text>
             <ImageView fitHeight="88.0" fitWidth="112.0" layoutX="125.0" layoutY="132.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../images/restaurant.png" />
+                  <Image url="@../images/shop.png" />
                </image>
             </ImageView>
             <Text fill="WHITE" layoutX="104.0" layoutY="271.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome to">
