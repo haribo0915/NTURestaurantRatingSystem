@@ -54,8 +54,8 @@ public class SQLUtils {
     		while (rs.next())
 	    		return new Restaurant(id, rs.getInt("area_id"), 
 		    				rs.getInt("food_category_id"),	rs.getString("name"), 
-		    				rs.getString("description"), ImageUtils.BlobToImage(rs.getBlob("image")), 
-		        			rs.getString("address"));
+		    				rs.getString("description"), rs.getString("image"),
+						rs.getString("address"));
     	} catch (Exception r) {
     		throw new QueryException("queryRestaurant error: utils");
     	}

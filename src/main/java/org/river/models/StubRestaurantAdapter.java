@@ -45,7 +45,7 @@ public class StubRestaurantAdapter implements RestaurantAdapter {
             Integer id = rand.nextInt(50);
             id += 1;
             Restaurant restaurant = new Restaurant(i, id, id, "testRestaurant"+id,
-                    "test restaurant description "+i, new Image("file:./src/main/resources/images/fire.png"), "restaurant address "+i);
+                    "test restaurant description "+i,"file:./src/main/resources/images/fire.png", "restaurant address "+i);
             restaurantList.add(restaurant);
         }
 
@@ -196,7 +196,7 @@ public class StubRestaurantAdapter implements RestaurantAdapter {
         for (int i = 0; i < 5; i++) {
 
             UserComment userComment = new UserComment(2, "admin", "admin", "admin", "admin@gmail.com", "CSIE",
-                    i, restaurant.getId(), 4, "the restaurant is good "+i , new Image("file:./src/main/resources/images/fire.png"),
+                    i, restaurant.getId(), 4, "the restaurant is good "+i , "file:./src/main/resources/images/fire.png",
                     new Timestamp(System.currentTimeMillis()));
             userCommentList.add(userComment);
         }
@@ -209,6 +209,6 @@ public class StubRestaurantAdapter implements RestaurantAdapter {
         Integer id = rand.nextInt(50);
         id += 1;
         return new Comment(id, userId, restaurantId, 5, "the restaurant is very good",
-                new Image("file:./src/main/resources/images/fire.png"), new Timestamp(System.currentTimeMillis()));
+                "file:./src/main/resources/images/fire.png", new Timestamp(System.currentTimeMillis()));
     }
 }

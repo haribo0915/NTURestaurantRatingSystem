@@ -5,7 +5,7 @@ create table comment
 	restaurant_id int not null,
 	rate int not null,
 	description varchar(500) null,
-	image longblob null,
+	image varchar(200) null,
 	date timestamp not null,
 	constraint comment_pk
 		primary key (id, user_id, restaurant_id),

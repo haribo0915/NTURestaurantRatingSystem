@@ -6,6 +6,7 @@ package org.river.models;
 public class JDBCRestaurantAdapterFactory implements RestaurantAdapterFactory {
     @Override
     public RestaurantAdapter create() {
-        return new JDBCRestaurantAdapter();
+        //return new JDBCRestaurantAdapter();
+        return null;
     }
 }

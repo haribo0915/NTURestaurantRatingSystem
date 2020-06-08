@@ -56,7 +56,7 @@ public class CommentDialogController implements Initializable {
             comment = restaurantAdapter.queryComment(currentUser.getId(), restaurantId);
             rateTextField.setText(String.valueOf(comment.getRate()));
             commentTextField.setText(comment.getDescription());
-            uploadImagePathTextField.setText(comment.getImage().getUrl());
+            uploadImagePathTextField.setText(comment.getImage());
         } catch (Exception e) {
             comment = new Comment();
             e.printStackTrace();
@@ -76,7 +76,7 @@ public class CommentDialogController implements Initializable {
             String description = commentTextField.getText();
             Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 
-            setComment(currentUser.getId(), restaurantId, description, image, new Timestamp(System.currentTimeMillis()));
+            setComment(currentUser.getId(), restaurantId, description, image.getUrl(), new Timestamp(System.currentTimeMillis()));
             if (comment.getId() == null) {
                 comment = restaurantAdapter.createComment(comment);
             } else {
@@ -90,7 +90,7 @@ public class CommentDialogController implements Initializable {
         }
     }
 
-    private void setComment(Integer userId, Integer restaurantId, String description, Image image, Timestamp timestamp) {
+    private void setComment(Integer userId, Integer restaurantId, String description, String image, Timestamp timestamp) {
         comment.setUserId(userId);
         comment.setRestaurantId(restaurantId);
         comment.setDescription(description);

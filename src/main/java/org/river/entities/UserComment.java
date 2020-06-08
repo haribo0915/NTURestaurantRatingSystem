@@ -18,13 +18,13 @@ public class UserComment {
     private Integer restaurantId;
     private Integer rate;
     private String description;
-    private Image image;
+    private String image;
     private Timestamp timestamp;
 
     public UserComment() {
     }
 
-    public UserComment(Integer roleId, String name, String account, String password, String email, String department, Integer userId, Integer restaurantId, Integer rate, String description, Image image, Timestamp timestamp) {
+    public UserComment(Integer roleId, String name, String account, String password, String email, String department, Integer userId, Integer restaurantId, Integer rate, String description, String image, Timestamp timestamp) {
         this.roleId = roleId;
         this.name = name;
         this.account = account;
@@ -119,11 +119,11 @@ public class UserComment {
         this.description = description;
     }
 
-    public Image getImage() {
+    public String getImage() {
         return image;
     }
 
-    public void setImage(Image image) {
+    public void setImage(String image) {
         this.image = image;
     }
 

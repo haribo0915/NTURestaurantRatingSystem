@@ -87,7 +87,7 @@ public class RestaurantDetailsController implements Initializable {
             restaurantNameLabel.setText(restaurant.getName());
             restaurantAddressLabel.setText(restaurant.getAddress());
             restaurantDescriptionLabel.setText(restaurant.getDescription());
-            restaurantImage.setImage(restaurant.getImage());
+            restaurantImage.setImage(new Image(restaurant.getImage(), 100, 150, true, true));
 
             Double restaurantAverageRate = 0.0;
             if (userCommentList.size() != 0) {

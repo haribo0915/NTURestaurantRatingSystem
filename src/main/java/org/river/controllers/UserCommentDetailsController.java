@@ -3,6 +3,7 @@ package org.river.controllers;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import org.river.entities.User;
 import org.river.entities.UserComment;
@@ -45,6 +46,6 @@ public class UserCommentDetailsController implements Initializable {
         userRateLabel.setText(String.valueOf(userComment.getRate()));
         userCommentLabel.setText(userComment.getDescription());
         userCommentedTimeLabel.setText(String.valueOf(userComment.getTimestamp()));
-        userUploadImage.setImage(userComment.getImage());
+        userUploadImage.setImage(new Image(userComment.getImage(), 100, 150, true, true));
     }
 }

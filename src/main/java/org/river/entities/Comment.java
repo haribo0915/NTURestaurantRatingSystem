@@ -12,13 +12,13 @@ public class Comment {
     private Integer restaurantId;
     private Integer rate;
     private String description;
-    private Image image;
+    private String image;
     private Timestamp timestamp;
 
     public Comment() {
     }
 
-    public Comment(Integer userId, Integer restaurantId, Integer rate, String description, Image image, Timestamp timestamp) {
+    public Comment(Integer userId, Integer restaurantId, Integer rate, String description, String image, Timestamp timestamp) {
         this.userId = userId;
         this.restaurantId = restaurantId;
         this.rate = rate;
@@ -27,7 +27,7 @@ public class Comment {
         this.timestamp = timestamp;
     }
 
-    public Comment(Integer id, Integer userId, Integer restaurantId, Integer rate, String description, Image image, Timestamp timestamp) {
+    public Comment(Integer id, Integer userId, Integer restaurantId, Integer rate, String description, String image, Timestamp timestamp) {
         this.id = id;
         this.userId = userId;
         this.restaurantId = restaurantId;
@@ -77,11 +77,11 @@ public class Comment {
         this.description = description;
     }
 
-    public Image getImage() {
+    public String getImage() {
         return image;
     }
 
-    public void setImage(Image image) {
+    public void setImage(String image) {
         this.image = image;
     }
 

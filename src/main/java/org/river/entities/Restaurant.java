@@ -11,13 +11,13 @@ public class Restaurant {
     private Integer foodCategoryId;
     private String name;
     private String description;
-    private Image image;
+    private String image;
     private String address;
 
     public Restaurant() {
     }
 
-    public Restaurant(Integer areaId, Integer foodCategoryId, String name, String description, Image image, String address) {
+    public Restaurant(Integer areaId, Integer foodCategoryId, String name, String description, String image, String address) {
         this.areaId = areaId;
         this.foodCategoryId = foodCategoryId;
         this.name = name;
@@ -26,7 +26,7 @@ public class Restaurant {
         this.address = address;
     }
 
-    public Restaurant(Integer id, Integer areaId, Integer foodCategoryId, String name, String description, Image image, String address) {
+    public Restaurant(Integer id, Integer areaId, Integer foodCategoryId, String name, String description, String image, String address) {
         this.id = id;
         this.areaId = areaId;
         this.foodCategoryId = foodCategoryId;
@@ -76,11 +76,11 @@ public class Restaurant {
         this.description = description;
     }
 
-    public Image getImage() {
+    public String getImage() {
         return image;
     }
 
-    public void setImage(Image image) {
+    public void setImage(String image) {
         this.image = image;
     }
 

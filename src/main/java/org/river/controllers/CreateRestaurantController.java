@@ -81,7 +81,7 @@ public class CreateRestaurantController implements Initializable {
         FileChooser fileChooser = new FileChooser();
         File imageFile = fileChooser.showOpenDialog((Stage)((Node)event.getSource()).getScene().getWindow());
         uploadImagePathTextField.setText(imageFile.getAbsolutePath());
-        restaurant.setImage(new Image(imageFile.toURI().toString(), 100, 150, true, true));
+        restaurant.setImage(imageFile.getAbsolutePath());
     }
 
     @SuppressWarnings("DuplicatedCode")
