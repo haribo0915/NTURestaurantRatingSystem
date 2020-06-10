@@ -1,9 +1,7 @@
 package org.river.exceptions;
 
-/**
- * @author - Haribo
- */
-public class CreateException extends RuntimeException {
+
+public class CreateException extends sqlException {
     public CreateException(String errMessage) {
         super(errMessage);
     }

@@ -12,7 +12,7 @@ import org.river.models.DBConnect;
 
 public class JDBCUserAdapter implements UserAdapter {
     @Override
-    public User createUser(User user) throws CreateException {
+    public User createUser(User user) {
     	DBConnect DBC = new DBConnect();
     	Connection con = DBC.getConnect();
     	
@@ -32,7 +32,7 @@ public class JDBCUserAdapter implements UserAdapter {
     		int reply = stat.executeUpdate();
     	}
     	catch(Exception e) {
-    		throw new CreateException("createUser error");
+    		//throw new CreateException("createUser error");
     	}
     	
     	String sqlQuery = "select u.id from user u where account=?";
@@ -45,12 +45,17 @@ public class JDBCUserAdapter implements UserAdapter {
  				   user.getName(), user.getAccount(), user.getPassword(), 
  				   user.getEmail(), user.getDepartment());
     	} catch(Exception e) {
-    		throw new CreateException("createRole error: fail to insert");
+    		//default return type
+    		return new User(-1, -1, 
+  				   "", "", "", 
+  				   "", "");
+    		
+    		//throw new CreateException("createRole error: fail to insert");
     	}
     }
 
     @Override
-    public User updateUser(User user) throws UpdateException {
+    public User updateUser(User user) {
     	DBConnect DBC = new DBConnect();
     	Connection con = DBC.getConnect();
     	String sqlQuery = "UPDATE user SET role_id=?,name=?,account=?,"
@@ -71,7 +76,7 @@ public class JDBCUserAdapter implements UserAdapter {
     		int reply = stat.executeUpdate();
     	}
     	catch(Exception e) {
-    		throw new UpdateException("updateUser error");
+    		// throw new UpdateException("updateUser error");
     	}
     	return new User(user.getId(), user.getRoleId(), 
 				   user.getName(), user.getAccount(), user.getPassword(), 
@@ -79,7 +84,7 @@ public class JDBCUserAdapter implements UserAdapter {
     }
 
     @Override
-    public User deleteUser(User user) throws DeleteException {
+    public User deleteUser(User user) {
     	DBConnect DBC = new DBConnect();
     	Connection con = DBC.getConnect();
     	String sqlQuery = "delete from user where id=?";
@@ -91,7 +96,7 @@ public class JDBCUserAdapter implements UserAdapter {
     		int reply = stat.executeUpdate();
     	}
     	catch(Exception e) {
-    		throw new DeleteException("deleteUser error");
+    		// throw new DeleteException("deleteUser error");
     	}
     	return new User(user.getId(), user.getRoleId(), 
 				   user.getName(), user.getAccount(), user.getPassword(), 
@@ -99,7 +104,7 @@ public class JDBCUserAdapter implements UserAdapter {
     }
 
     @Override
-    public User queryUser(String account, String password) throws QueryException {
+    public User queryUser(String account, String password) throws ResourceNotFoundException {
     	DBConnect DBC = new DBConnect();
     	Connection con = DBC.getConnect();
     	User out = null;
@@ -114,27 +119,25 @@ public class JDBCUserAdapter implements UserAdapter {
     		rs.next();
     		
     		// check password
-	    	if (!password.equals(rs.getString("password"))) {
-	    		errMsg = "wrong password";
-	    		throw new Exception();
-	    	}
+	    	if (!password.equals(rs.getString("password")))
+	    		throw new Exception("wrong password");
 	    	
 	    	out = new User(rs.getInt("id"), rs.getInt("role_id"), 
 	    				   rs.getString("name"), account, password, 
 	    				   rs.getString("email"), rs.getString("department"));
     	}
     	catch(Exception e) {
-    		if (errMsg == null)
-    			throw new QueryException("queryUser error: can't find account");
-    		else
-    			throw new QueryException("queryUser error: wrong password");
+    		
     	}
     	
-    	return out;
+    	if (out == null)
+    		return out;
+    	else
+    		throw new ResourceNotFoundException("queryUser error");
     }
 
-    @Override ///QQQQQQ
-    public Role createRole(Role role) throws CreateException {
+    @Override 
+    public Role createRole(Role role) {
     	DBConnect DBC = new DBConnect();
     	Connection con = DBC.getConnect();
     	String sqlUpdate = "insert into role (title) values (?)";
@@ -145,7 +148,7 @@ public class JDBCUserAdapter implements UserAdapter {
     		int reply = stat.executeUpdate();
     	}
     	catch(Exception e) {
-    		throw new CreateException("createRole error");
+    		//throw new CreateException("createRole error");
     	}
     	
     	Role out = null;
@@ -158,13 +161,15 @@ public class JDBCUserAdapter implements UserAdapter {
     			out = new Role(rs.getInt("id"), role.getTitle());
     		}
     	} catch(Exception e) {
-    		throw new CreateException("createRole error: fail to insert");
+    		//throw new CreateException("createRole error: fail to insert");
     	}
-    	return out;
+    	
+    	// defalut return type
+    	return new Role(-1, "");
     }
 
     @Override 
-    public Role updateRole(Role role) throws UpdateException {
+    public Role updateRole(Role role) {
     	DBConnect DBC = new DBConnect();
     	Connection con = DBC.getConnect();
     	String sqlQuery = "UPDATE role SET title=? where id=?";
@@ -176,13 +181,13 @@ public class JDBCUserAdapter implements UserAdapter {
     		int reply = stat.executeUpdate();
     	}
     	catch(Exception e) {
-    		throw new UpdateException("updateRole error");
+    		//throw new UpdateException("updateRole error");
     	}
     	return new Role(role.getId(), role.getTitle());
     }
 
     @Override 
-    public Role deleteRole(Role role) throws DeleteException {
+    public Role deleteRole(Role role) {
     	DBConnect DBC = new DBConnect();
     	Connection con = DBC.getConnect();
     	String sqlQuery = "delete from role where id=?";
@@ -194,13 +199,13 @@ public class JDBCUserAdapter implements UserAdapter {
     		int reply = stat.executeUpdate();
     	}
     	catch(Exception e) {
-    		throw new DeleteException("deleteRole error");
+    		//throw new DeleteException("deleteRole error");
     	}
     	return new Role(role.getId(), role.getTitle());
     }
 
-    @Override ///QQQQQQQQQQQ
-    public Role queryRole(Integer id) throws QueryException {
+    @Override 
+    public Role queryRole(Integer id) throws ResourceNotFoundException {
     	DBConnect DBC = new DBConnect();
     	Connection con = DBC.getConnect();
     	String sqlQuery = "select * from role where id=?";
@@ -220,14 +225,14 @@ public class JDBCUserAdapter implements UserAdapter {
     		}
     	}
     	catch(Exception e) {
-    		throw new QueryException("queryRole error: id");
+    		//throw new QueryException("queryRole error: id");
     	}
     	
     	if (cnt == 1)
     		return out;
     	else if (cnt < 1)
-    		throw new QueryException("queryRole error: id can't find");
+    		throw new ResourceNotFoundException("queryRole error: id can't find");
     	else
-    		throw new QueryException("queryRole error: multi-reply");
+    		return out;//throw new QueryException("queryRole error: multi-reply");
     }
 }

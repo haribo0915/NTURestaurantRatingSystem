@@ -1,9 +1,7 @@
 package org.river.exceptions;
 
-/**
- * @author - Haribo
- */
-public class QueryException extends RuntimeException {
+
+public class QueryException extends sqlException {
     public QueryException(String errMessage) {
         super(errMessage);
     }
