@@ -2,10 +2,7 @@ package org.river.models;
 
 import org.river.entities.Role;
 import org.river.entities.User;
-import org.river.exceptions.CreateException;
-import org.river.exceptions.DeleteException;
-import org.river.exceptions.QueryException;
-import org.river.exceptions.UpdateException;
+import org.river.exceptions.ResourceNotFoundException;
 import java.util.Random;
 
 /**
@@ -13,7 +10,7 @@ import java.util.Random;
  */
 public class StubUserAdapter implements UserAdapter {
     @Override
-    public User createUser(User user) throws CreateException {
+    public User createUser(User user){
         Random rand = new Random();
         Integer id = rand.nextInt(50);
         id += 1;
@@ -22,43 +19,43 @@ public class StubUserAdapter implements UserAdapter {
     }
 
     @Override
-    public User updateUser(User user) throws UpdateException {
+    public User updateUser(User user){
         return user;
     }
 
     @Override
-    public User deleteUser(User user) throws DeleteException {
+    public User deleteUser(User user){
         return user;
     }
 
     @Override
-    public User queryUser(String account, String password) throws QueryException {
+    public User queryUser(String account, String password)  {
         if (account.equals("admin") && password.equals("admin")) {
             return new User(1, 1, "admin", "admin", "admin",
                     "admin@gmail.com","CSIE");
         } else {
-            throw new QueryException("User Not Found");
+            throw new ResourceNotFoundException("User Not Found");
         }
 
     }
 
     @Override
-    public Role createRole(Role role) throws CreateException {
+    public Role createRole(Role role) {
         return null;
     }
 
     @Override
-    public Role updateRole(Role role) throws UpdateException {
+    public Role updateRole(Role role) {
         return null;
     }
 
     @Override
-    public Role deleteRole(Role role) throws DeleteException {
+    public Role deleteRole(Role role) {
         return null;
     }
 
     @Override
-    public Role queryRole(Integer id) throws QueryException {
+    public Role queryRole(Integer id) {
         return null;
     }
 }

@@ -19,6 +19,7 @@ import javafx.stage.Stage;
 import org.river.entities.Restaurant;
 import org.river.entities.User;
 import org.river.entities.UserComment;
+import org.river.exceptions.ResourceNotFoundException;
 import org.river.models.RestaurantAdapter;
 import org.river.models.RestaurantAdapterFactory;
 import org.w3c.dom.events.MouseEvent;
@@ -98,12 +99,14 @@ public class RestaurantDetailsController implements Initializable {
             }
             restaurantRateLabel.setText(String.valueOf(restaurantAverageRate));
 
+        } catch (ResourceNotFoundException e) {
+            System.out.println(e.getMessage());
         } catch (Exception e) {
             e.printStackTrace();
+        } finally {
+            initUserCommentsTable();
+            querySelectedUserCommentBtn.setDisable(true);
         }
-
-        initUserCommentsTable();
-        querySelectedUserCommentBtn.setDisable(true);
     }
 
     public void userClickedOnUserCommentTable(Event event) {
@@ -159,6 +162,8 @@ public class RestaurantDetailsController implements Initializable {
             //refresh user comment table
             List<UserComment> userCommentList = restaurantAdapter.queryUserComments(this.restaurant);
             refreshUserCommentTable(userCommentList);
+        } catch (ResourceNotFoundException e) {
+            System.out.println(e.getMessage());
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -15,6 +15,7 @@ import org.river.entities.Area;
 import org.river.entities.FoodCategory;
 import org.river.entities.Restaurant;
 import org.river.entities.User;
+import org.river.exceptions.ResourceNotFoundException;
 import org.river.models.RestaurantAdapter;
 import org.river.models.RestaurantAdapterFactory;
 
@@ -74,6 +75,8 @@ public class EditRestaurantController implements Initializable {
 
             initRestaurantInformation();
 
+        } catch (ResourceNotFoundException e) {
+            System.out.println(e.getMessage());
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -120,6 +123,8 @@ public class EditRestaurantController implements Initializable {
 
             Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
             stage.close();
+        } catch (ResourceNotFoundException e) {
+            System.out.println(e.getMessage());
         } catch (Exception e) {
             e.printStackTrace();
         }

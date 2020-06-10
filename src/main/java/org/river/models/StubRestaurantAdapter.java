@@ -1,11 +1,6 @@
 package org.river.models;
-
-import javafx.scene.image.Image;
 import org.river.entities.*;
-import org.river.exceptions.CreateException;
-import org.river.exceptions.DeleteException;
-import org.river.exceptions.QueryException;
-import org.river.exceptions.UpdateException;
+import org.river.exceptions.ResourceNotFoundException;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -18,7 +13,7 @@ import java.util.stream.Collectors;
  */
 public class StubRestaurantAdapter implements RestaurantAdapter {
     @Override
-    public Restaurant createRestaurant(Restaurant restaurant) throws CreateException {
+    public Restaurant createRestaurant(Restaurant restaurant) {
         Random rand = new Random();
         Integer id = rand.nextInt(50);
         id += 1;
@@ -27,17 +22,17 @@ public class StubRestaurantAdapter implements RestaurantAdapter {
     }
 
     @Override
-    public Restaurant updateRestaurant(Restaurant restaurant) throws UpdateException {
+    public Restaurant updateRestaurant(Restaurant restaurant) {
         return restaurant;
     }
 
     @Override
-    public Restaurant deleteRestaurant(Restaurant restaurant) throws DeleteException {
+    public Restaurant deleteRestaurant(Restaurant restaurant) {
         return restaurant;
     }
 
     @Override
-    public List<Restaurant> queryRestaurants(String restaurantName, Area area, FoodCategory foodCategory) throws QueryException {
+    public List<Restaurant> queryRestaurants(String restaurantName, Area area, FoodCategory foodCategory) throws ResourceNotFoundException {
         List<Restaurant> restaurantList = new ArrayList<>();
 
         for (int i = 1; i <= 50; i++) {
@@ -69,27 +64,27 @@ public class StubRestaurantAdapter implements RestaurantAdapter {
     }
 
     @Override
-    public List<Restaurant> queryWeeklyHottestRestaurants() throws QueryException {
+    public List<Restaurant> queryWeeklyHottestRestaurants() throws ResourceNotFoundException {
         return null;
     }
 
     @Override
-    public Area createArea(Area area) throws CreateException {
+    public Area createArea(Area area){
         return null;
     }
 
     @Override
-    public Area updateArea(Area area) throws UpdateException {
+    public Area updateArea(Area area) {
         return null;
     }
 
     @Override
-    public Area deleteArea(Area area) throws DeleteException {
+    public Area deleteArea(Area area) {
         return null;
     }
 
     @Override
-    public Area queryArea(Integer id) throws QueryException {
+    public Area queryArea(Integer id) throws ResourceNotFoundException {
         Random rand = new Random();
         Integer randomId = rand.nextInt(50);
         randomId += 1;
@@ -97,7 +92,7 @@ public class StubRestaurantAdapter implements RestaurantAdapter {
     }
 
     @Override
-    public Area queryArea(String name) throws QueryException {
+    public Area queryArea(String name) throws ResourceNotFoundException {
         Random rand = new Random();
         Integer randomId = rand.nextInt(50);
         randomId += 1;
@@ -105,7 +100,7 @@ public class StubRestaurantAdapter implements RestaurantAdapter {
     }
 
     @Override
-    public List<Area> queryAreas() throws QueryException {
+    public List<Area> queryAreas() throws ResourceNotFoundException {
         List<Area> areaList = new ArrayList<>();
         for (int i = 0; i < 5; i++) {
             Random rand = new Random();
@@ -118,22 +113,22 @@ public class StubRestaurantAdapter implements RestaurantAdapter {
     }
 
     @Override
-    public FoodCategory createFoodCategory(FoodCategory foodCategory) throws CreateException {
+    public FoodCategory createFoodCategory(FoodCategory foodCategory) {
         return null;
     }
 
     @Override
-    public FoodCategory updateFoodCategory(FoodCategory foodCategory) throws UpdateException {
+    public FoodCategory updateFoodCategory(FoodCategory foodCategory) {
         return null;
     }
 
     @Override
-    public FoodCategory deleteFoodCategory(FoodCategory foodCategory) throws DeleteException {
+    public FoodCategory deleteFoodCategory(FoodCategory foodCategory) {
         return null;
     }
 
     @Override
-    public FoodCategory queryFoodCategory(Integer id) throws QueryException {
+    public FoodCategory queryFoodCategory(Integer id) {
         Random rand = new Random();
         Integer randomId = rand.nextInt(50);
         randomId += 1;
@@ -141,7 +136,7 @@ public class StubRestaurantAdapter implements RestaurantAdapter {
     }
 
     @Override
-    public FoodCategory queryFoodCategory(String name) throws QueryException {
+    public FoodCategory queryFoodCategory(String name) throws ResourceNotFoundException {
         Random rand = new Random();
         Integer randomId = rand.nextInt(50);
         randomId += 1;
@@ -149,7 +144,7 @@ public class StubRestaurantAdapter implements RestaurantAdapter {
     }
 
     @Override
-    public List<FoodCategory> queryFoodCategories() throws QueryException {
+    public List<FoodCategory> queryFoodCategories() throws ResourceNotFoundException {
         List<FoodCategory> foodCategoryList = new ArrayList<>();
         for (int i = 0; i < 5; i++) {
             Random rand = new Random();
@@ -162,7 +157,7 @@ public class StubRestaurantAdapter implements RestaurantAdapter {
     }
 
     @Override
-    public Comment createComment(Comment comment) throws CreateException {
+    public Comment createComment(Comment comment) {
         Random rand = new Random();
         Integer id = rand.nextInt(50);
         id += 1;
@@ -171,27 +166,27 @@ public class StubRestaurantAdapter implements RestaurantAdapter {
     }
 
     @Override
-    public Comment updateComment(Comment comment) throws UpdateException {
+    public Comment updateComment(Comment comment) {
         return comment;
     }
 
     @Override
-    public Comment deleteComment(Comment comment) throws DeleteException {
+    public Comment deleteComment(Comment comment) {
         return comment;
     }
 
     @Override
-    public List<Comment> queryComments(User user) throws QueryException {
+    public List<Comment> queryComments(User user) throws ResourceNotFoundException {
         return null;
     }
 
     @Override
-    public List<Comment> queryComments(Restaurant restaurant) throws QueryException {
+    public List<Comment> queryComments(Restaurant restaurant) throws ResourceNotFoundException {
         return null;
     }
 
     @Override
-    public List<UserComment> queryUserComments(Restaurant restaurant) throws QueryException {
+    public List<UserComment> queryUserComments(Restaurant restaurant) throws ResourceNotFoundException {
         List<UserComment> userCommentList = new ArrayList<>();
         for (int i = 0; i < 5; i++) {
 
@@ -204,7 +199,7 @@ public class StubRestaurantAdapter implements RestaurantAdapter {
     }
 
     @Override
-    public Comment queryComment(Integer userId, Integer restaurantId) throws QueryException {
+    public Comment queryComment(Integer userId, Integer restaurantId) throws ResourceNotFoundException {
         Random rand = new Random();
         Integer id = rand.nextInt(50);
         id += 1;

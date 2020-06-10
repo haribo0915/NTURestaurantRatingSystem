@@ -9,32 +9,32 @@ import java.util.List;
  * @author - Haribo
  */
 public interface RestaurantAdapter {
-    Restaurant createRestaurant(Restaurant restaurant) throws CreateException;
-    Restaurant updateRestaurant(Restaurant restaurant) throws UpdateException;
-    Restaurant deleteRestaurant(Restaurant restaurant) throws DeleteException;
-    List<Restaurant> queryRestaurants(String restaurantName, Area area, FoodCategory foodCategory) throws QueryException;
-    List<Restaurant> queryWeeklyHottestRestaurants() throws QueryException;
+    Restaurant createRestaurant(Restaurant restaurant);
+    Restaurant updateRestaurant(Restaurant restaurant);
+    Restaurant deleteRestaurant(Restaurant restaurant);
+    List<Restaurant> queryRestaurants(String restaurantName, Area area, FoodCategory foodCategory) throws ResourceNotFoundException;
+    List<Restaurant> queryWeeklyHottestRestaurants() throws ResourceNotFoundException;
 
-    Area createArea(Area area) throws CreateException;
-    Area updateArea(Area area) throws UpdateException;
-    Area deleteArea(Area area) throws DeleteException;
-    Area queryArea(Integer id) throws QueryException;
-    Area queryArea(String name) throws QueryException;
-    List<Area> queryAreas() throws QueryException;
+    Area createArea(Area area);
+    Area updateArea(Area area);
+    Area deleteArea(Area area);
+    Area queryArea(Integer id) throws ResourceNotFoundException;
+    Area queryArea(String name) throws ResourceNotFoundException;
+    List<Area> queryAreas() throws ResourceNotFoundException;
 
-    FoodCategory createFoodCategory(FoodCategory foodCategory) throws CreateException;
-    FoodCategory updateFoodCategory(FoodCategory foodCategory) throws UpdateException;
-    FoodCategory deleteFoodCategory(FoodCategory foodCategory) throws DeleteException;
-    FoodCategory queryFoodCategory(Integer id) throws QueryException;
-    FoodCategory queryFoodCategory(String name) throws QueryException;
-    List<FoodCategory> queryFoodCategories() throws QueryException;
+    FoodCategory createFoodCategory(FoodCategory foodCategory);
+    FoodCategory updateFoodCategory(FoodCategory foodCategory);
+    FoodCategory deleteFoodCategory(FoodCategory foodCategory);
+    FoodCategory queryFoodCategory(Integer id) throws ResourceNotFoundException;
+    FoodCategory queryFoodCategory(String name) throws ResourceNotFoundException;
+    List<FoodCategory> queryFoodCategories() throws ResourceNotFoundException;
 
-    Comment createComment(Comment comment) throws CreateException;
-    Comment updateComment(Comment comment) throws UpdateException;
-    Comment deleteComment(Comment comment) throws DeleteException;
-    List<Comment> queryComments(User user) throws QueryException;
-    List<Comment> queryComments(Restaurant restaurant) throws QueryException;
-    List<UserComment> queryUserComments(Restaurant restaurant) throws QueryException;
-    Comment queryComment(Integer userId, Integer restaurantId) throws QueryException;
+    Comment createComment(Comment comment);
+    Comment updateComment(Comment comment);
+    Comment deleteComment(Comment comment);
+    List<Comment> queryComments(User user) throws ResourceNotFoundException;
+    List<Comment> queryComments(Restaurant restaurant) throws ResourceNotFoundException;
+    List<UserComment> queryUserComments(Restaurant restaurant) throws ResourceNotFoundException;
+    Comment queryComment(Integer userId, Integer restaurantId) throws ResourceNotFoundException;
 
 }

@@ -15,6 +15,7 @@ import org.river.entities.Area;
 import org.river.entities.FoodCategory;
 import org.river.entities.Restaurant;
 import org.river.entities.User;
+import org.river.exceptions.ResourceNotFoundException;
 import org.river.models.RestaurantAdapter;
 import org.river.models.RestaurantAdapterFactory;
 
@@ -72,6 +73,8 @@ public class CreateRestaurantController implements Initializable {
             }
             areaComboBox.setItems(areaComboBoxObservableList);
 
+        } catch (ResourceNotFoundException e) {
+            System.out.println(e.getMessage());
         } catch (Exception e) {
             e.printStackTrace();
         }

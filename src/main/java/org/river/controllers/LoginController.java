@@ -7,10 +7,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.fxml.FXML;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.river.entities.User;
-import org.river.exceptions.QueryException;
+import org.river.exceptions.ResourceNotFoundException;
 import org.river.models.RestaurantAdapterFactory;
 import org.river.models.UserAdapter;
 import org.river.models.UserAdapterFactory;
@@ -47,7 +46,7 @@ public class LoginController {
             User currentUser = userAdapter.queryUser(userName.getText(), password.getText());
             System.out.println("login success!!");
             loadRestaurantListView(event, currentUser);
-        } catch (QueryException e) {
+        } catch (ResourceNotFoundException e) {
             System.out.println(e.getMessage());
         }
     }

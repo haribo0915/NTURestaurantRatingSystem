@@ -8,8 +8,6 @@ import org.river.entities.Restaurant;
 import org.river.exceptions.QueryException;
 import org.river.models.DBConnect;
 
-import javafx.scene.image.Image;
-
 public class SQLUtils {
 	public static int countSQL(Connection con, String table) {
 		try {

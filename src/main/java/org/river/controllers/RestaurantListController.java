@@ -21,6 +21,7 @@ import org.river.entities.Area;
 import org.river.entities.FoodCategory;
 import org.river.entities.Restaurant;
 import org.river.entities.User;
+import org.river.exceptions.ResourceNotFoundException;
 import org.river.models.*;
 
 import java.io.IOException;
@@ -99,14 +100,16 @@ public class RestaurantListController implements Initializable {
                 restaurantNameComboboxObservableList.add(restaurant.getName());
             }
             restaurantNameComboBox.setItems(restaurantNameComboboxObservableList);
+        } catch (ResourceNotFoundException e) {
+            System.out.println(e.getMessage());
         } catch (Exception e) {
             e.printStackTrace();
+        } finally {
+            initRestaurantTable();
+            querySelectedRestaurantBtn.setDisable(true);
+            editRestaurantBtn.setDisable(true);
+            deleteRestaurantBtn.setDisable(true);
         }
-
-        initRestaurantTable();
-        querySelectedRestaurantBtn.setDisable(true);
-        editRestaurantBtn.setDisable(true);
-        deleteRestaurantBtn.setDisable(true);
 
     }
 
@@ -138,6 +141,8 @@ public class RestaurantListController implements Initializable {
             List<Restaurant> restaurantList = restaurantAdapter.queryRestaurants(restaurantName, area, foodCategory);
 
             refreshRestaurantTable(restaurantList);
+        } catch (ResourceNotFoundException e) {
+            System.out.println(e.getMessage());
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -148,6 +153,8 @@ public class RestaurantListController implements Initializable {
             List<Restaurant> restaurantList = restaurantAdapter.queryWeeklyHottestRestaurants();
             //refresh restaurant table
             refreshRestaurantTable(restaurantList);
+        } catch (ResourceNotFoundException e) {
+            System.out.println(e.getMessage());
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -160,6 +167,8 @@ public class RestaurantListController implements Initializable {
             //refresh restaurant table
             //List<Restaurant> restaurantList = restaurantAdapter.queryRestaurants();
             //refreshRestaurantTable(restaurantList);
+        } catch (ResourceNotFoundException e) {
+            System.out.println(e.getMessage());
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -178,7 +187,9 @@ public class RestaurantListController implements Initializable {
             stage.setScene(new Scene(restaurantDetailsParent));
             stage.sizeToScene();
             stage.show();
-        } catch (IOException e) {
+        } catch (ResourceNotFoundException e) {
+            System.out.println(e.getMessage());
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -189,6 +200,8 @@ public class RestaurantListController implements Initializable {
             //refresh restaurant table
             List<Restaurant> restaurantList = restaurantAdapter.queryRestaurants(null, null, null);
             refreshRestaurantTable(restaurantList);
+        } catch (ResourceNotFoundException e) {
+            System.out.println(e.getMessage());
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -220,6 +233,8 @@ public class RestaurantListController implements Initializable {
             //refresh restaurant table
             List<Restaurant> restaurantList = restaurantAdapter.queryRestaurants(null, null, null);
             refreshRestaurantTable(restaurantList);
+        } catch (ResourceNotFoundException e) {
+            System.out.println(e.getMessage());
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -251,6 +266,8 @@ public class RestaurantListController implements Initializable {
             //refresh restaurant table
             List<Restaurant> restaurantList = restaurantAdapter.queryRestaurants(null, null, null);
             refreshRestaurantTable(restaurantList);
+        } catch (ResourceNotFoundException e) {
+            System.out.println(e.getMessage());
         } catch (Exception e) {
             e.printStackTrace();
         }

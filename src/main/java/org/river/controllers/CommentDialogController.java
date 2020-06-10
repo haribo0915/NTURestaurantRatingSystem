@@ -15,6 +15,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import org.river.entities.Comment;
 import org.river.entities.User;
+import org.river.exceptions.ResourceNotFoundException;
 import org.river.models.RestaurantAdapter;
 import org.river.models.RestaurantAdapterFactory;
 
@@ -56,8 +57,10 @@ public class CommentDialogController implements Initializable {
             rateTextField.setText(String.valueOf(comment.getRate()));
             commentTextField.setText(comment.getDescription());
             uploadImagePathTextField.setText(comment.getImage());
-        } catch (Exception e) {
+        } catch (ResourceNotFoundException e) {
             comment = new Comment();
+            System.out.println(e.getMessage());
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
