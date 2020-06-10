@@ -1,9 +1,7 @@
 package org.river.exceptions;
 
-/**
- * @author - Haribo
- */
-public class DeleteException extends RuntimeException {
+
+public class DeleteException extends sqlException {
 
     public DeleteException(String errMessage) {
         super(errMessage);
