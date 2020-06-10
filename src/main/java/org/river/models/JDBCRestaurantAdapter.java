@@ -141,10 +141,12 @@ public class JDBCRestaurantAdapter implements RestaurantAdapter {
 		    				rs.getInt("food_category_id"),	rs.getString("name"),
 		    				rs.getString("description"), rs.getString("image"),
 		        			rs.getString("address")));
-    	} catch (Exception r) {
-    		throw new ResourceNotFoundException("queryRestaurants error");
+    	} catch (Exception e) {
+    		e.printStackTrace();
     	}
 
+    	if (out.size() == 0)
+    		throw new ResourceNotFoundException("query restaurants error");
     	return out;
 	}
 
@@ -174,7 +176,7 @@ public class JDBCRestaurantAdapter implements RestaurantAdapter {
 
     	}
     	catch(Exception e) {
-    		throw new ResourceNotFoundException("queryWeeklyHottestRestaurants error");
+    		e.printStackTrace();
     	}
 
     	// find hottest
@@ -188,6 +190,9 @@ public class JDBCRestaurantAdapter implements RestaurantAdapter {
     		else if (max == totalRate[i])
     			out.add(SQLUtils.queryRestaurant(i));
     	}
+
+		if (out.size() == 0)
+			throw new ResourceNotFoundException("queryWeeklyHottestRestaurants error");
     	return out;
     }
 
@@ -277,15 +282,13 @@ public class JDBCRestaurantAdapter implements RestaurantAdapter {
     		}
     	}
     	catch(Exception e) {
+    		e.printStackTrace();
     		//throw new QueryException("queryArea error: id");
     	}
 
-    	if (cnt == 1)
-    		return out;
-    	else if (cnt < 1)
-    		throw new ResourceNotFoundException("queryArea error: name can't be found with given id");
-    	else
-    		return out; //throw new QueryException("queryArea error: multi-reply");
+    	if(cnt < 1)
+    		throw new ResourceNotFoundException("queryArea error: given area id not found");
+    	return out;
     }
 
     @Override
@@ -312,12 +315,9 @@ public class JDBCRestaurantAdapter implements RestaurantAdapter {
     		//throw new QueryException("queryArea error: name");
     	}
 
-    	if (cnt == 1)
-    		return out;
-    	else if (cnt < 1)
-    		throw new ResourceNotFoundException("queryArea error: id can't be found with given name");
-    	else
-    		return out; //throw new QueryException("queryArea error: multi-reply");
+		if(cnt < 1)
+			throw new ResourceNotFoundException("queryArea error: given area name not found");
+		return out;
     }
 
     @Override
@@ -341,6 +341,9 @@ public class JDBCRestaurantAdapter implements RestaurantAdapter {
     	catch(Exception e) {
     		//throw new QueryException("queryArea error: List");
     	}
+
+		if (out.size() == 0)
+			throw new ResourceNotFoundException("query areas error");
     	return out;
     }
 
@@ -435,12 +438,9 @@ public class JDBCRestaurantAdapter implements RestaurantAdapter {
     		throw new ResourceNotFoundException("queryFoodCategory error: id");
     	}
 
-    	if (cnt == 1)
-    		return out;
-    	else if (cnt < 1)
-    		throw new ResourceNotFoundException("queryFoodCategory error: id can't find");
-    	else
-    		return out;//throw new QueryException("queryFoodCategory error: multi-reply");
+		if(cnt < 1)
+			throw new ResourceNotFoundException("queryFoodCategory error: id can't find");
+		return out;
     }
 
     @Override
@@ -467,12 +467,9 @@ public class JDBCRestaurantAdapter implements RestaurantAdapter {
     		//throw new QueryException("queryFoodCategory error: name");
     	}
 
-    	if (cnt == 1)
-    		return out;
-    	else if (cnt < 1)
-    		throw new ResourceNotFoundException("queryFoodCategory error: name can't find id");
-    	else
-    		return out; //throw new QueryException("queryFoodCategory error: multi-reply");
+		if(cnt < 1)
+			throw new ResourceNotFoundException("queryFoodCategory error: name can't find id");
+		return out;
     }
 
     @Override
@@ -494,9 +491,10 @@ public class JDBCRestaurantAdapter implements RestaurantAdapter {
     		}
     	}
     	catch(Exception e) {
-    		//throw new QueryException("queryFoodCategory error: List");
+    		e.printStackTrace();
     	}
-
+		if(out.size() == 0)
+			throw new ResourceNotFoundException("query food categories not found");
     	return out;
     }
 
@@ -529,7 +527,7 @@ public class JDBCRestaurantAdapter implements RestaurantAdapter {
     			stat.setTimestamp(6, comment.getTimestamp());
     		stat.executeUpdate();
     	} catch(Exception e) {
-    		;
+    		e.printStackTrace();
     	}
 
     	try {
@@ -621,9 +619,12 @@ public class JDBCRestaurantAdapter implements RestaurantAdapter {
 
     	}
     	catch(Exception e) {
-    		//throw new QueryException("queryComments: error: List");
+
     	}
 
+    	if (out.size() == 0) {
+    		throw new ResourceNotFoundException("queryComments: error: List");
+		}
     	return out;
     }
 
@@ -650,6 +651,9 @@ public class JDBCRestaurantAdapter implements RestaurantAdapter {
     		//throw new QueryException("queryComments: error: List");
     	}
 
+		if (out.size() == 0) {
+			throw new ResourceNotFoundException("queryComments: error: List");
+		}
     	return out;
     }
 
@@ -678,6 +682,10 @@ public class JDBCRestaurantAdapter implements RestaurantAdapter {
     	catch(Exception e) {
     		//throw new QueryException("queryUserComments: error: List");
     	}
+
+		if (out.size() == 0) {
+			throw new ResourceNotFoundException("queryComments: error: List");
+		}
     	return out;
     }
 

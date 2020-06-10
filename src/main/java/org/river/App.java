@@ -27,8 +27,8 @@ public class App extends Application {
             Parent root = loader.load();
 
             LoginController loginController = loader.getController();
-            loginController.setUserAdapterFactory(new StubUserAdapterFactory());
-            loginController.setRestaurantAdapterFactory(new StubRestaurantAdapterFactory());
+            loginController.setUserAdapterFactory(new JDBCUserAdapterFactory());
+            loginController.setRestaurantAdapterFactory(new JDBCRestaurantAdapterFactory());
 
             stage.setTitle("NTU Restaurant Rating System");
             stage.setScene(new Scene(root));

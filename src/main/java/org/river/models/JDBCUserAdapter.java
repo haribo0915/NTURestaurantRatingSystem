@@ -108,7 +108,6 @@ public class JDBCUserAdapter implements UserAdapter {
     	DBConnect DBC = new DBConnect();
     	Connection con = DBC.getConnect();
     	User out = null;
-    	String errMsg = null;
     	
     	// Fetch account
     	try {
@@ -119,21 +118,19 @@ public class JDBCUserAdapter implements UserAdapter {
     		rs.next();
     		
     		// check password
-	    	if (!password.equals(rs.getString("password")))
-	    		throw new Exception("wrong password");
-	    	
-	    	out = new User(rs.getInt("id"), rs.getInt("role_id"), 
-	    				   rs.getString("name"), account, password, 
-	    				   rs.getString("email"), rs.getString("department"));
+	    	if (password.equals(rs.getString("password"))) {
+				out = new User(rs.getInt("id"), rs.getInt("role_id"),
+						rs.getString("name"), account, password,
+						rs.getString("email"), rs.getString("department"));
+			}
     	}
     	catch(Exception e) {
     		
     	}
     	
     	if (out == null)
-    		return out;
-    	else
     		throw new ResourceNotFoundException("queryUser error");
+    	return out;
     }
 
     @Override 

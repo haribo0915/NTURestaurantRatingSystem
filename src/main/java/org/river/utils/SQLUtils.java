@@ -5,7 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 import org.river.entities.Restaurant;
-import org.river.exceptions.QueryException;
+import org.river.exceptions.ResourceNotFoundException;
 import org.river.models.DBConnect;
 
 public class SQLUtils {
@@ -39,25 +39,29 @@ public class SQLUtils {
 		return out;
 	}
 
-	public static Restaurant queryRestaurant(int id) throws QueryException {
-		DBConnect DBC = new DBConnect();
-    	Connection con = DBC.getConnect();
-    	
-    	try {
-    		String sqlQuery = "select * from restaurant where id=?";
-    		PreparedStatement stat = con.prepareStatement(sqlQuery);
-    		stat.setInt(1, id);
-    		ResultSet rs = stat.executeQuery();
-    		
-    		while (rs.next())
-	    		return new Restaurant(id, rs.getInt("area_id"), 
-		    				rs.getInt("food_category_id"),	rs.getString("name"), 
-		    				rs.getString("description"), rs.getString("image"),
-						rs.getString("address"));
-    	} catch (Exception r) {
-    		throw new QueryException("queryRestaurant error: utils");
-    	}
-    	throw new QueryException("queryRestaurant error: utils");
+	public static Restaurant queryRestaurant(int id) throws ResourceNotFoundException {
+			DBConnect DBC = new DBConnect();
+			Connection con = DBC.getConnect();
+			Restaurant out = null;
+
+			try {
+				String sqlQuery = "select * from restaurant where id=?";
+				PreparedStatement stat = con.prepareStatement(sqlQuery);
+				stat.setInt(1, id);
+				ResultSet rs = stat.executeQuery();
+
+				while (rs.next())
+					out = new Restaurant(id, rs.getInt("area_id"),
+							rs.getInt("food_category_id"),	rs.getString("name"),
+							rs.getString("description"), rs.getString("image"),
+							rs.getString("address"));
+			} catch (Exception e) {
+
+			}
+
+			if (out == null)
+				throw new ResourceNotFoundException("queryRestaurant error: utils");
+			return out;
 	}
 
 }
