@@ -108,8 +108,12 @@ public class RestaurantListController implements Initializable {
         } finally {
             initRestaurantTable();
             querySelectedRestaurantBtn.setDisable(true);
+            //if current isn't administrator, all the modifying operations on restaurant won't allow
             editRestaurantBtn.setDisable(true);
             deleteRestaurantBtn.setDisable(true);
+            if (currentUser.getRoleId() != 1) {
+                createRestaurantBtn.setDisable(true);
+            }
         }
 
     }
@@ -121,8 +125,11 @@ public class RestaurantListController implements Initializable {
 
     public void userClickedOnRestaurantTable(MouseEvent event) {
         querySelectedRestaurantBtn.setDisable(false);
-        editRestaurantBtn.setDisable(false);
-        deleteRestaurantBtn.setDisable(false);
+        //The modifying button will open if current is administrator and he've selected a restaurant
+        if (currentUser.getRoleId() == 1) {
+            editRestaurantBtn.setDisable(false);
+            deleteRestaurantBtn.setDisable(false);
+        }
     }
 
     private void refreshRestaurantTable(List<Restaurant> restaurantList) {
