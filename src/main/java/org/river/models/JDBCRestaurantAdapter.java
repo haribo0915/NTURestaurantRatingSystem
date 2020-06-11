@@ -161,8 +161,8 @@ public class JDBCRestaurantAdapter implements RestaurantAdapter {
 
     	List<Restaurant> out = new ArrayList<Restaurant>();
     	int restaurantCount = SQLUtils.countSQL(con, "restaurant");
-    	int[] totalRate = new int [restaurantCount + 2];
-    	int[] rateCount = new int [restaurantCount + 2];
+		double[] totalRate = new double [restaurantCount + 2];
+		double[] rateCount = new double [restaurantCount + 2];
 
     	try {
     		PreparedStatement stat = con.prepareStatement(sqlQuery);
@@ -183,14 +183,17 @@ public class JDBCRestaurantAdapter implements RestaurantAdapter {
     	// find hottest
     	double max = 0;
     	for (int i = 1; i < restaurantCount + 1; i++) {
+    		System.out.println(totalRate[i]);
+			System.out.println(rateCount[i]);
+
     		if (rateCount[i] == 0)
     			continue;
-    		else if (max < (double)totalRate[i]/rateCount[i]) {
-    			max = (double)totalRate[i]/rateCount[i];
+    		else if (max < totalRate[i]/rateCount[i]) {
+    			max = totalRate[i]/rateCount[i];
     			out = new ArrayList<Restaurant>();
     			out.add(SQLUtils.queryRestaurant(i));
     		}
-    		else if (max == (double)totalRate[i]/rateCount[i])
+    		else if (max == totalRate[i]/rateCount[i])
     			out.add(SQLUtils.queryRestaurant(i));
     	}
 
