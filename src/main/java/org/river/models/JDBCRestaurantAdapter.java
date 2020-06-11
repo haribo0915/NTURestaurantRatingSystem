@@ -661,7 +661,7 @@ public class JDBCRestaurantAdapter implements RestaurantAdapter {
     public List<UserComment> queryUserComments(Restaurant restaurant) throws ResourceNotFoundException {
     	DBConnect DBC = new DBConnect();
     	Connection con = DBC.getConnect();
-    	String sqlQuery = "select * from comment inner join user on restaurant_id=?";
+    	String sqlQuery = "select * from comment c inner join user u on restaurant_id=? and c.user_id=u.id";
 
     	List<UserComment> out = new ArrayList<UserComment>();
     	try {
