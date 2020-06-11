@@ -181,14 +181,16 @@ public class JDBCRestaurantAdapter implements RestaurantAdapter {
     	}
 
     	// find hottest
-    	int max = 0;
+    	double max = 0;
     	for (int i = 1; i < restaurantCount + 1; i++) {
-    		if (max < totalRate[i]) {
-    			max = totalRate[i];
+    		if (rateCount[i] == 0)
+    			continue;
+    		else if (max < (double)totalRate[i]/rateCount[i]) {
+    			max = (double)totalRate[i]/rateCount[i];
     			out = new ArrayList<Restaurant>();
     			out.add(SQLUtils.queryRestaurant(i));
     		}
-    		else if (max == totalRate[i])
+    		else if (max == (double)totalRate[i]/rateCount[i])
     			out.add(SQLUtils.queryRestaurant(i));
     	}
 

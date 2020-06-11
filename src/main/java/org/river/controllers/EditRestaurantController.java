@@ -105,7 +105,7 @@ public class EditRestaurantController implements Initializable {
         FileChooser fileChooser = new FileChooser();
         File imageFile = fileChooser.showOpenDialog((Stage)((Node)event.getSource()).getScene().getWindow());
         uploadImagePathTextField.setText(imageFile.getAbsolutePath());
-        restaurant.setImage(imageFile.getAbsolutePath());
+        restaurant.setImage("file:"+imageFile.getAbsolutePath().replaceAll("\\\\", "\\\\\\\\"));
     }
 
     @SuppressWarnings("DuplicatedCode")
