@@ -69,7 +69,7 @@ public class CommentDialogController implements Initializable {
         FileChooser fileChooser = new FileChooser();
         File imageFile = fileChooser.showOpenDialog((Stage)((Node)event.getSource()).getScene().getWindow());
         uploadImagePathTextField.setText(imageFile.getAbsolutePath());
-        comment.setImage(imageFile.getAbsolutePath());
+        comment.setImage("file:"+imageFile.getAbsolutePath().replaceAll("\\\\", "\\\\\\\\"));
     }
 
     public void saveCommentHandler(ActionEvent event) {

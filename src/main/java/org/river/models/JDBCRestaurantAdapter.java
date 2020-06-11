@@ -100,9 +100,10 @@ public class JDBCRestaurantAdapter implements RestaurantAdapter {
     		PreparedStatement stat = con.prepareStatement(sqlQuery);
     		stat.setInt(1, restaurant.getId());
     		int reply = stat.executeUpdate();
+    		System.out.println("delete restaurant success");
     	}
     	catch(Exception e) {
-    		//throw new DeleteException("deleteRestaurant error");
+    		e.printStackTrace();
     	}
     	return restaurant;
     }

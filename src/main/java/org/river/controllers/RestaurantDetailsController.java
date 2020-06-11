@@ -81,23 +81,12 @@ public class RestaurantDetailsController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
-            List<UserComment> userCommentList = restaurantAdapter.queryUserComments(restaurant);
-            userCommentTableObservableList.addAll(userCommentList);
-            userCommentTable.setItems(userCommentTableObservableList);
-
             restaurantNameLabel.setText(restaurant.getName());
             restaurantAddressLabel.setText(restaurant.getAddress());
             restaurantDescriptionLabel.setText(restaurant.getDescription());
             restaurantImage.setImage(new Image(restaurant.getImage(), 100, 150, true, true));
-
-            Double restaurantAverageRate = 0.0;
-            if (userCommentList.size() != 0) {
-                for (UserComment userComment : userCommentList) {
-                    restaurantAverageRate += userComment.getRate();
-                }
-                restaurantAverageRate /= userCommentList.size();
-            }
-            restaurantRateLabel.setText(String.valueOf(restaurantAverageRate));
+            List<UserComment> userCommentList = restaurantAdapter.queryUserComments(restaurant);
+            refreshRestaurantRate(userCommentList);
 
         } catch (ResourceNotFoundException e) {
             System.out.println(e.getMessage());
@@ -125,6 +114,20 @@ public class RestaurantDetailsController implements Initializable {
         userCommentTableObservableList.clear();
         userCommentTableObservableList.addAll(userCommentList);
         userCommentTable.setItems(userCommentTableObservableList);
+    }
+
+    private void refreshRestaurantRate(List<UserComment> userCommentList) {
+        userCommentTableObservableList.clear();
+        userCommentTableObservableList.addAll(userCommentList);
+        userCommentTable.setItems(userCommentTableObservableList);
+        Double restaurantAverageRate = 0.0;
+        if (userCommentList.size() != 0) {
+            for (UserComment userComment : userCommentList) {
+                restaurantAverageRate += userComment.getRate();
+            }
+            restaurantAverageRate /= userCommentList.size();
+        }
+        restaurantRateLabel.setText(String.valueOf(restaurantAverageRate));
     }
 
     public void querySelectedUserCommentHandler(ActionEvent event) {
@@ -157,15 +160,19 @@ public class RestaurantDetailsController implements Initializable {
     }
 
     public void createCommentHandler(ActionEvent event) {
+        List<UserComment> userCommentList = new ArrayList<>();
+
         try {
             loadCommentDialogView(event);
             //refresh user comment table
-            List<UserComment> userCommentList = restaurantAdapter.queryUserComments(this.restaurant);
-            refreshUserCommentTable(userCommentList);
+            userCommentList = restaurantAdapter.queryUserComments(this.restaurant);
         } catch (ResourceNotFoundException e) {
             System.out.println(e.getMessage());
         } catch (Exception e) {
             e.printStackTrace();
+        } finally {
+            refreshUserCommentTable(userCommentList);
+            refreshRestaurantRate(userCommentList);
         }
     }
 

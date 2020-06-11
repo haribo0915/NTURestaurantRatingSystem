@@ -10,4 +10,6 @@ create table user
     constraint user_pk
         primary key (id),
     FOREIGN KEY (role_id) REFERENCES role(id)
+	ON DELETE CASCADE
+       	ON UPDATE CASCADE
 );

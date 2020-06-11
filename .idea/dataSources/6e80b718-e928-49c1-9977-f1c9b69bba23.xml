@@ -1216,11 +1216,15 @@ restaurant_id</ColNames>
       <ColNames>user_id</ColNames>
       <RefTableName>user</RefTableName>
       <RefColNames>id</RefColNames>
+      <OnUpdate>cascade</OnUpdate>
+      <OnDelete>cascade</OnDelete>
     </foreign-key>
     <foreign-key id="306" parent="287" name="comment_ibfk_2">
       <ColNames>restaurant_id</ColNames>
       <RefTableName>restaurant</RefTableName>
       <RefColNames>id</RefColNames>
+      <OnUpdate>cascade</OnUpdate>
+      <OnDelete>cascade</OnDelete>
     </foreign-key>
     <column id="307" parent="288" name="id">
       <Position>1</Position>
@@ -1298,11 +1302,15 @@ restaurant_id</ColNames>
       <ColNames>food_category_id</ColNames>
       <RefTableName>food_category</RefTableName>
       <RefColNames>id</RefColNames>
+      <OnUpdate>cascade</OnUpdate>
+      <OnDelete>cascade</OnDelete>
     </foreign-key>
     <foreign-key id="321" parent="289" name="restaurant_ibfk_2">
       <ColNames>area_id</ColNames>
       <RefTableName>area</RefTableName>
       <RefColNames>id</RefColNames>
+      <OnUpdate>cascade</OnUpdate>
+      <OnDelete>cascade</OnDelete>
     </foreign-key>
     <column id="322" parent="290" name="id">
       <Position>1</Position>
@@ -1377,6 +1385,8 @@ restaurant_id</ColNames>
       <ColNames>role_id</ColNames>
       <RefTableName>role</RefTableName>
       <RefColNames>id</RefColNames>
+      <OnUpdate>cascade</OnUpdate>
+      <OnDelete>cascade</OnDelete>
     </foreign-key>
   </database-model>
 </dataSource>

@@ -9,6 +9,10 @@ create table restaurant
     address varchar(200) not null,
     constraint restaurant_pk
         primary key (id),
-    FOREIGN KEY (food_category_id) REFERENCES food_category(id),
+    FOREIGN KEY (food_category_id) REFERENCES food_category(id)
+	ON DELETE CASCADE
+       	ON UPDATE CASCADE,
     FOREIGN KEY (area_id) REFERENCES area(id)
+	ON DELETE CASCADE
+       	ON UPDATE CASCADE
 );

@@ -9,8 +9,12 @@ create table comment
 	date timestamp not null,
 	constraint comment_pk
 		primary key (id, user_id, restaurant_id),
-    	FOREIGN KEY (user_id) REFERENCES user(id),
-    	FOREIGN KEY (restaurant_id) REFERENCES restaurant(id),
+    	FOREIGN KEY (user_id) REFERENCES user(id)
+		ON DELETE CASCADE
+       		ON UPDATE CASCADE,
+    	FOREIGN KEY (restaurant_id) REFERENCES restaurant(id)
+		ON DELETE CASCADE
+       		ON UPDATE CASCADE,
     	constraint chk_rate
         	check (rate >= 1 and rate <= 5)
 );

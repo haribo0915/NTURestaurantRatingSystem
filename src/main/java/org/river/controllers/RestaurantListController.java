@@ -132,6 +132,7 @@ public class RestaurantListController implements Initializable {
     }
 
     public void queryRestaurantsHandler(ActionEvent event) {
+        List<Restaurant> restaurantList = new ArrayList<>();
         try {
             String restaurantName = restaurantNameComboBox.getValue();
             String areaName = areaComboBox.getValue();
@@ -139,25 +140,27 @@ public class RestaurantListController implements Initializable {
             restaurantName = (restaurantName == null || restaurantName.equals(""))? null : restaurantName;
             Area area = (areaName == null || areaName.equals(""))? null : restaurantAdapter.queryArea(areaName);
             FoodCategory foodCategory = (foodCategoryName == null || foodCategoryName.equals(""))? null : restaurantAdapter.queryFoodCategory(foodCategoryName);
-            List<Restaurant> restaurantList = restaurantAdapter.queryRestaurants(restaurantName, area, foodCategory);
+            restaurantList = restaurantAdapter.queryRestaurants(restaurantName, area, foodCategory);
 
-            refreshRestaurantTable(restaurantList);
         } catch (ResourceNotFoundException e) {
             System.out.println(e.getMessage());
         } catch (Exception e) {
             e.printStackTrace();
+        } finally {
+            refreshRestaurantTable(restaurantList);
         }
     }
 
     public void queryHottestRestaurantHandler(ActionEvent event) {
+        List<Restaurant> restaurantList = new ArrayList<>();
         try {
-            List<Restaurant> restaurantList = restaurantAdapter.queryWeeklyHottestRestaurants();
-            //refresh restaurant table
-            refreshRestaurantTable(restaurantList);
+            restaurantList = restaurantAdapter.queryWeeklyHottestRestaurants();
         } catch (ResourceNotFoundException e) {
             System.out.println(e.getMessage());
         } catch (Exception e) {
             e.printStackTrace();
+        } finally {
+            refreshRestaurantTable(restaurantList);
         }
     }
 
@@ -228,16 +231,17 @@ public class RestaurantListController implements Initializable {
     }
 
     public void editRestaurantHandler(ActionEvent event) {
+        List<Restaurant> restaurantList = new ArrayList<>();
         try {
             Restaurant selectedRestaurant = restaurantTable.getSelectionModel().getSelectedItem();
             loadEditRestaurantView(event, selectedRestaurant);
-            //refresh restaurant table
-            List<Restaurant> restaurantList = restaurantAdapter.queryRestaurants(null, null, null);
-            refreshRestaurantTable(restaurantList);
+            restaurantList = restaurantAdapter.queryRestaurants(null, null, null);
         } catch (ResourceNotFoundException e) {
             System.out.println(e.getMessage());
         } catch (Exception e) {
             e.printStackTrace();
+        } finally {
+            refreshRestaurantTable(restaurantList);
         }
     }
 
@@ -261,16 +265,19 @@ public class RestaurantListController implements Initializable {
     }
 
     public void deleteRestaurantHandler(ActionEvent event) {
+        List<Restaurant> restaurantList = new ArrayList<>();
         try {
             Restaurant selectedRestaurant = restaurantTable.getSelectionModel().getSelectedItem();
             selectedRestaurant = restaurantAdapter.deleteRestaurant(selectedRestaurant);
-            //refresh restaurant table
-            List<Restaurant> restaurantList = restaurantAdapter.queryRestaurants(null, null, null);
-            refreshRestaurantTable(restaurantList);
+            System.out.println(selectedRestaurant.getName());
+            restaurantList = restaurantAdapter.queryRestaurants(null, null, null);
+            System.out.println("delete!!!!");
         } catch (ResourceNotFoundException e) {
             System.out.println(e.getMessage());
         } catch (Exception e) {
             e.printStackTrace();
+        } finally {
+            refreshRestaurantTable(restaurantList);
         }
     }
 
