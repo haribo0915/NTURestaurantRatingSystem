@@ -8,13 +8,16 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.fxml.FXML;
 import javafx.stage.Stage;
+import org.river.entities.Restaurant;
 import org.river.entities.User;
 import org.river.exceptions.ResourceNotFoundException;
+import org.river.models.RestaurantAdapter;
 import org.river.models.RestaurantAdapterFactory;
 import org.river.models.UserAdapter;
 import org.river.models.UserAdapterFactory;
 
 import java.io.IOException;
+import java.util.List;
 
 /**
  * @author - Haribo
@@ -45,6 +48,9 @@ public class LoginController {
             UserAdapter userAdapter = userAdapterFactory.create();
             User currentUser = userAdapter.queryUser(userName.getText(), password.getText());
             System.out.println("login success!!");
+            RestaurantAdapter restaurantAdapter = restaurantAdapterFactory.create();
+            List<Restaurant> restaurantList = restaurantAdapter.queryRestaurants(null, null, null);
+            System.out.println(restaurantList);
             loadRestaurantListView(event, currentUser);
         } catch (ResourceNotFoundException e) {
             System.out.println(e.getMessage());

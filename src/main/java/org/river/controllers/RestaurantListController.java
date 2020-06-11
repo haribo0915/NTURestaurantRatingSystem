@@ -80,6 +80,7 @@ public class RestaurantListController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
             List<Restaurant> restaurantList = restaurantAdapter.queryRestaurants(null, null, null);
+            //System.out.println(restaurantList);
             //TODO if the return list is null, JDBCRestaurantAdapter needs to throw Resource not found exception, or it'll throw nullPointerException
             restaurantTableObservableList.addAll(restaurantList);
             restaurantTable.setItems(restaurantTableObservableList);
