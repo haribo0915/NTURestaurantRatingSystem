@@ -2,8 +2,31 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="de867bdc-71b1-437c-a8b1-59cf6870e4c2" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/resources/csv/area.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/csv/comment.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/csv/food_category.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/csv/restaurant.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/csv/role.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/csv/user.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/river/controllers/RestaurantDetailsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/river/controllers/RestaurantDetailsController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/river/models/JDBCRestaurantAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/river/models/JDBCRestaurantAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/test_csv/area.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/test_csv/food_category.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/test_csv/restaurant.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/test_csv/role.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/test_csv/user.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/views/RestaurantDetails.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/views/RestaurantDetails.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/views/UserCommentDetails.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/views/UserCommentDetails.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/river/controllers/RestaurantDetailsController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/river/controllers/RestaurantDetailsController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/river/models/JDBCRestaurantAdapter.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/river/models/JDBCRestaurantAdapter.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/test_csv/area.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/test_csv/food_category.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/test_csv/restaurant.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/test_csv/role.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/test_csv/user.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/views/RestaurantDetails.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/views/RestaurantDetails.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/views/UserCommentDetails.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/views/UserCommentDetails.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -70,7 +93,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources/test_csv/restaurant.csv" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources/test_csv/area.csv" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.2" />
@@ -183,6 +206,7 @@
       <workItem from="1591798005902" duration="7897000" />
       <workItem from="1591844350038" duration="35000" />
       <workItem from="1591858737995" duration="8336000" />
+      <workItem from="1591886461696" duration="1657000" />
     </task>
     <servers />
   </component>
@@ -225,26 +249,26 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="254" height="195" key="DatabaseViewActions_Filter/0.0.1536.824@0.0.1536.824" timestamp="1591598643621" />
-    <state x="549" y="167" key="FileChooserDialogImpl" timestamp="1591864728924">
+    <state x="549" y="167" key="FileChooserDialogImpl" timestamp="1591887952992">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="549" y="167" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1591864728924" />
-    <state width="1493" height="165" key="GridCell.Tab.0.bottom" timestamp="1591867150593">
+    <state x="549" y="167" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1591887952992" />
+    <state width="1493" height="165" key="GridCell.Tab.0.bottom" timestamp="1591888086908">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="165" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1591867150593" />
-    <state width="1493" height="165" key="GridCell.Tab.0.center" timestamp="1591867150592">
+    <state width="1493" height="165" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1591888086908" />
+    <state width="1493" height="165" key="GridCell.Tab.0.center" timestamp="1591888086908">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="165" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1591867150592" />
-    <state width="1493" height="165" key="GridCell.Tab.0.left" timestamp="1591867150592">
+    <state width="1493" height="165" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1591888086908" />
+    <state width="1493" height="165" key="GridCell.Tab.0.left" timestamp="1591888086908">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="165" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1591867150592" />
-    <state width="1493" height="165" key="GridCell.Tab.0.right" timestamp="1591867150592">
+    <state width="1493" height="165" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1591888086908" />
+    <state width="1493" height="165" key="GridCell.Tab.0.right" timestamp="1591888086908">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="165" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1591867150592" />
+    <state width="1493" height="165" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1591888086908" />
     <state width="1493" height="165" key="GridCell.Tab.1.bottom" timestamp="1591867150593">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -293,10 +317,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="620" y="134" key="com.intellij.database.view.ui.DbObjectDialog/0.0.1536.824@0.0.1536.824" timestamp="1590472344098" />
-    <state x="457" y="236" key="com.intellij.ide.util.TipDialog" timestamp="1591858738523">
+    <state x="457" y="236" key="com.intellij.ide.util.TipDialog" timestamp="1591886477282">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="457" y="236" key="com.intellij.ide.util.TipDialog/0.0.1536.824@0.0.1536.824" timestamp="1591858738523" />
+    <state x="457" y="236" key="com.intellij.ide.util.TipDialog/0.0.1536.824@0.0.1536.824" timestamp="1591886477282" />
     <state x="171" y="107" key="new project wizard" timestamp="1590995980114">
       <screen x="0" y="0" width="1536" height="824" />
     </state>

@@ -127,7 +127,7 @@ public class RestaurantDetailsController implements Initializable {
             }
             restaurantAverageRate /= userCommentList.size();
         }
-        restaurantRateLabel.setText(String.valueOf(restaurantAverageRate));
+        restaurantRateLabel.setText(String.format("%.1f", restaurantAverageRate));
     }
 
     public void querySelectedUserCommentHandler(ActionEvent event) {

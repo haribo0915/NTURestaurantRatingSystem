@@ -13,7 +13,7 @@
    <children>
       <AnchorPane prefHeight="145.0" prefWidth="700.0">
          <children>
-            <Label fx:id="restaurantNameLabel" layoutX="14.0" layoutY="9.0" prefHeight="42.0" prefWidth="194.0" text="Restaurant" textFill="#057aff">
+            <Label fx:id="restaurantNameLabel" layoutX="14.0" layoutY="9.0" prefHeight="27.0" prefWidth="358.0" text="Restaurant" textFill="#057aff">
                <font>
                   <Font size="20.0" />
                </font></Label>
@@ -22,10 +22,13 @@
                   <Font size="16.0" />
                </font></Label>
             <ImageView fx:id="restaurantImage" fitHeight="134.0" fitWidth="212.0" layoutX="488.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true" />
-            <Label fx:id="restaurantDescriptionLabel" alignment="TOP_LEFT" layoutX="269.0" layoutY="8.0" prefHeight="134.0" prefWidth="218.0" text="Description" textFill="#057aff" />
-            <Label fx:id="restaurantRateLabel" layoutX="77.0" layoutY="96.0" prefHeight="35.0" prefWidth="42.0" text="R" textFill="#057aff">
+            <Label fx:id="restaurantDescriptionLabel" alignment="TOP_LEFT" layoutX="286.0" layoutY="43.0" prefHeight="97.0" prefWidth="212.0" text="Description" textFill="#057aff" wrapText="true">
                <font>
-                  <Font size="23.0" />
+                  <Font size="14.0" />
+               </font></Label>
+            <Label fx:id="restaurantRateLabel" layoutX="63.0" layoutY="101.0" prefHeight="26.0" prefWidth="34.0" text="0.0" textFill="#057aff">
+               <font>
+                  <Font size="16.0" />
                </font></Label>
             <ImageView fitHeight="42.0" fitWidth="42.0" layoutX="14.0" layoutY="93.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -44,7 +47,7 @@
         </columns>
       </TableView>
       <Button fx:id="querySelectedUserCommentBtn" layoutX="616.0" layoutY="474.0" mnemonicParsing="false" onAction="#querySelectedUserCommentHandler" style="-fx-background-color: #0598ff; -fx-background-radius: 100;" text="See Details" textFill="WHITE" />
-      <Button fx:id="createCommentBtn" layoutX="481.0" layoutY="474.0" mnemonicParsing="false" onAction="#createCommentHandler" style="-fx-background-color: #0598ff; -fx-background-radius: 100;" text="Upload Comment" textFill="WHITE">
+      <Button fx:id="createCommentBtn" layoutX="525.0" layoutY="474.0" mnemonicParsing="false" onAction="#createCommentHandler" style="-fx-background-color: #0598ff; -fx-background-radius: 100;" text="Comment" textFill="WHITE">
          <font>
             <Font name="Arial" size="12.0" />
          </font></Button>

@@ -161,39 +161,53 @@ public class JDBCRestaurantAdapter implements RestaurantAdapter {
 
     	List<Restaurant> out = new ArrayList<Restaurant>();
     	int restaurantCount = SQLUtils.countSQL(con, "restaurant");
-		double[] totalRate = new double [restaurantCount + 2];
-		double[] rateCount = new double [restaurantCount + 2];
+
+    	int[] restaurantIds = new int [restaurantCount + 2];
+    	int[] rateArray = new int [restaurantCount + 2];
+    	int maxRestaurantId = 0;
+    	int queryCnt = 0;
+    	
 
     	try {
     		PreparedStatement stat = con.prepareStatement(sqlQuery);
     		ResultSet rs = stat.executeQuery();
-
-    		while (rs.next())
+    		
+    		while (rs.next()) {
     			if (new java.util.Date().getTime() - rs.getTimestamp("date").getTime() < 1000*3600*24*7) {
-    				int restaurantId = rs.getInt("restaurant_id");
-    				totalRate[restaurantId] += rs.getInt("rate");
-    				rateCount[restaurantId] += 1;
+    				restaurantIds[queryCnt] = rs.getInt("restaurant_id");
+    				rateArray[queryCnt] = rs.getInt("rate");
+    				if (maxRestaurantId < restaurantIds[queryCnt])
+    					maxRestaurantId = restaurantIds[queryCnt];
+    				queryCnt += 1;
     			}
-
+    		}
     	}
     	catch(Exception e) {
     		e.printStackTrace();
     	}
+    	
+    	
+    	int[] totalRate = new int [maxRestaurantId + 2];
+    	int[] commentCnt = new int [maxRestaurantId + 2];
+    	
+    	for (int i = 0; i < queryCnt; i++) {
+    		totalRate[restaurantIds[i]] += rateArray[restaurantIds[i]];
+    		commentCnt[restaurantIds[i]] += 1;
+    	}
 
     	// find hottest
     	double max = 0;
-    	for (int i = 1; i < restaurantCount + 1; i++) {
-    		System.out.println(totalRate[i]);
-			System.out.println(rateCount[i]);
 
-    		if (rateCount[i] == 0)
+    	for (int i = 1; i < maxRestaurantId + 1; i++) {
+    		if (commentCnt[i] == 0)
     			continue;
-    		else if (max < totalRate[i]/rateCount[i]) {
-    			max = totalRate[i]/rateCount[i];
+    		else if (max < (double)totalRate[i]/commentCnt[i]) {
+    			max = (double)totalRate[i]/commentCnt[i];
     			out = new ArrayList<Restaurant>();
     			out.add(SQLUtils.queryRestaurant(i));
     		}
-    		else if (max == totalRate[i]/rateCount[i])
+    		else if (max == (double)totalRate[i]/commentCnt[i])
+
     			out.add(SQLUtils.queryRestaurant(i));
     	}
 

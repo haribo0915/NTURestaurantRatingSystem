@@ -11,7 +11,7 @@
       <Label fx:id="userDepartmentLabel" layoutX="83.0" layoutY="98.0" prefHeight="38.0" prefWidth="127.0" text="Label" />
       <Label fx:id="userRateLabel" layoutX="82.0" layoutY="161.0" prefHeight="38.0" prefWidth="61.0" text="Label" />
       <Label fx:id="userCommentedTimeLabel" layoutX="82.0" layoutY="223.0" prefHeight="38.0" prefWidth="155.0" text="Label" />
-      <Label fx:id="userCommentLabel" alignment="TOP_LEFT" layoutX="247.0" layoutY="160.0" prefHeight="150.0" prefWidth="275.0" text="Label" />
+      <Label fx:id="userCommentLabel" alignment="TOP_LEFT" layoutX="247.0" layoutY="160.0" prefHeight="150.0" prefWidth="275.0" text="Label" wrapText="true" />
       <ImageView fx:id="userUploadImage" fitHeight="133.0" fitWidth="186.0" layoutX="233.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fitHeight="32.0" fitWidth="32.0" layoutX="31.0" layoutY="37.0" pickOnBounds="true" preserveRatio="true">
          <image>
