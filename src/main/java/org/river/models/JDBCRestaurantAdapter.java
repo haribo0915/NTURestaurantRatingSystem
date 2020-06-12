@@ -158,14 +158,11 @@ public class JDBCRestaurantAdapter implements RestaurantAdapter {
     	DBConnect DBC = new DBConnect();
     	Connection con = DBC.getConnect();
     	String sqlQuery = "select * from comment";
-
     	List<Restaurant> out = new ArrayList<Restaurant>();
-    	int restaurantCount = SQLUtils.countSQL(con, "restaurant");
 
-    	int[] restaurantIds = new int [restaurantCount + 2];
-    	int[] rateArray = new int [restaurantCount + 2];
+    	List<Integer> restaurantIds = new ArrayList<Integer>();
+    	List<Integer> rateArray = new ArrayList<Integer>();
     	int maxRestaurantId = 0;
-    	int queryCnt = 0;
     	
 
     	try {
@@ -174,11 +171,12 @@ public class JDBCRestaurantAdapter implements RestaurantAdapter {
     		
     		while (rs.next()) {
     			if (new java.util.Date().getTime() - rs.getTimestamp("date").getTime() < 1000*3600*24*7) {
-    				restaurantIds[queryCnt] = rs.getInt("restaurant_id");
-    				rateArray[queryCnt] = rs.getInt("rate");
-    				if (maxRestaurantId < restaurantIds[queryCnt])
-    					maxRestaurantId = restaurantIds[queryCnt];
-    				queryCnt += 1;
+    				int restaurantId = rs.getInt("restaurant_id");
+    				int restaurantRate = rs.getInt("rate");
+    				restaurantIds.add(restaurantId);
+    				rateArray.add(restaurantRate);
+    				if (maxRestaurantId < restaurantId)
+    					maxRestaurantId = restaurantId;
     			}
     		}
     	}
@@ -187,12 +185,14 @@ public class JDBCRestaurantAdapter implements RestaurantAdapter {
     	}
     	
     	
-    	int[] totalRate = new int [maxRestaurantId + 2];
-    	int[] commentCnt = new int [maxRestaurantId + 2];
+    	int[] totalRate = new int [maxRestaurantId + 20];
+    	int[] commentCnt = new int [maxRestaurantId + 20];
     	
-    	for (int i = 0; i < queryCnt; i++) {
-    		totalRate[restaurantIds[i]] += rateArray[restaurantIds[i]];
-    		commentCnt[restaurantIds[i]] += 1;
+    	for (int i = 0; i < restaurantIds.size(); i++) {
+    		int restaurantId = restaurantIds.get(i);
+    		int restaurantRate = rateArray.get(i);
+    		totalRate[restaurantId] += restaurantRate;
+    		commentCnt[restaurantId] += 1;
     	}
 
     	// find hottest
@@ -207,7 +207,6 @@ public class JDBCRestaurantAdapter implements RestaurantAdapter {
     			out.add(SQLUtils.queryRestaurant(i));
     		}
     		else if (max == (double)totalRate[i]/commentCnt[i])
-
     			out.add(SQLUtils.queryRestaurant(i));
     	}
 
