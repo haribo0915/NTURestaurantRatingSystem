@@ -1,7 +1,5 @@
 package org.river.entities;
 
-import javafx.scene.image.Image;
-
 /**
  * @author - Haribo
  */

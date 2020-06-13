@@ -1,7 +1,7 @@
 package org.river.models;
 
 import org.river.entities.*;
-import org.river.exceptions.*;
+import org.river.exceptions.ResourceNotFoundException;
 
 import java.util.List;
 

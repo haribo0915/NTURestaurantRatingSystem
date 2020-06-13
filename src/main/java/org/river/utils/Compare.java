@@ -1,10 +1,10 @@
 package org.river.utils;
 
+import javafx.scene.image.Image;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-
-import javafx.scene.image.Image;
 
 public class Compare {
 	public static int countSQL(Connection con, String table) {

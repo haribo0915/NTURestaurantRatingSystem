@@ -1,6 +1,5 @@
 package org.river.entities;
 
-import javafx.scene.image.Image;
 import java.sql.Timestamp;
 
 /**

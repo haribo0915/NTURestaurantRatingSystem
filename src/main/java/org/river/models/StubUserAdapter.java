@@ -3,6 +3,7 @@ package org.river.models;
 import org.river.entities.Role;
 import org.river.entities.User;
 import org.river.exceptions.ResourceNotFoundException;
+
 import java.util.Random;
 
 /**

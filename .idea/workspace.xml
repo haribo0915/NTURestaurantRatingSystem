@@ -1,7 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="de867bdc-71b1-437c-a8b1-59cf6870e4c2" name="Default Changelist" comment="" />
+    <list default="true" id="de867bdc-71b1-437c-a8b1-59cf6870e4c2" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/river/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/river/App.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/river/controllers/CommentDialogController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/river/controllers/CommentDialogController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/river/controllers/CreateRestaurantController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/river/controllers/CreateRestaurantController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/river/controllers/EditRestaurantController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/river/controllers/EditRestaurantController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/river/controllers/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/river/controllers/LoginController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/river/controllers/RestaurantDetailsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/river/controllers/RestaurantDetailsController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/river/controllers/RestaurantListController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/river/controllers/RestaurantListController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/river/controllers/UserCommentDetailsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/river/controllers/UserCommentDetailsController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/river/entities/Comment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/river/entities/Comment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/river/entities/Restaurant.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/river/entities/Restaurant.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/river/entities/UserComment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/river/entities/UserComment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/river/models/JDBCRestaurantAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/river/models/JDBCRestaurantAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/river/models/JDBCUserAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/river/models/JDBCUserAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/river/models/RestaurantAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/river/models/RestaurantAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/river/models/StubUserAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/river/models/StubUserAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/river/utils/Compare.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/river/utils/Compare.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/river/utils/ImageTransform.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/river/utils/ImageTransform.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/river/utils/ImageUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/river/utils/ImageUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/river/utils/SQLUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/river/utils/SQLUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/river/App.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/river/App.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/river/controllers/CommentDialogController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/river/controllers/CommentDialogController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/river/controllers/CreateRestaurantController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/river/controllers/CreateRestaurantController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/river/controllers/EditRestaurantController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/river/controllers/EditRestaurantController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/river/controllers/LoginController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/river/controllers/LoginController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/river/controllers/RestaurantDetailsController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/river/controllers/RestaurantDetailsController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/river/controllers/RestaurantListController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/river/controllers/RestaurantListController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/river/controllers/UserCommentDetailsController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/river/controllers/UserCommentDetailsController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/river/entities/Comment.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/river/entities/Comment.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/river/entities/Restaurant.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/river/entities/Restaurant.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/river/entities/UserComment.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/river/entities/UserComment.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/river/models/JDBCRestaurantAdapter.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/river/models/JDBCRestaurantAdapter.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/river/models/JDBCUserAdapter.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/river/models/JDBCUserAdapter.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/river/models/StubUserAdapter.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/river/models/StubUserAdapter.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/river/utils/ImageTransform.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/river/utils/ImageTransform.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/river/utils/ImageUtils.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/river/utils/ImageUtils.class" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -181,6 +218,10 @@
       <workItem from="1591844350038" duration="35000" />
       <workItem from="1591858737995" duration="8336000" />
       <workItem from="1591886461696" duration="4089000" />
+      <workItem from="1591941757075" duration="112000" />
+      <workItem from="1591959073585" duration="226000" />
+      <workItem from="1592057318506" duration="2771000" />
+      <workItem from="1592063458526" duration="4242000" />
     </task>
     <servers />
   </component>
@@ -203,10 +244,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="278" y="68" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.824@0.0.1536.824" timestamp="1590992309161" />
-    <state x="574" y="96" key="#com.intellij.ide.util.MemberChooser" timestamp="1591596748399">
+    <state x="574" y="96" key="#com.intellij.ide.util.MemberChooser" timestamp="1592063724014">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="574" y="96" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824@0.0.1536.824" timestamp="1591596748399" />
+    <state x="574" y="96" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824@0.0.1536.824" timestamp="1592063724014" />
     <state x="556" y="297" width="423" height="239" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes" timestamp="1590516511882">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -227,22 +268,22 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="549" y="167" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1591887952992" />
-    <state width="1493" height="165" key="GridCell.Tab.0.bottom" timestamp="1591890896858">
+    <state width="1493" height="67" key="GridCell.Tab.0.bottom" timestamp="1592068101579">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="165" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1591890896858" />
-    <state width="1493" height="165" key="GridCell.Tab.0.center" timestamp="1591890896858">
+    <state width="1493" height="67" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1592068101579" />
+    <state width="1493" height="67" key="GridCell.Tab.0.center" timestamp="1592068101579">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="165" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1591890896858" />
-    <state width="1493" height="165" key="GridCell.Tab.0.left" timestamp="1591890896858">
+    <state width="1493" height="67" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1592068101579" />
+    <state width="1493" height="67" key="GridCell.Tab.0.left" timestamp="1592068101578">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="165" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1591890896858" />
-    <state width="1493" height="165" key="GridCell.Tab.0.right" timestamp="1591890896858">
+    <state width="1493" height="67" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1592068101578" />
+    <state width="1493" height="67" key="GridCell.Tab.0.right" timestamp="1592068101579">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="165" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1591890896858" />
+    <state width="1493" height="67" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1592068101579" />
     <state width="1493" height="165" key="GridCell.Tab.1.bottom" timestamp="1591890896858">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -291,10 +332,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="620" y="134" key="com.intellij.database.view.ui.DbObjectDialog/0.0.1536.824@0.0.1536.824" timestamp="1590472344098" />
-    <state x="457" y="236" key="com.intellij.ide.util.TipDialog" timestamp="1591886477282">
+    <state x="457" y="236" key="com.intellij.ide.util.TipDialog" timestamp="1592063465241">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="457" y="236" key="com.intellij.ide.util.TipDialog/0.0.1536.824@0.0.1536.824" timestamp="1591886477282" />
+    <state x="457" y="236" key="com.intellij.ide.util.TipDialog/0.0.1536.824@0.0.1536.824" timestamp="1592063465241" />
     <state x="171" y="107" key="new project wizard" timestamp="1590995980114">
       <screen x="0" y="0" width="1536" height="824" />
     </state>

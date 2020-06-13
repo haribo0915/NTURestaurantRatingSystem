@@ -1,5 +1,6 @@
 package org.river.controllers;
 
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -22,13 +23,16 @@ import org.river.entities.FoodCategory;
 import org.river.entities.Restaurant;
 import org.river.entities.User;
 import org.river.exceptions.ResourceNotFoundException;
-import org.river.models.*;
+import org.river.models.RestaurantAdapter;
+import org.river.models.RestaurantAdapterFactory;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 /**
  * @author - Haribo
@@ -37,6 +41,7 @@ public class RestaurantListController implements Initializable {
     private RestaurantAdapterFactory restaurantAdapterFactory;
     private RestaurantAdapter restaurantAdapter;
     private User currentUser;
+    private ExecutorService cachedThreadPool = Executors.newCachedThreadPool();
 
     @FXML
     private ComboBox<String> foodCategoryComboBox;
@@ -139,50 +144,53 @@ public class RestaurantListController implements Initializable {
     }
 
     public void queryRestaurantsHandler(ActionEvent event) {
-        List<Restaurant> restaurantList = new ArrayList<>();
-        try {
-            String restaurantName = restaurantNameComboBox.getValue();
-            String areaName = areaComboBox.getValue();
-            String foodCategoryName = foodCategoryComboBox.getValue();
-            restaurantName = (restaurantName == null || restaurantName.equals(""))? null : restaurantName;
-            Area area = (areaName == null || areaName.equals(""))? null : restaurantAdapter.queryArea(areaName);
-            FoodCategory foodCategory = (foodCategoryName == null || foodCategoryName.equals(""))? null : restaurantAdapter.queryFoodCategory(foodCategoryName);
-            restaurantList = restaurantAdapter.queryRestaurants(restaurantName, area, foodCategory);
-
-        } catch (ResourceNotFoundException e) {
-            System.out.println(e.getMessage());
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            refreshRestaurantTable(restaurantList);
-        }
+        cachedThreadPool.execute(() -> {
+            List<Restaurant> restaurantList = new ArrayList<>();
+            try {
+                String restaurantName = restaurantNameComboBox.getValue();
+                String areaName = areaComboBox.getValue();
+                String foodCategoryName = foodCategoryComboBox.getValue();
+                restaurantName = (restaurantName == null || restaurantName.equals(""))? null : restaurantName;
+                Area area = (areaName == null || areaName.equals(""))? null : restaurantAdapter.queryArea(areaName);
+                FoodCategory foodCategory = (foodCategoryName == null || foodCategoryName.equals(""))? null : restaurantAdapter.queryFoodCategory(foodCategoryName);
+                restaurantList = restaurantAdapter.queryRestaurants(restaurantName, area, foodCategory);
+            } catch (ResourceNotFoundException e) {
+                System.out.println(e.getMessage());
+            } catch (Exception e) {
+                e.printStackTrace();
+            } finally {
+                refreshRestaurantTable(restaurantList);
+            }
+        });
     }
 
     public void queryHottestRestaurantHandler(ActionEvent event) {
-        List<Restaurant> restaurantList = new ArrayList<>();
-        try {
-            restaurantList = restaurantAdapter.queryWeeklyHottestRestaurants();
-        } catch (ResourceNotFoundException e) {
-            System.out.println(e.getMessage());
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            refreshRestaurantTable(restaurantList);
-        }
+        cachedThreadPool.execute(() -> {
+            List<Restaurant> restaurantList = new ArrayList<>();
+            try {
+                restaurantList = restaurantAdapter.queryWeeklyHottestRestaurants();
+            } catch (ResourceNotFoundException e) {
+                System.out.println(e.getMessage());
+            } catch (Exception e) {
+                e.printStackTrace();
+            } finally {
+                refreshRestaurantTable(restaurantList);
+            }
+        });
     }
 
     public void querySelectedRestaurantHandler(ActionEvent event) {
-        try {
-            Restaurant selectedRestaurant = restaurantTable.getSelectionModel().getSelectedItem();
-            loadRestaurantDetailsView(event, selectedRestaurant);
-            //refresh restaurant table
-            //List<Restaurant> restaurantList = restaurantAdapter.queryRestaurants();
-            //refreshRestaurantTable(restaurantList);
-        } catch (ResourceNotFoundException e) {
-            System.out.println(e.getMessage());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        cachedThreadPool.execute(() -> {
+            try {
+                Restaurant selectedRestaurant = restaurantTable.getSelectionModel().getSelectedItem();
+                //Use Platform.runLater() to do UI stuff from outside the FXThread
+                Platform.runLater(() -> loadRestaurantDetailsView(event, selectedRestaurant));
+            } catch (ResourceNotFoundException e) {
+                System.out.println(e.getMessage());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
     }
 
     private void loadRestaurantDetailsView(ActionEvent event, Restaurant selectedRestaurant) {
@@ -206,15 +214,16 @@ public class RestaurantListController implements Initializable {
     }
 
     public void createRestaurantHandler(ActionEvent event) {
+        List<Restaurant> restaurantList = new ArrayList<>();
         try {
             loadCreateRestaurantView(event);
-            //refresh restaurant table
-            List<Restaurant> restaurantList = restaurantAdapter.queryRestaurants(null, null, null);
-            refreshRestaurantTable(restaurantList);
+            restaurantList = restaurantAdapter.queryRestaurants(null, null, null);
         } catch (ResourceNotFoundException e) {
             System.out.println(e.getMessage());
         } catch (Exception e) {
             e.printStackTrace();
+        } finally {
+            refreshRestaurantTable(restaurantList);
         }
     }
 
@@ -276,9 +285,7 @@ public class RestaurantListController implements Initializable {
         try {
             Restaurant selectedRestaurant = restaurantTable.getSelectionModel().getSelectedItem();
             selectedRestaurant = restaurantAdapter.deleteRestaurant(selectedRestaurant);
-            System.out.println(selectedRestaurant.getName());
             restaurantList = restaurantAdapter.queryRestaurants(null, null, null);
-            System.out.println("delete!!!!");
         } catch (ResourceNotFoundException e) {
             System.out.println(e.getMessage());
         } catch (Exception e) {

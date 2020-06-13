@@ -10,7 +10,10 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -22,7 +25,6 @@ import org.river.entities.UserComment;
 import org.river.exceptions.ResourceNotFoundException;
 import org.river.models.RestaurantAdapter;
 import org.river.models.RestaurantAdapterFactory;
-import org.w3c.dom.events.MouseEvent;
 
 import java.io.IOException;
 import java.net.URL;
@@ -30,6 +32,8 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 /**
  * @author - Haribo
@@ -39,6 +43,7 @@ public class RestaurantDetailsController implements Initializable {
     private RestaurantAdapter restaurantAdapter;
     private Restaurant restaurant;
     private User currentUser;
+    private ExecutorService cachedThreadPool = Executors.newCachedThreadPool();
 
     @FXML
     private Label restaurantNameLabel;
@@ -134,7 +139,6 @@ public class RestaurantDetailsController implements Initializable {
         try {
             UserComment selectedUserComment = userCommentTable.getSelectionModel().getSelectedItem();
             loadUserCommentDetailsView(event, selectedUserComment);
-
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -7,11 +7,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import org.river.entities.User;
 import org.river.entities.UserComment;
-import org.river.models.RestaurantAdapter;
-import org.river.models.RestaurantAdapterFactory;
 
 import java.net.URL;
-import java.sql.Timestamp;
 import java.util.ResourceBundle;
 
 /**

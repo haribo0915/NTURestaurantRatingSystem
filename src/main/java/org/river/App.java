@@ -4,14 +4,10 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import org.river.controllers.LoginController;
-import org.river.controllers.RestaurantListController;
-import org.river.entities.Restaurant;
-import org.river.models.*;
+import org.river.models.JDBCRestaurantAdapterFactory;
+import org.river.models.JDBCUserAdapterFactory;
 
 import java.io.IOException;
 

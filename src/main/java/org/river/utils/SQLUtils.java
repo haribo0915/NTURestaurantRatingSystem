@@ -1,12 +1,12 @@
 package org.river.utils;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-
 import org.river.entities.Restaurant;
 import org.river.exceptions.ResourceNotFoundException;
 import org.river.models.DBConnect;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 public class SQLUtils {
 	public static int countSQL(Connection con, String table) {

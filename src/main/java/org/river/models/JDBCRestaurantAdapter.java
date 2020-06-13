@@ -1,11 +1,15 @@
 package org.river.models;
 
 import org.river.entities.*;
-import org.river.utils.*;
-import org.river.exceptions.*;
-import java.util.*;
-import java.io.ByteArrayInputStream;
-import java.sql.*;
+import org.river.exceptions.ResourceNotFoundException;
+import org.river.utils.SQLUtils;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Types;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class JDBCRestaurantAdapter implements RestaurantAdapter {

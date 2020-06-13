@@ -1,14 +1,12 @@
 package org.river.models;
 
-import java.sql.ResultSet;
-import java.sql.Statement;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-
 import org.river.entities.Role;
 import org.river.entities.User;
-import org.river.exceptions.*;
-import org.river.models.DBConnect;
+import org.river.exceptions.ResourceNotFoundException;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 public class JDBCUserAdapter implements UserAdapter {
     @Override
