@@ -1,5 +1,6 @@
 package org.river.controllers;
 
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -16,6 +17,8 @@ import org.river.models.UserAdapter;
 import org.river.models.UserAdapterFactory;
 
 import java.io.IOException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 /**
  * @author - Haribo
@@ -23,6 +26,7 @@ import java.io.IOException;
 public class LoginController {
     private UserAdapterFactory userAdapterFactory;
     private RestaurantAdapterFactory restaurantAdapterFactory;
+    private ExecutorService cachedThreadPool = SingletonCachedThreadPool.getInstance();
 
     @FXML
     private TextField userName;
@@ -41,13 +45,15 @@ public class LoginController {
     }
 
     public void loginHandler(ActionEvent event) {
-        try {
-            UserAdapter userAdapter = userAdapterFactory.create();
-            User currentUser = userAdapter.queryUser(userName.getText(), password.getText());
-            loadRestaurantListView(event, currentUser);
-        } catch (ResourceNotFoundException e) {
-            System.out.println(e.getMessage());
-        }
+        cachedThreadPool.execute(() -> {
+            try {
+                UserAdapter userAdapter = userAdapterFactory.create();
+                User currentUser = userAdapter.queryUser(userName.getText(), password.getText());
+                Platform.runLater(() -> loadRestaurantListView(event, currentUser));
+            } catch (ResourceNotFoundException e) {
+                System.out.println(e.getMessage());
+            }
+        });
     }
 
     private void loadRestaurantListView(ActionEvent event, User currentUser) {
@@ -69,11 +75,13 @@ public class LoginController {
     }
 
     public void registerHandler(ActionEvent event) {
-        try {
-            loadRegisterView(event);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
+        cachedThreadPool.execute(() -> {
+            try {
+                Platform.runLater(() -> loadRegisterView(event));
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+        });
     }
 
     private void loadRegisterView(ActionEvent event) {

@@ -43,7 +43,7 @@ public class RestaurantDetailsController implements Initializable {
     private RestaurantAdapter restaurantAdapter;
     private Restaurant restaurant;
     private User currentUser;
-    private ExecutorService cachedThreadPool = Executors.newCachedThreadPool();
+    private ExecutorService cachedThreadPool = SingletonCachedThreadPool.getInstance();
 
     @FXML
     private Label restaurantNameLabel;

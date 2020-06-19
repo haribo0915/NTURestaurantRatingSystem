@@ -39,6 +39,7 @@ public class SQLUtils {
 		return out;
 	}
 
+	// TODO 別放UTILS謝謝 BY架構之王
 	public static Restaurant queryRestaurant(int id) throws ResourceNotFoundException {
 			DBConnect DBC = new DBConnect();
 			Connection con = DBC.getConnect();

@@ -41,7 +41,7 @@ public class RestaurantListController implements Initializable {
     private RestaurantAdapterFactory restaurantAdapterFactory;
     private RestaurantAdapter restaurantAdapter;
     private User currentUser;
-    private ExecutorService cachedThreadPool = Executors.newCachedThreadPool();
+    private ExecutorService cachedThreadPool = SingletonCachedThreadPool.getInstance();
 
     @FXML
     private ComboBox<String> foodCategoryComboBox;
@@ -85,7 +85,6 @@ public class RestaurantListController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
             List<Restaurant> restaurantList = restaurantAdapter.queryRestaurants(null, null, null);
-            //System.out.println(restaurantList);
             //TODO if the return list is null, JDBCRestaurantAdapter needs to throw Resource not found exception, or it'll throw nullPointerException
             restaurantTableObservableList.addAll(restaurantList);
             restaurantTable.setItems(restaurantTableObservableList);
@@ -284,7 +283,7 @@ public class RestaurantListController implements Initializable {
         List<Restaurant> restaurantList = new ArrayList<>();
         try {
             Restaurant selectedRestaurant = restaurantTable.getSelectionModel().getSelectedItem();
-            selectedRestaurant = restaurantAdapter.deleteRestaurant(selectedRestaurant);
+            restaurantAdapter.deleteRestaurant(selectedRestaurant);
             restaurantList = restaurantAdapter.queryRestaurants(null, null, null);
         } catch (ResourceNotFoundException e) {
             System.out.println(e.getMessage());

@@ -72,15 +72,9 @@ public class CommentDialogController implements Initializable {
             Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 
             setComment(currentUser.getId(), restaurantId, rate, description, comment.getImage(), new Timestamp(System.currentTimeMillis()));
-
-            if (comment.getId() == null) {
-                comment = restaurantAdapter.createComment(comment);
-            } else {
-                comment = restaurantAdapter.updateComment(comment);
-            }
+            comment = (comment.getId() == null)? restaurantAdapter.createComment(comment) : restaurantAdapter.updateComment(comment);
             
             stage.close();
-
         } catch (Exception e) {
             e.printStackTrace();
         }
