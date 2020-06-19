@@ -15,8 +15,8 @@ import java.util.List;
 public class JDBCRestaurantAdapter implements RestaurantAdapter {
     @Override
     public Restaurant createRestaurant(Restaurant restaurant) {
-    	DBConnect DBC = new DBConnect();
-    	Connection con = DBC.getConnect();
+    	// Connecting to database
+    	Connection con = DBConnect.getConnect();
 
     	// Insert the new restaurant to the database
     	try {
@@ -65,8 +65,8 @@ public class JDBCRestaurantAdapter implements RestaurantAdapter {
 
     @Override
     public Restaurant updateRestaurant(Restaurant restaurant) {
-    	DBConnect DBC = new DBConnect();
-    	Connection con = DBC.getConnect();
+    	// Connecting to database
+    	Connection con = DBConnect.getConnect();
 
     	try {
     		String sqlQuery = "UPDATE restaurant SET name=?, area_id=?, "
@@ -95,8 +95,8 @@ public class JDBCRestaurantAdapter implements RestaurantAdapter {
 
     @Override
     public Restaurant deleteRestaurant(Restaurant restaurant) {
-    	DBConnect DBC = new DBConnect();
-    	Connection con = DBC.getConnect();
+    	// Connecting to database
+    	Connection con = DBConnect.getConnect();
 
     	// Delete
     	try {
@@ -116,8 +116,8 @@ public class JDBCRestaurantAdapter implements RestaurantAdapter {
 
 	@Override
 	public List<Restaurant> queryRestaurants(String restaurantName, Area area, FoodCategory foodCategory) throws ResourceNotFoundException {
-		DBConnect DBC = new DBConnect();
-    	Connection con = DBC.getConnect();
+		// Connecting to database
+    	Connection con = DBConnect.getConnect();
     	List<Restaurant> out = new ArrayList<Restaurant>();
 
     	try {
@@ -159,8 +159,8 @@ public class JDBCRestaurantAdapter implements RestaurantAdapter {
 
     @Override
     public List<Restaurant> queryWeeklyHottestRestaurants() throws ResourceNotFoundException {
-    	DBConnect DBC = new DBConnect();
-    	Connection con = DBC.getConnect();
+    	// Connecting to database
+    	Connection con = DBConnect.getConnect();
     	String sqlQuery = "select * from comment";
     	List<Restaurant> out = new ArrayList<Restaurant>();
 
@@ -221,8 +221,8 @@ public class JDBCRestaurantAdapter implements RestaurantAdapter {
 
     @Override
     public Area createArea(Area area) {
-    	DBConnect DBC = new DBConnect();
-    	Connection con = DBC.getConnect();
+    	// Connecting to database
+    	Connection con = DBConnect.getConnect();
     	String sqlUpdate = "insert into area (name) values (?)";
 
     	try {
@@ -250,8 +250,8 @@ public class JDBCRestaurantAdapter implements RestaurantAdapter {
 
     @Override
     public Area updateArea(Area area) {
-    	DBConnect DBC = new DBConnect();
-    	Connection con = DBC.getConnect();
+    	// Connecting to database
+    	Connection con = DBConnect.getConnect();
     	String sqlQuery = "UPDATE area SET name=? where id=?";
 
     	try {
@@ -268,8 +268,8 @@ public class JDBCRestaurantAdapter implements RestaurantAdapter {
 
     @Override
     public Area deleteArea(Area area) {
-    	DBConnect DBC = new DBConnect();
-    	Connection con = DBC.getConnect();
+    	// Connecting to database
+    	Connection con = DBConnect.getConnect();
     	String sqlQuery = "delete from area where id=?";
 
     	// Delete
@@ -286,8 +286,8 @@ public class JDBCRestaurantAdapter implements RestaurantAdapter {
 
     @Override
     public Area queryArea(Integer id) throws ResourceNotFoundException {
-    	DBConnect DBC = new DBConnect();
-    	Connection con = DBC.getConnect();
+    	// Connecting to database
+    	Connection con = DBConnect.getConnect();
     	String sqlQuery = "select * from area where id=?";
 
     	Area out = null;
@@ -316,8 +316,8 @@ public class JDBCRestaurantAdapter implements RestaurantAdapter {
 
     @Override
     public Area queryArea(String name) throws ResourceNotFoundException {
-    	DBConnect DBC = new DBConnect();
-    	Connection con = DBC.getConnect();
+    	// Connecting to database
+    	Connection con = DBConnect.getConnect();
     	String sqlQuery = "select * from area where name=?";
 
     	Area out = null;
@@ -345,8 +345,8 @@ public class JDBCRestaurantAdapter implements RestaurantAdapter {
 
     @Override
     public List<Area> queryAreas() throws ResourceNotFoundException {
-    	DBConnect DBC = new DBConnect();
-    	Connection con = DBC.getConnect();
+    	// Connecting to database
+    	Connection con = DBConnect.getConnect();
     	String sqlQuery = "select * from area";
 
     	List<Area> out = new ArrayList<Area>();
@@ -373,8 +373,8 @@ public class JDBCRestaurantAdapter implements RestaurantAdapter {
 
     @Override
     public FoodCategory createFoodCategory(FoodCategory foodCategory) {
-    	DBConnect DBC = new DBConnect();
-    	Connection con = DBC.getConnect();
+    	// Connecting to database
+    	Connection con = DBConnect.getConnect();
     	String sqlUpdate = "insert into food_category (name) values (?)";
 
     	try {
@@ -403,8 +403,8 @@ public class JDBCRestaurantAdapter implements RestaurantAdapter {
 
     @Override
     public FoodCategory updateFoodCategory(FoodCategory foodCategory) {
-    	DBConnect DBC = new DBConnect();
-    	Connection con = DBC.getConnect();
+    	// Connecting to database
+    	Connection con = DBConnect.getConnect();
     	String sqlQuery = "UPDATE food_category SET name=? where id=?";
 
     	try {
@@ -421,8 +421,8 @@ public class JDBCRestaurantAdapter implements RestaurantAdapter {
 
     @Override
     public FoodCategory deleteFoodCategory(FoodCategory foodCategory) {
-    	DBConnect DBC = new DBConnect();
-    	Connection con = DBC.getConnect();
+    	// Connecting to database
+    	Connection con = DBConnect.getConnect();
     	String sqlQuery = "delete from food_category where id=?";
 
     	// Delete
@@ -439,8 +439,8 @@ public class JDBCRestaurantAdapter implements RestaurantAdapter {
 
     @Override
     public FoodCategory queryFoodCategory(Integer id) throws ResourceNotFoundException {
-    	DBConnect DBC = new DBConnect();
-    	Connection con = DBC.getConnect();
+    	// Connecting to database
+    	Connection con = DBConnect.getConnect();
     	String sqlQuery = "select * from food_category where id=?";
 
     	FoodCategory out = null;
@@ -468,8 +468,8 @@ public class JDBCRestaurantAdapter implements RestaurantAdapter {
 
     @Override
     public FoodCategory queryFoodCategory(String name) throws ResourceNotFoundException {
-    	DBConnect DBC = new DBConnect();
-    	Connection con = DBC.getConnect();
+    	// Connecting to database
+    	Connection con = DBConnect.getConnect();
     	String sqlQuery = "select * from food_category where name=?";
 
     	FoodCategory out = null;
@@ -497,8 +497,8 @@ public class JDBCRestaurantAdapter implements RestaurantAdapter {
 
     @Override
     public List<FoodCategory> queryFoodCategories() throws ResourceNotFoundException {
-    	DBConnect DBC = new DBConnect();
-    	Connection con = DBC.getConnect();
+    	// Connecting to database
+    	Connection con = DBConnect.getConnect();
     	String sqlQuery = "select * from food_category";
 
     	List<FoodCategory> out = new ArrayList<FoodCategory>();
@@ -523,8 +523,8 @@ public class JDBCRestaurantAdapter implements RestaurantAdapter {
 
     @Override
     public Comment createComment(Comment comment) {
-    	DBConnect DBC = new DBConnect();
-    	Connection con = DBC.getConnect();
+    	// Connecting to database
+    	Connection con = DBConnect.getConnect();
 
     	try {
     		String sqlUpdata = "INSERT INTO comment (user_id, restaurant_id, "
@@ -570,8 +570,8 @@ public class JDBCRestaurantAdapter implements RestaurantAdapter {
 
     @Override
     public Comment updateComment(Comment comment) {
-    	DBConnect DBC = new DBConnect();
-    	Connection con = DBC.getConnect();
+    	// Connecting to database
+    	Connection con = DBConnect.getConnect();
 
     	try {
     		String sqlQuery = "UPDATE comment SET user_id=?, restaurant_id=?, "
@@ -605,8 +605,8 @@ public class JDBCRestaurantAdapter implements RestaurantAdapter {
 
     @Override
     public Comment deleteComment(Comment comment) {
-    	DBConnect DBC = new DBConnect();
-    	Connection con = DBC.getConnect();
+    	// Connecting to database
+    	Connection con = DBConnect.getConnect();
 
     	try {
     		String sqlQuery = "delete from comment where id=?";
@@ -624,8 +624,8 @@ public class JDBCRestaurantAdapter implements RestaurantAdapter {
 
     @Override
     public List<Comment> queryComments(User user) throws ResourceNotFoundException {
-    	DBConnect DBC = new DBConnect();
-    	Connection con = DBC.getConnect();
+    	// Connecting to database
+    	Connection con = DBConnect.getConnect();
     	String sqlQuery = "select * from comment where user_id=?";
 
     	List<Comment> out = new ArrayList<Comment>();
@@ -653,8 +653,8 @@ public class JDBCRestaurantAdapter implements RestaurantAdapter {
 
     @Override
     public List<Comment> queryComments(Restaurant restaurant) throws ResourceNotFoundException {
-    	DBConnect DBC = new DBConnect();
-    	Connection con = DBC.getConnect();
+    	// Connecting to database
+    	Connection con = DBConnect.getConnect();
     	String sqlQuery = "select * from comment where restaurant_id=?";
 
     	List<Comment> out = new ArrayList<Comment>();
@@ -682,8 +682,8 @@ public class JDBCRestaurantAdapter implements RestaurantAdapter {
 
     @Override
     public List<UserComment> queryUserComments(Restaurant restaurant) throws ResourceNotFoundException {
-    	DBConnect DBC = new DBConnect();
-    	Connection con = DBC.getConnect();
+    	// Connecting to database
+    	Connection con = DBConnect.getConnect();
     	String sqlQuery = "select * from comment c inner join user u on restaurant_id=? and c.user_id=u.id";
 
     	List<UserComment> out = new ArrayList<UserComment>();
@@ -714,8 +714,8 @@ public class JDBCRestaurantAdapter implements RestaurantAdapter {
 
 	@Override
 	public Comment queryComment(Integer userId, Integer restaurantId) throws ResourceNotFoundException {
-		DBConnect DBC = new DBConnect();
-    	Connection con = DBC.getConnect();
+		// Connecting to database
+    	Connection con = DBConnect.getConnect();
     	String sqlQuery = "select * from comment where user_id=? and restaurant_id=?";
 
     	Comment out = null;

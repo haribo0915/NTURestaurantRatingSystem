@@ -11,8 +11,8 @@ import java.sql.ResultSet;
 public class JDBCUserAdapter implements UserAdapter {
     @Override
     public User createUser(User user) {
-    	DBConnect DBC = new DBConnect();
-    	Connection con = DBC.getConnect();
+    	// Connecting to database
+    	Connection con = DBConnect.getConnect();
     	
     	String sqlUpdate = "insert into user (role_id, name, account, password, "
     			+ "email, department) values (?, ?, ?, ?, ?, ?)";
@@ -54,8 +54,8 @@ public class JDBCUserAdapter implements UserAdapter {
 
     @Override
     public User updateUser(User user) {
-    	DBConnect DBC = new DBConnect();
-    	Connection con = DBC.getConnect();
+    	// Connecting to database
+    	Connection con = DBConnect.getConnect();
     	String sqlQuery = "UPDATE user SET role_id=?,name=?,account=?,"
     			+ "password=?,email=?,department=? where id=?";
     	
@@ -83,8 +83,8 @@ public class JDBCUserAdapter implements UserAdapter {
 
     @Override
     public User deleteUser(User user) {
-    	DBConnect DBC = new DBConnect();
-    	Connection con = DBC.getConnect();
+    	// Connecting to database
+    	Connection con = DBConnect.getConnect();
     	String sqlQuery = "delete from user where id=?";
     	
     	// Delete
@@ -103,8 +103,8 @@ public class JDBCUserAdapter implements UserAdapter {
 
     @Override
     public User queryUser(String account, String password) throws ResourceNotFoundException {
-    	DBConnect DBC = new DBConnect();
-    	Connection con = DBC.getConnect();
+    	// Connecting to database
+    	Connection con = DBConnect.getConnect();
     	User out = null;
     	
     	// Fetch account
@@ -133,8 +133,8 @@ public class JDBCUserAdapter implements UserAdapter {
 
     @Override 
     public Role createRole(Role role) {
-    	DBConnect DBC = new DBConnect();
-    	Connection con = DBC.getConnect();
+    	// Connecting to database
+    	Connection con = DBConnect.getConnect();
     	String sqlUpdate = "insert into role (title) values (?)";
     	
     	try {
@@ -165,8 +165,8 @@ public class JDBCUserAdapter implements UserAdapter {
 
     @Override 
     public Role updateRole(Role role) {
-    	DBConnect DBC = new DBConnect();
-    	Connection con = DBC.getConnect();
+    	// Connecting to database
+    	Connection con = DBConnect.getConnect();
     	String sqlQuery = "UPDATE role SET title=? where id=?";
     	
     	try {
@@ -183,8 +183,8 @@ public class JDBCUserAdapter implements UserAdapter {
 
     @Override 
     public Role deleteRole(Role role) {
-    	DBConnect DBC = new DBConnect();
-    	Connection con = DBC.getConnect();
+    	// Connecting to database
+    	Connection con = DBConnect.getConnect();
     	String sqlQuery = "delete from role where id=?";
     	
     	// Delete
@@ -201,8 +201,8 @@ public class JDBCUserAdapter implements UserAdapter {
 
     @Override 
     public Role queryRole(Integer id) throws ResourceNotFoundException {
-    	DBConnect DBC = new DBConnect();
-    	Connection con = DBC.getConnect();
+    	// Connecting to database
+    	Connection con = DBConnect.getConnect();
     	String sqlQuery = "select * from role where id=?";
     	
     	Role out = null;
