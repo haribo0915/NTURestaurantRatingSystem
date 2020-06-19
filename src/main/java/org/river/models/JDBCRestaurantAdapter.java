@@ -13,10 +13,16 @@ import java.util.List;
 
 
 public class JDBCRestaurantAdapter implements RestaurantAdapter {
+	private JDBCConnectionPool jdbcConnectionPool;
+
+	public JDBCRestaurantAdapter() {
+		jdbcConnectionPool = JDBCConnectionPool.getInstance();
+	}
+	
     @Override
     public Restaurant createRestaurant(Restaurant restaurant) {
     	// Connecting to database
-    	Connection con = DBConnect.getConnect();
+    	Connection con = jdbcConnectionPool.takeOut();
 
     	// Insert the new restaurant to the database
     	try {
@@ -40,8 +46,8 @@ public class JDBCRestaurantAdapter implements RestaurantAdapter {
     		stat.setString(6, restaurant.getAddress());
     		stat.executeUpdate();
     	} catch(Exception e) {
-    		//throw new CreateException("createRestaurant error");
-    	}
+    		e.printStackTrace();
+    	} 
 
     	// Fetch restaurant_id
     	int id = -1;
@@ -54,8 +60,11 @@ public class JDBCRestaurantAdapter implements RestaurantAdapter {
     		id = rs.getInt("id");
     	}
     	catch(Exception e) {
-    		//throw new CreateException("createRestaurant error: retrieve error");
-    	}
+    		e.printStackTrace();
+    	} 
+    	finally {
+            jdbcConnectionPool.takeIn(con);
+        }
 
     	return new Restaurant(id, restaurant.getAreaId(),
     			restaurant.getFoodCategoryId(),	restaurant.getName(),
@@ -66,7 +75,7 @@ public class JDBCRestaurantAdapter implements RestaurantAdapter {
     @Override
     public Restaurant updateRestaurant(Restaurant restaurant) {
     	// Connecting to database
-    	Connection con = DBConnect.getConnect();
+    	Connection con = jdbcConnectionPool.takeOut();
 
     	try {
     		String sqlQuery = "UPDATE restaurant SET name=?, area_id=?, "
@@ -88,15 +97,18 @@ public class JDBCRestaurantAdapter implements RestaurantAdapter {
     		int reply = stat.executeUpdate();
     	}
     	catch(Exception e) {
-    		//throw new UpdateException("updateRestaurant error");
-    	}
+    		e.printStackTrace();
+    	} finally {
+            jdbcConnectionPool.takeIn(con);
+        }
+
     	return restaurant;
     }
 
     @Override
     public Restaurant deleteRestaurant(Restaurant restaurant) {
     	// Connecting to database
-    	Connection con = DBConnect.getConnect();
+    	Connection con = jdbcConnectionPool.takeOut();
 
     	// Delete
     	try {
@@ -104,20 +116,47 @@ public class JDBCRestaurantAdapter implements RestaurantAdapter {
     		PreparedStatement stat = con.prepareStatement(sqlQuery);
     		stat.setInt(1, restaurant.getId());
     		int reply = stat.executeUpdate();
-    		System.out.println("delete restaurant success");
     	}
     	catch(Exception e) {
     		e.printStackTrace();
-    	}
+    	} finally {
+            jdbcConnectionPool.takeIn(con);
+        }
+
     	return restaurant;
     }
 
+    public Restaurant queryRestaurant(int id) throws ResourceNotFoundException {
+    	// Connecting to database
+    	Connection con = jdbcConnectionPool.takeOut();
+		Restaurant out = null;
 
+		try {
+			String sqlQuery = "select * from restaurant where id=?";
+			PreparedStatement stat = con.prepareStatement(sqlQuery);
+			stat.setInt(1, id);
+			ResultSet rs = stat.executeQuery();
+
+			while (rs.next())
+				out = new Restaurant(id, rs.getInt("area_id"),
+						rs.getInt("food_category_id"),	rs.getString("name"),
+						rs.getString("description"), rs.getString("image"),
+						rs.getString("address"));
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+            jdbcConnectionPool.takeIn(con);
+        }
+
+		if (out == null)
+			throw new ResourceNotFoundException("queryRestaurant error: utils");
+		return out;
+    }
 
 	@Override
 	public List<Restaurant> queryRestaurants(String restaurantName, Area area, FoodCategory foodCategory) throws ResourceNotFoundException {
 		// Connecting to database
-    	Connection con = DBConnect.getConnect();
+    	Connection con = jdbcConnectionPool.takeOut();
     	List<Restaurant> out = new ArrayList<Restaurant>();
 
     	try {
@@ -148,7 +187,9 @@ public class JDBCRestaurantAdapter implements RestaurantAdapter {
 		        			rs.getString("address")));
     	} catch (Exception e) {
     		e.printStackTrace();
-    	}
+    	} finally {
+            jdbcConnectionPool.takeIn(con);
+        }
 
     	if (out.size() == 0)
     		throw new ResourceNotFoundException("query restaurants error");
@@ -160,7 +201,7 @@ public class JDBCRestaurantAdapter implements RestaurantAdapter {
     @Override
     public List<Restaurant> queryWeeklyHottestRestaurants() throws ResourceNotFoundException {
     	// Connecting to database
-    	Connection con = DBConnect.getConnect();
+    	Connection con = jdbcConnectionPool.takeOut();
     	String sqlQuery = "select * from comment";
     	List<Restaurant> out = new ArrayList<Restaurant>();
 
@@ -187,7 +228,9 @@ public class JDBCRestaurantAdapter implements RestaurantAdapter {
     	}
     	catch(Exception e) {
     		e.printStackTrace();
-    	}
+    	} finally {
+    		jdbcConnectionPool.takeIn(con);
+		}
     	
     	
     	int[] totalRate = new int [maxRestaurantId + 20];
@@ -209,10 +252,10 @@ public class JDBCRestaurantAdapter implements RestaurantAdapter {
     		else if (max < (double)totalRate[i]/commentCnt[i]) {
     			max = (double)totalRate[i]/commentCnt[i];
     			out = new ArrayList<Restaurant>();
-    			out.add(SQLUtils.queryRestaurant(i));
+    			out.add(queryRestaurant(i));
     		}
     		else if (max == (double)totalRate[i]/commentCnt[i])
-    			out.add(SQLUtils.queryRestaurant(i));
+    			out.add(queryRestaurant(i));
     	}
 
 		if (out.size() == 0)
@@ -223,7 +266,7 @@ public class JDBCRestaurantAdapter implements RestaurantAdapter {
     @Override
     public Area createArea(Area area) {
     	// Connecting to database
-    	Connection con = DBConnect.getConnect();
+    	Connection con = jdbcConnectionPool.takeOut();
     	String sqlUpdate = "insert into area (name) values (?)";
 
     	try {
@@ -232,7 +275,7 @@ public class JDBCRestaurantAdapter implements RestaurantAdapter {
     		int reply = stat.executeUpdate();
     	}
     	catch(Exception e) {
-    		//throw new CreateException("createArea error");
+    		e.printStackTrace();
     	}
 
     	Area out = null;
@@ -244,15 +287,18 @@ public class JDBCRestaurantAdapter implements RestaurantAdapter {
     		rs.next();
     		out = new Area(rs.getInt("id"), area.getName());
     	} catch(Exception e) {
-    		//throw new CreateException("createArea error: fail to insert");
-    	}
+    		e.printStackTrace();
+    	} finally {
+            jdbcConnectionPool.takeIn(con);
+        }
+
     	return out;
     }
 
     @Override
     public Area updateArea(Area area) {
     	// Connecting to database
-    	Connection con = DBConnect.getConnect();
+    	Connection con = jdbcConnectionPool.takeOut();
     	String sqlQuery = "UPDATE area SET name=? where id=?";
 
     	try {
@@ -262,15 +308,18 @@ public class JDBCRestaurantAdapter implements RestaurantAdapter {
     		int reply = stat.executeUpdate();
     	}
     	catch(Exception e) {
-    		//throw new UpdateException("updateArea error");
-    	}
+    		e.printStackTrace();
+    	} finally {
+            jdbcConnectionPool.takeIn(con);
+        }
+
     	return new Area(area.getId(), area.getName());
     }
 
     @Override
     public Area deleteArea(Area area) {
     	// Connecting to database
-    	Connection con = DBConnect.getConnect();
+    	Connection con = jdbcConnectionPool.takeOut();
     	String sqlQuery = "delete from area where id=?";
 
     	// Delete
@@ -280,15 +329,18 @@ public class JDBCRestaurantAdapter implements RestaurantAdapter {
     		int reply = stat.executeUpdate();
     	}
     	catch(Exception e) {
-    		//throw new DeleteException("deleteArea error");
-    	}
+    		e.printStackTrace();
+    	} finally {
+            jdbcConnectionPool.takeIn(con);
+        }
+
     	return new Area(area.getId(), area.getName());
     }
 
     @Override
     public Area queryArea(Integer id) throws ResourceNotFoundException {
     	// Connecting to database
-    	Connection con = DBConnect.getConnect();
+    	Connection con = jdbcConnectionPool.takeOut();
     	String sqlQuery = "select * from area where id=?";
 
     	Area out = null;
@@ -307,8 +359,9 @@ public class JDBCRestaurantAdapter implements RestaurantAdapter {
     	}
     	catch(Exception e) {
     		e.printStackTrace();
-    		//throw new QueryException("queryArea error: id");
-    	}
+    	} finally {
+            jdbcConnectionPool.takeIn(con);
+        }
 
     	if(cnt < 1)
     		throw new ResourceNotFoundException("queryArea error: given area id not found");
@@ -318,7 +371,7 @@ public class JDBCRestaurantAdapter implements RestaurantAdapter {
     @Override
     public Area queryArea(String name) throws ResourceNotFoundException {
     	// Connecting to database
-    	Connection con = DBConnect.getConnect();
+    	Connection con = jdbcConnectionPool.takeOut();
     	String sqlQuery = "select * from area where name=?";
 
     	Area out = null;
@@ -336,8 +389,10 @@ public class JDBCRestaurantAdapter implements RestaurantAdapter {
     		}
     	}
     	catch(Exception e) {
-    		//throw new QueryException("queryArea error: name");
-    	}
+    		e.printStackTrace();
+    	} finally {
+            jdbcConnectionPool.takeIn(con);
+        }
 
 		if(cnt < 1)
 			throw new ResourceNotFoundException("queryArea error: given area name not found");
@@ -347,7 +402,7 @@ public class JDBCRestaurantAdapter implements RestaurantAdapter {
     @Override
     public List<Area> queryAreas() throws ResourceNotFoundException {
     	// Connecting to database
-    	Connection con = DBConnect.getConnect();
+    	Connection con = jdbcConnectionPool.takeOut();
     	String sqlQuery = "select * from area";
 
     	List<Area> out = new ArrayList<Area>();
@@ -363,8 +418,10 @@ public class JDBCRestaurantAdapter implements RestaurantAdapter {
     		}
     	}
     	catch(Exception e) {
-    		//throw new QueryException("queryArea error: List");
-    	}
+    		e.printStackTrace();
+    	} finally {
+            jdbcConnectionPool.takeIn(con);
+        }
 
 		if (out.size() == 0)
 			throw new ResourceNotFoundException("query areas error");
@@ -375,7 +432,7 @@ public class JDBCRestaurantAdapter implements RestaurantAdapter {
     @Override
     public FoodCategory createFoodCategory(FoodCategory foodCategory) {
     	// Connecting to database
-    	Connection con = DBConnect.getConnect();
+    	Connection con = jdbcConnectionPool.takeOut();
     	String sqlUpdate = "insert into food_category (name) values (?)";
 
     	try {
@@ -384,7 +441,7 @@ public class JDBCRestaurantAdapter implements RestaurantAdapter {
     		int reply = stat.executeUpdate();
     	}
     	catch(Exception e) {
-    		//throw new CreateException("createFoodCategory error");
+    		e.printStackTrace();
     	}
 
     	FoodCategory out = null;
@@ -397,15 +454,18 @@ public class JDBCRestaurantAdapter implements RestaurantAdapter {
     			out = new FoodCategory(rs.getInt("id"), foodCategory.getName());
     		}
     	} catch(Exception e) {
-    		//throw new CreateException("createFoodCategory error: fail to insert");
-    	}
+    		e.printStackTrace();
+    	} finally {
+            jdbcConnectionPool.takeIn(con);
+        }
+
     	return out;
     }
 
     @Override
     public FoodCategory updateFoodCategory(FoodCategory foodCategory) {
     	// Connecting to database
-    	Connection con = DBConnect.getConnect();
+    	Connection con = jdbcConnectionPool.takeOut();
     	String sqlQuery = "UPDATE food_category SET name=? where id=?";
 
     	try {
@@ -415,15 +475,18 @@ public class JDBCRestaurantAdapter implements RestaurantAdapter {
     		int reply = stat.executeUpdate();
     	}
     	catch(Exception e) {
-    		//throw new UpdateException("updateFoodCategory error");
-    	}
+    		e.printStackTrace();
+    	} finally {
+            jdbcConnectionPool.takeIn(con);
+        }
+
     	return new FoodCategory(foodCategory.getId(), foodCategory.getName());
     }
 
     @Override
     public FoodCategory deleteFoodCategory(FoodCategory foodCategory) {
     	// Connecting to database
-    	Connection con = DBConnect.getConnect();
+    	Connection con = jdbcConnectionPool.takeOut();
     	String sqlQuery = "delete from food_category where id=?";
 
     	// Delete
@@ -433,15 +496,18 @@ public class JDBCRestaurantAdapter implements RestaurantAdapter {
     		int reply = stat.executeUpdate();
     	}
     	catch(Exception e) {
-    		//throw new DeleteException("deleteFoodCategory error");
-    	}
+    		e.printStackTrace();
+    	} finally {
+            jdbcConnectionPool.takeIn(con);
+        }
+
     	return new FoodCategory(foodCategory.getId(), foodCategory.getName());
     }
 
     @Override
     public FoodCategory queryFoodCategory(Integer id) throws ResourceNotFoundException {
     	// Connecting to database
-    	Connection con = DBConnect.getConnect();
+    	Connection con = jdbcConnectionPool.takeOut();
     	String sqlQuery = "select * from food_category where id=?";
 
     	FoodCategory out = null;
@@ -460,7 +526,9 @@ public class JDBCRestaurantAdapter implements RestaurantAdapter {
     	}
     	catch(Exception e) {
     		throw new ResourceNotFoundException("queryFoodCategory error: id");
-    	}
+    	} finally {
+            jdbcConnectionPool.takeIn(con);
+        }
 
 		if(cnt < 1)
 			throw new ResourceNotFoundException("queryFoodCategory error: id can't find");
@@ -470,7 +538,7 @@ public class JDBCRestaurantAdapter implements RestaurantAdapter {
     @Override
     public FoodCategory queryFoodCategory(String name) throws ResourceNotFoundException {
     	// Connecting to database
-    	Connection con = DBConnect.getConnect();
+    	Connection con = jdbcConnectionPool.takeOut();
     	String sqlQuery = "select * from food_category where name=?";
 
     	FoodCategory out = null;
@@ -488,8 +556,10 @@ public class JDBCRestaurantAdapter implements RestaurantAdapter {
     		}
     	}
     	catch(Exception e) {
-    		//throw new QueryException("queryFoodCategory error: name");
-    	}
+    		e.printStackTrace();
+    	} finally {
+            jdbcConnectionPool.takeIn(con);
+        }
 
 		if(cnt < 1)
 			throw new ResourceNotFoundException("queryFoodCategory error: name can't find id");
@@ -499,7 +569,7 @@ public class JDBCRestaurantAdapter implements RestaurantAdapter {
     @Override
     public List<FoodCategory> queryFoodCategories() throws ResourceNotFoundException {
     	// Connecting to database
-    	Connection con = DBConnect.getConnect();
+    	Connection con = jdbcConnectionPool.takeOut();
     	String sqlQuery = "select * from food_category";
 
     	List<FoodCategory> out = new ArrayList<FoodCategory>();
@@ -516,7 +586,10 @@ public class JDBCRestaurantAdapter implements RestaurantAdapter {
     	}
     	catch(Exception e) {
     		e.printStackTrace();
-    	}
+    	} finally {
+            jdbcConnectionPool.takeIn(con);
+        }
+
 		if(out.size() == 0)
 			throw new ResourceNotFoundException("query food categories not found");
     	return out;
@@ -525,7 +598,7 @@ public class JDBCRestaurantAdapter implements RestaurantAdapter {
     @Override
     public Comment createComment(Comment comment) {
     	// Connecting to database
-    	Connection con = DBConnect.getConnect();
+    	Connection con = jdbcConnectionPool.takeOut();
 
     	try {
     		String sqlUpdata = "INSERT INTO comment (user_id, restaurant_id, "
@@ -553,26 +626,31 @@ public class JDBCRestaurantAdapter implements RestaurantAdapter {
     	} catch(Exception e) {
     		e.printStackTrace();
     	}
-
+    	
+    	Comment out = null;
+    	
     	try {
     		int sqlCount = SQLUtils.countSQL(con, "comment");
-    		return new Comment(sqlCount, comment.getUserId(), comment.getRestaurantId(),
+    		out = new Comment(sqlCount, comment.getUserId(), comment.getRestaurantId(),
     				comment.getRate(), comment.getDescription(),
     				comment.getImage(), comment.getTimestamp());
     	}
     	catch(Exception e) {
     		// default return type
-    		return new Comment(-1, -1, -1,
+    		out = new Comment(-1, -1, -1,
     				0, null,
     				null, null);
-    		//throw new CreateException("createComment error: retrieve error");
-    	}
+    	} finally {
+    		jdbcConnectionPool.takeIn(con);
+		}
+    	
+    	return out;
     }
 
     @Override
     public Comment updateComment(Comment comment) {
     	// Connecting to database
-    	Connection con = DBConnect.getConnect();
+    	Connection con = jdbcConnectionPool.takeOut();
 
     	try {
     		String sqlQuery = "UPDATE comment SET user_id=?, restaurant_id=?, "
@@ -595,38 +673,42 @@ public class JDBCRestaurantAdapter implements RestaurantAdapter {
     			stat.setTimestamp(6, comment.getTimestamp());
     		stat.setInt(7, comment.getId());
     		int reply = stat.executeUpdate();
-    		return comment;
     	}
     	catch(Exception e) {
-    		return comment;
-    		
-    		//throw new UpdateException("updateComment error");
-    	}
+    		e.printStackTrace();
+    	} 
+    	finally {
+    		jdbcConnectionPool.takeIn(con);
+		}
+    	
+    	return comment;
     }
 
     @Override
     public Comment deleteComment(Comment comment) {
     	// Connecting to database
-    	Connection con = DBConnect.getConnect();
+    	Connection con = jdbcConnectionPool.takeOut();
 
     	try {
     		String sqlQuery = "delete from comment where id=?";
     		PreparedStatement stat = con.prepareStatement(sqlQuery);
     		stat.setInt(1, comment.getId());
     		int reply = stat.executeUpdate();
-    		return comment;
     	}
     	catch(Exception e) {
-    		return comment;
-    		
-    		//throw new DeleteException("deleteComment error");
+    		e.printStackTrace();
     	}
+    	finally {
+    		jdbcConnectionPool.takeIn(con);
+		}
+    	
+    	return comment;
     }
 
     @Override
     public List<Comment> queryComments(User user) throws ResourceNotFoundException {
     	// Connecting to database
-    	Connection con = DBConnect.getConnect();
+    	Connection con = jdbcConnectionPool.takeOut();
     	String sqlQuery = "select * from comment where user_id=?";
 
     	List<Comment> out = new ArrayList<Comment>();
@@ -642,9 +724,10 @@ public class JDBCRestaurantAdapter implements RestaurantAdapter {
 	    				rs.getTimestamp("date")));
 
     	}
-    	catch(Exception e) {
-
-    	}
+    	catch(Exception e) {}
+    	finally {
+    		jdbcConnectionPool.takeIn(con);
+		}
 
     	if (out.size() == 0) {
     		throw new ResourceNotFoundException("queryComments: error: List");
@@ -655,7 +738,7 @@ public class JDBCRestaurantAdapter implements RestaurantAdapter {
     @Override
     public List<Comment> queryComments(Restaurant restaurant) throws ResourceNotFoundException {
     	// Connecting to database
-    	Connection con = DBConnect.getConnect();
+    	Connection con = jdbcConnectionPool.takeOut();
     	String sqlQuery = "select * from comment where restaurant_id=?";
 
     	List<Comment> out = new ArrayList<Comment>();
@@ -672,8 +755,11 @@ public class JDBCRestaurantAdapter implements RestaurantAdapter {
 
     	}
     	catch(Exception e) {
-    		//throw new QueryException("queryComments: error: List");
-    	}
+    		e.printStackTrace();
+    	} 
+    	finally {
+    		jdbcConnectionPool.takeIn(con);
+		}
 
 		if (out.size() == 0) {
 			throw new ResourceNotFoundException("queryComments: error: List");
@@ -684,7 +770,7 @@ public class JDBCRestaurantAdapter implements RestaurantAdapter {
     @Override
     public List<UserComment> queryUserComments(Restaurant restaurant) throws ResourceNotFoundException {
     	// Connecting to database
-    	Connection con = DBConnect.getConnect();
+    	Connection con = jdbcConnectionPool.takeOut();
     	String sqlQuery = "select * from comment c inner join user u on restaurant_id=? and c.user_id=u.id";
 
     	List<UserComment> out = new ArrayList<UserComment>();
@@ -704,8 +790,11 @@ public class JDBCRestaurantAdapter implements RestaurantAdapter {
 
     	}
     	catch(Exception e) {
-    		//throw new QueryException("queryUserComments: error: List");
+    		e.printStackTrace();
     	}
+    	finally {
+    		jdbcConnectionPool.takeIn(con);
+		}
 
 		if (out.size() == 0) {
 			throw new ResourceNotFoundException("queryComments: error: List");
@@ -716,7 +805,7 @@ public class JDBCRestaurantAdapter implements RestaurantAdapter {
 	@Override
 	public Comment queryComment(Integer userId, Integer restaurantId) throws ResourceNotFoundException {
 		// Connecting to database
-    	Connection con = DBConnect.getConnect();
+    	Connection con = jdbcConnectionPool.takeOut();
     	String sqlQuery = "select * from comment where user_id=? and restaurant_id=?";
 
     	Comment out = null;
@@ -734,8 +823,11 @@ public class JDBCRestaurantAdapter implements RestaurantAdapter {
 
     	}
     	catch(Exception e) {
-    		//throw new QueryException("queryComment error");
+    		e.printStackTrace();
     	}
+    	finally {
+    		jdbcConnectionPool.takeIn(con);
+		}
 
     	if (out == null)
     		throw new ResourceNotFoundException("New Comment");

@@ -39,30 +39,4 @@ public class SQLUtils {
 		return out;
 	}
 
-	// TODO 別放UTILS謝謝 BY架構之王
-	public static Restaurant queryRestaurant(int id) throws ResourceNotFoundException {
-			DBConnect DBC = new DBConnect();
-			Connection con = DBC.getConnect();
-			Restaurant out = null;
-
-			try {
-				String sqlQuery = "select * from restaurant where id=?";
-				PreparedStatement stat = con.prepareStatement(sqlQuery);
-				stat.setInt(1, id);
-				ResultSet rs = stat.executeQuery();
-
-				while (rs.next())
-					out = new Restaurant(id, rs.getInt("area_id"),
-							rs.getInt("food_category_id"),	rs.getString("name"),
-							rs.getString("description"), rs.getString("image"),
-							rs.getString("address"));
-			} catch (Exception e) {
-
-			}
-
-			if (out == null)
-				throw new ResourceNotFoundException("queryRestaurant error: utils");
-			return out;
-	}
-
 }
