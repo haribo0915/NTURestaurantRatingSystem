@@ -175,6 +175,7 @@ public class JDBCRestaurantAdapter implements RestaurantAdapter {
     		
     		while (rs.next()) {
     			if (new java.util.Date().getTime() - rs.getTimestamp("date").getTime() < 1000*3600*24*7) {
+					System.out.println("comment");
     				int restaurantId = rs.getInt("restaurant_id");
     				int restaurantRate = rs.getInt("rate");
     				restaurantIds.add(restaurantId);
@@ -737,7 +738,7 @@ public class JDBCRestaurantAdapter implements RestaurantAdapter {
     	}
 
     	if (out == null)
-    		throw new ResourceNotFoundException("queryComment error");
+    		throw new ResourceNotFoundException("New Comment");
     	else
     		return out;
 	}

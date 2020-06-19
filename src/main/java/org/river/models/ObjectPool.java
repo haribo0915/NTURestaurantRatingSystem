@@ -24,8 +24,7 @@ public abstract class ObjectPool<T> {
 
     abstract void dead(T object);
 
-    synchronized T takeOut()
-    {
+    synchronized T takeOut() {
         long now = System.currentTimeMillis();
         T object;
         if (unlock.size() > 0) {
@@ -37,14 +36,12 @@ public abstract class ObjectPool<T> {
                     unlock.remove(object);
                     dead(object);
                     object = null;
-                }
-                else {
+                } else {
                     if (validate(object)) {
                         unlock.remove(object);
                         lock.put(object, now);
                         return (object);
-                    }
-                    else {
+                    } else {
                         // object failed validation
                         unlock.remove(object);
                         dead(object);
@@ -58,8 +55,7 @@ public abstract class ObjectPool<T> {
         lock.put(object, now);
         return (object);
     }
-    synchronized void takeIn(T object)
-    {
+    synchronized void takeIn(T object) {
         lock.remove(object);
         unlock.put(object, System.currentTimeMillis());
     }
