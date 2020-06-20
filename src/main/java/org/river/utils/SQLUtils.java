@@ -1,9 +1,5 @@
 package org.river.utils;
 
-import org.river.entities.Restaurant;
-import org.river.exceptions.ResourceNotFoundException;
-import org.river.models.DBConnect;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

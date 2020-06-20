@@ -14,12 +14,18 @@ import java.util.Map;
 /**
  * @author - Haribo
  */
-public class SanitizerImpl implements Sanitizer {
+public class FoulLanguageMapSanitizer implements Sanitizer {
     Map<String, Integer> foulLanguageMap = new HashMap<>();
     int maxFoulLanguageLength = 0;
 
+    /**
+     * It will filter out the comment with foul language by foul language map.
+     *
+     * @param commentList commentList
+     * @return comments with foul language
+     */
     @Override
-    public List<Comment> filterCommentsWithFoulLanguage(List<Comment> commentList) {
+    public List<Comment> sanitize(List<Comment> commentList) {
         List<Comment> commentWithFoulLanguageList = new ArrayList<>();
         initializeFoulLanguageMap();
 

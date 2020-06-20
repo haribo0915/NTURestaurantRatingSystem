@@ -6,6 +6,8 @@ import org.river.exceptions.ResourceNotFoundException;
 import java.util.List;
 
 /**
+ * CRUD utils of restaurant, area, food category and comment for controllers
+ *
  * @author - Haribo
  */
 public interface RestaurantAdapter {

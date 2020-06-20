@@ -19,6 +19,9 @@ import java.sql.Timestamp;
 import java.util.ResourceBundle;
 
 /**
+ * The comment dialog controller is used to create or modify the comment
+ * of specific user.
+ *
  * @author - Haribo
  */
 public class CommentDialogController implements Initializable {
@@ -42,7 +45,13 @@ public class CommentDialogController implements Initializable {
         this.restaurantId = restaurantId;
     }
 
-
+    /**
+     * It will load the old comment if the user has commented the restaurant before;
+     * otherwise it will create a new comment form for the user.
+     *
+     * @param url
+     * @param resourceBundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
@@ -65,6 +74,12 @@ public class CommentDialogController implements Initializable {
         comment.setImage("file:"+imageFile.getAbsolutePath().replaceAll("\\\\", "\\\\\\\\"));
     }
 
+    /**
+     * Handle the save comment event. It will check the user input first
+     * and convert illegal input like null or empty string to legal one.
+     *
+     * @param event
+     */
     public void saveCommentHandler(ActionEvent event) {
         try {
             Integer rate = Integer.valueOf(rateTextField.getText());

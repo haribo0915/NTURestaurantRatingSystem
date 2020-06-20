@@ -5,6 +5,11 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 /**
+ * The jdbc connection pool is used to maintain a collection of database connections
+ * and reuse them to improve performance in our multithreading environment. It will
+ * create new connection if there isn't any free one in the pool; otherwise it will
+ * return the old connection.
+ *
  * @author - Haribo
  */
 public class JDBCConnectionPool extends ObjectPool<Connection> {
@@ -22,9 +27,14 @@ public class JDBCConnectionPool extends ObjectPool<Connection> {
             e.printStackTrace();
         }
     }
-    // Instead of block the whole method, in order to increase performance,
-    // we use synchronized modifier only when the object are going to create and promise that
-    // JDBCConnectionPool is Singleton in multithreading condition
+
+    /**
+     * Instead of block the whole method, in order to increase performance,
+     * we use synchronized modifier only when the object are going to create
+     * and promise that JDBCConnectionPool is Singleton in multithreading condition
+     *
+     * @return jdbcConnectionPool
+     */
     public static JDBCConnectionPool getInstance() {
         if (jdbcConnectionPool == null) {
             synchronized(JDBCConnectionPool.class) {
@@ -47,6 +57,12 @@ public class JDBCConnectionPool extends ObjectPool<Connection> {
         }
     }
 
+    /**
+     * Check whether the connection is closed
+     *
+     * @param connection connection
+     * @return true if the connection hasn't closed; otherwise, return false
+     */
     @Override
     boolean validate(Connection connection) {
         try {
@@ -58,6 +74,11 @@ public class JDBCConnectionPool extends ObjectPool<Connection> {
         }
     }
 
+    /**
+     * Close the connection with database
+     *
+     * @param connection connection
+     */
     @Override
     void dead(Connection connection) {
         try {

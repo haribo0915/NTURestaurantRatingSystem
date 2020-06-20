@@ -24,6 +24,8 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 /**
+ * The create restaurant controller is used to create a new restaurant information.
+ *
  * @author - Haribo
  */
 public class CreateRestaurantController implements Initializable {
@@ -57,6 +59,12 @@ public class CreateRestaurantController implements Initializable {
         this.restaurant = new Restaurant();
     }
 
+    /**
+     * Initialize food category combo box, area combo box for administrator to choose.
+     *
+     * @param url
+     * @param resourceBundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
@@ -86,6 +94,12 @@ public class CreateRestaurantController implements Initializable {
         restaurant.setImage("file:"+imageFile.getAbsolutePath().replaceAll("\\\\", "\\\\\\\\"));
     }
 
+    /**
+     * Handle the save restaurant event. It will check the user input first
+     * and convert illegal input like null or empty string to legal one.
+     *
+     * @param event
+     */
     @SuppressWarnings("DuplicatedCode")
     public void saveRestaurantHandler(ActionEvent event) {
         try {

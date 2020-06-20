@@ -9,6 +9,9 @@ import java.util.Random;
 import java.util.stream.Collectors;
 
 /**
+ * The mock restaurant adapter is used to test the controllers and views
+ * before jdbc restaurant adapter is completed.
+ *
  * @author - Haribo
  */
 public class StubRestaurantAdapter implements RestaurantAdapter {

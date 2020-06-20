@@ -7,6 +7,9 @@ import org.river.exceptions.ResourceNotFoundException;
 import java.util.Random;
 
 /**
+ * The mock user adapter is used to test the controllers and views
+ * before jdbc user adapter is completed.
+ *
  * @author - Haribo
  */
 public class StubUserAdapter implements UserAdapter {

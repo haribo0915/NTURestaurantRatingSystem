@@ -4,6 +4,11 @@ import java.util.Enumeration;
 import java.util.Hashtable;
 
 /**
+ * The object pool is used to maintain a collection of objects and reuse them to
+ * improve performance in our multithreading environment. It will create new
+ * object if there isn't any free one in the pool; otherwise it will reuse the
+ * old object
+ *
  * @author - Haribo
  */
 public abstract class ObjectPool<T> {
@@ -24,6 +29,15 @@ public abstract class ObjectPool<T> {
 
     abstract void dead(T object);
 
+    /**
+     * When we take out the object from object pool, we will first check whether
+     * there is any object in unlocked list and whether it has expired. We take
+     * a object from unlocked list if succeed and put it in locked list; otherwise
+     * we create a new object and store it in locked list. In addition, we use
+     * synchronized modifier to avoid race condition
+     *
+     * @return object
+     */
     synchronized T takeOut() {
         long now = System.currentTimeMillis();
         T object;
@@ -55,6 +69,12 @@ public abstract class ObjectPool<T> {
         lock.put(object, now);
         return (object);
     }
+
+    /**
+     * Return the object after finishing the operation with that object
+     *
+     * @param object
+     */
     synchronized void takeIn(T object) {
         lock.remove(object);
         unlock.put(object, System.currentTimeMillis());

@@ -32,9 +32,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 /**
+ * The restaurant list controller is used to select favorite restaurant with several
+ * parameter specified by user, create new restaurant information, modify restaurant information,
+ * and delete restaurant.
+ *
  * @author - Haribo
  */
 public class RestaurantListController implements Initializable {
@@ -81,11 +84,16 @@ public class RestaurantListController implements Initializable {
         this.currentUser = currentUser;
     }
 
+    /**
+     * Initialize restaurant table view and combo box.
+     *
+     * @param url
+     * @param resourceBundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
             List<Restaurant> restaurantList = restaurantAdapter.queryRestaurants(null, null, null);
-            //TODO if the return list is null, JDBCRestaurantAdapter needs to throw Resource not found exception, or it'll throw nullPointerException
             restaurantTableObservableList.addAll(restaurantList);
             restaurantTable.setItems(restaurantTableObservableList);
 
@@ -127,6 +135,11 @@ public class RestaurantListController implements Initializable {
         addressCol.setCellValueFactory(new PropertyValueFactory<>("address"));
     }
 
+    /**
+     * Enable restaurant details button if user select a restaurant.
+     *
+     * @param event
+     */
     public void userClickedOnRestaurantTable(MouseEvent event) {
         querySelectedRestaurantBtn.setDisable(false);
         //The modifying button will open if current is administrator and he've selected a restaurant
@@ -142,6 +155,12 @@ public class RestaurantListController implements Initializable {
         restaurantTable.setItems(restaurantTableObservableList);
     }
 
+    /**
+     * Handle the query restaurant event. It will query restaurant by specific
+     * restaurant name, area name or food category name.
+     *
+     * @param event
+     */
     public void queryRestaurantsHandler(ActionEvent event) {
         cachedThreadPool.execute(() -> {
             List<Restaurant> restaurantList = new ArrayList<>();
@@ -163,6 +182,12 @@ public class RestaurantListController implements Initializable {
         });
     }
 
+    /**
+     * Handle the query hottest restaurant event.
+     * It will query the weekly hottest restaurants.
+     *
+     * @param event
+     */
     public void queryHottestRestaurantHandler(ActionEvent event) {
         cachedThreadPool.execute(() -> {
             List<Restaurant> restaurantList = new ArrayList<>();
@@ -178,6 +203,12 @@ public class RestaurantListController implements Initializable {
         });
     }
 
+    /**
+     * Handle the query selected restaurant event.
+     * It will query the selected restaurant.
+     *
+     * @param event
+     */
     public void querySelectedRestaurantHandler(ActionEvent event) {
         cachedThreadPool.execute(() -> {
             try {
@@ -212,6 +243,11 @@ public class RestaurantListController implements Initializable {
         }
     }
 
+    /**
+     * Handle the create restaurant event. It will create new restaurant information.
+     *
+     * @param event
+     */
     public void createRestaurantHandler(ActionEvent event) {
         List<Restaurant> restaurantList = new ArrayList<>();
         try {
@@ -245,6 +281,11 @@ public class RestaurantListController implements Initializable {
         }
     }
 
+    /**
+     * Handle the edit restaurant event. It will modify restaurant information.
+     *
+     * @param event
+     */
     public void editRestaurantHandler(ActionEvent event) {
         List<Restaurant> restaurantList = new ArrayList<>();
         try {
@@ -279,6 +320,11 @@ public class RestaurantListController implements Initializable {
         }
     }
 
+    /**
+     * Handle the delete restaurant event. It will delete selected restaurant information.
+     *
+     * @param event
+     */
     public void deleteRestaurantHandler(ActionEvent event) {
         List<Restaurant> restaurantList = new ArrayList<>();
         try {

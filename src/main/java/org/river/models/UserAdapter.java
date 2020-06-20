@@ -5,6 +5,8 @@ import org.river.entities.User;
 import org.river.exceptions.ResourceNotFoundException;
 
 /**
+ * CRUD utils of user and role for controllers
+ *
  * @author - Haribo
  */
 public interface UserAdapter {

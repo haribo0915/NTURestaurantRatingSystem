@@ -34,9 +34,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 /**
+ * The restaurant details controller is used to show all the user comments of
+ * the restaurant, create a new comment for a user and sanitize comment with
+ * foul language.
+ *
  * @author - Haribo
  */
 public class RestaurantDetailsController implements Initializable {
@@ -83,9 +86,15 @@ public class RestaurantDetailsController implements Initializable {
         this.restaurantAdapter = restaurantAdapterFactory.create();
         this.restaurant = restaurant;
         this.currentUser = currentUser;
-        this.sanitizer = new SanitizerImpl();
+        this.sanitizer = new FoulLanguageMapSanitizer();
     }
 
+    /**
+     * Initialize the comment table view.
+     *
+     * @param url
+     * @param resourceBundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
@@ -110,7 +119,7 @@ public class RestaurantDetailsController implements Initializable {
 
     private void sanitizeCommentWithFoulLanguage() {
         List<Comment> commentList = restaurantAdapter.queryComments(restaurant);
-        List<Comment> commentWithFoulLanguageList = sanitizer.filterCommentsWithFoulLanguage(commentList);
+        List<Comment> commentWithFoulLanguageList = sanitizer.sanitize(commentList);
         for (Comment comment: commentWithFoulLanguageList) {
             restaurantAdapter.deleteComment(comment);
         }
@@ -134,6 +143,11 @@ public class RestaurantDetailsController implements Initializable {
         userCommentTable.setItems(userCommentTableObservableList);
     }
 
+    /**
+     * Calculate the current rate of the restaurant with specific user comment list.
+     *
+     * @param userCommentList
+     */
     private void refreshRestaurantRate(List<UserComment> userCommentList) {
         userCommentTableObservableList.clear();
         userCommentTableObservableList.addAll(userCommentList);
@@ -148,6 +162,12 @@ public class RestaurantDetailsController implements Initializable {
         restaurantRateLabel.setText(String.format("%.1f", restaurantAverageRate));
     }
 
+    /**
+     * Handle the query selected user comment event. It will show the
+     * comment details of the specific user.
+     *
+     * @param event
+     */
     public void querySelectedUserCommentHandler(ActionEvent event) {
         try {
             UserComment selectedUserComment = userCommentTable.getSelectionModel().getSelectedItem();
@@ -176,6 +196,12 @@ public class RestaurantDetailsController implements Initializable {
         }
     }
 
+    /**
+     * Handle the create comment event. It will create new comment if the
+     * description of the comment doesn't contain foul language.
+     *
+     * @param event
+     */
     public void createCommentHandler(ActionEvent event) {
         List<UserComment> userCommentList = new ArrayList<>();
 
@@ -213,6 +239,11 @@ public class RestaurantDetailsController implements Initializable {
         }
     }
 
+    /**
+     * Go back to restaurant list.
+     *
+     * @param event
+     */
     public void goBackHandler(ActionEvent event) {
         try {
             loadRestaurantListView(event, currentUser);

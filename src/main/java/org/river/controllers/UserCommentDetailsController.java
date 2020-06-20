@@ -12,6 +12,9 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 /**
+ * The user comment details controller show the comment
+ * details of specific user.
+ *
  * @author - Haribo
  */
 public class UserCommentDetailsController implements Initializable {
