@@ -15,11 +15,13 @@ public class JDBCUserAdapter implements UserAdapter {
 		jdbcConnectionPool = JDBCConnectionPool.getInstance();
 	}
 
+	// insert the given user object into the database
     @Override
     public User createUser(User user) {
     	// Connecting to database
     	Connection con = jdbcConnectionPool.takeOut();
     	
+    	// Insert
     	String sqlUpdate = "insert into user (role_id, name, account, password, "
     			+ "email, department) values (?, ?, ?, ?, ?, ?)";
     	try {
@@ -39,6 +41,7 @@ public class JDBCUserAdapter implements UserAdapter {
     		//throw new CreateException("createUser error");
     	}
     	
+    	// Fetch the user_id
     	String sqlQuery = "select u.id from user u where account=?";
     	try {
     		PreparedStatement stat = con.prepareStatement(sqlQuery);
@@ -60,6 +63,7 @@ public class JDBCUserAdapter implements UserAdapter {
 		}
     }
 
+    // update the given user object into the database
     @Override
     public User updateUser(User user) {
     	// Connecting to database
@@ -67,6 +71,7 @@ public class JDBCUserAdapter implements UserAdapter {
     	String sqlQuery = "UPDATE user SET role_id=?,name=?,account=?,"
     			+ "password=?,email=?,department=? where id=?";
     	
+    	// Update
     	try {
     		PreparedStatement stat = con.prepareStatement(sqlQuery);
     		stat.setInt(1, user.getRoleId());
@@ -92,6 +97,7 @@ public class JDBCUserAdapter implements UserAdapter {
 				   user.getEmail(), user.getDepartment());
     }
 
+    // delete the given user object from the database
     @Override
     public User deleteUser(User user) {
     	// Connecting to database
@@ -115,6 +121,7 @@ public class JDBCUserAdapter implements UserAdapter {
 				   user.getEmail(), user.getDepartment());
     }
 
+    // return the user object with the given account and password into the database
     @Override
     public User queryUser(String account, String password) throws ResourceNotFoundException {
     	// Connecting to database
@@ -146,12 +153,14 @@ public class JDBCUserAdapter implements UserAdapter {
     	return out;
     }
 
+    // insert the given role object into the database
     @Override 
     public Role createRole(Role role) {
     	// Connecting to database
 		Connection con = jdbcConnectionPool.takeOut();
     	String sqlUpdate = "insert into role (title) values (?)";
     	
+    	// Insert
     	try {
     		PreparedStatement stat = con.prepareStatement(sqlUpdate);
     		stat.setString(1, role.getTitle());
@@ -161,6 +170,7 @@ public class JDBCUserAdapter implements UserAdapter {
     		//throw new CreateException("createRole error");
     	}
     	
+    	// Fetch the role_id
     	Role out = null;
     	String sqlQuery = "select r.id from role r where title=?";
     	try {
@@ -179,6 +189,7 @@ public class JDBCUserAdapter implements UserAdapter {
     	return new Role(-1, "");
     }
 
+    // update the given role object into the database
     @Override 
     public Role updateRole(Role role) {
     	// Connecting to database
@@ -199,6 +210,7 @@ public class JDBCUserAdapter implements UserAdapter {
     	return new Role(role.getId(), role.getTitle());
     }
 
+    // delete the given role object from the database
     @Override 
     public Role deleteRole(Role role) {
     	// Connecting to database
@@ -219,6 +231,7 @@ public class JDBCUserAdapter implements UserAdapter {
     	return new Role(role.getId(), role.getTitle());
     }
 
+    // query the role object with the given role_id from the database
     @Override 
     public Role queryRole(Integer id) throws ResourceNotFoundException {
     	// Connecting to database
