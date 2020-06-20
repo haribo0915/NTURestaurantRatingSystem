@@ -117,6 +117,8 @@ public class EditRestaurantController implements Initializable {
             restaurant.setFoodCategoryId(foodCategory.getId());
             Area area = restaurantAdapter.queryArea(areaComboBox.getValue());
             restaurant.setAreaId(area.getId());
+            String imageFilePath = (restaurant.getImage() == null)? "" : restaurant.getImage();
+            restaurant.setImage(imageFilePath);
 
             restaurant = restaurantAdapter.updateRestaurant(restaurant);
 

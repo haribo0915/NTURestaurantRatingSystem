@@ -69,11 +69,11 @@ public class CommentDialogController implements Initializable {
         try {
             Integer rate = Integer.valueOf(rateTextField.getText());
             String description = commentTextField.getText();
-            Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-
-            setComment(currentUser.getId(), restaurantId, rate, description, comment.getImage(), new Timestamp(System.currentTimeMillis()));
+            String imageFilePath = (comment.getImage() == null)? "" : comment.getImage();
+            setComment(currentUser.getId(), restaurantId, rate, description, imageFilePath, new Timestamp(System.currentTimeMillis()));
             comment = (comment.getId() == null)? restaurantAdapter.createComment(comment) : restaurantAdapter.updateComment(comment);
-            
+
+            Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
             stage.close();
         } catch (Exception e) {
             e.printStackTrace();

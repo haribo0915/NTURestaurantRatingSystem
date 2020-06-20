@@ -43,6 +43,8 @@ public class UserCommentDetailsController implements Initializable {
         userRateLabel.setText(String.valueOf(userComment.getRate()));
         userCommentLabel.setText(userComment.getDescription());
         userCommentedTimeLabel.setText(String.valueOf(userComment.getTimestamp()));
-        userUploadImage.setImage(new Image(userComment.getImage(), 100, 150, true, true));
+        if (!userComment.getImage().equals("")) {
+            userUploadImage.setImage(new Image(userComment.getImage(), 100, 150, true, true));
+        }
     }
 }

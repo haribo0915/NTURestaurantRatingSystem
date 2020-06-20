@@ -19,6 +19,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import org.river.entities.Comment;
 import org.river.entities.Restaurant;
 import org.river.entities.User;
 import org.river.entities.UserComment;
@@ -43,6 +44,7 @@ public class RestaurantDetailsController implements Initializable {
     private RestaurantAdapter restaurantAdapter;
     private Restaurant restaurant;
     private User currentUser;
+    private Sanitizer sanitizer;
     private ExecutorService cachedThreadPool = SingletonCachedThreadPool.getInstance();
 
     @FXML
@@ -81,11 +83,14 @@ public class RestaurantDetailsController implements Initializable {
         this.restaurantAdapter = restaurantAdapterFactory.create();
         this.restaurant = restaurant;
         this.currentUser = currentUser;
+        this.sanitizer = new SanitizerImpl();
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
+            sanitizeCommentWithFoulLanguage();
+
             restaurantNameLabel.setText(restaurant.getName());
             restaurantAddressLabel.setText(restaurant.getAddress());
             restaurantDescriptionLabel.setText(restaurant.getDescription());
@@ -100,6 +105,14 @@ public class RestaurantDetailsController implements Initializable {
         } finally {
             initUserCommentsTable();
             querySelectedUserCommentBtn.setDisable(true);
+        }
+    }
+
+    private void sanitizeCommentWithFoulLanguage() {
+        List<Comment> commentList = restaurantAdapter.queryComments(restaurant);
+        List<Comment> commentWithFoulLanguageList = sanitizer.filterCommentsWithFoulLanguage(commentList);
+        for (Comment comment: commentWithFoulLanguageList) {
+            restaurantAdapter.deleteComment(comment);
         }
     }
 
@@ -169,6 +182,7 @@ public class RestaurantDetailsController implements Initializable {
         try {
             loadCommentDialogView(event);
             //refresh user comment table
+            sanitizeCommentWithFoulLanguage();
             userCommentList = restaurantAdapter.queryUserComments(this.restaurant);
         } catch (ResourceNotFoundException e) {
             System.out.println(e.getMessage());
@@ -185,7 +199,6 @@ public class RestaurantDetailsController implements Initializable {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/CommentDialog.fxml"));
 
             CommentDialogController commentDialogController = new CommentDialogController(restaurantAdapterFactory, this.currentUser, restaurant.getId());
-            //CommentDialogController commentDialogController = new CommentDialogController(restaurantAdapterFactory, this.currentUser, 1);
             loader.setController(commentDialogController);
 
             Parent commentDialogParent = loader.load();
