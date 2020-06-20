@@ -9,6 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 public class SQLUtils {
+	// count the number of data in the table
 	public static int countSQL(Connection con, String table) {
 		try {
 			String sqlUpdata = "select COUNT(*) from " + table;
@@ -23,6 +24,7 @@ public class SQLUtils {
 		return -1;
 	}
 
+	// Set a int into a position of a byte array
 	public static void setInt(byte[] buffer, int offset, int number) {
 		buffer[3 + offset] = (byte) (number & 0xFF);   
 		buffer[2 + offset] = (byte) ((number >> 8) & 0xFF);   
@@ -30,6 +32,7 @@ public class SQLUtils {
 		buffer[0 + offset] = (byte) ((number >> 24) & 0xFF);
 	}
 	
+	// Fetch a int from a position of a byte array
 	public static int fetchInt(byte[] buffer, int offset) {
 		int out = 0;
 		for (int i = 0; i < 4; i++) {

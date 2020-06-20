@@ -19,6 +19,7 @@ public class JDBCRestaurantAdapter implements RestaurantAdapter {
 		jdbcConnectionPool = JDBCConnectionPool.getInstance();
 	}
 	
+	// Insert a new restaurant to the database and return a Restaurant object
     @Override
     public Restaurant createRestaurant(Restaurant restaurant) {
     	// Connecting to database
@@ -72,11 +73,13 @@ public class JDBCRestaurantAdapter implements RestaurantAdapter {
     			restaurant.getAddress());
     }
 
+    // update the new info about the given restaurant to the database
     @Override
     public Restaurant updateRestaurant(Restaurant restaurant) {
     	// Connecting to database
     	Connection con = jdbcConnectionPool.takeOut();
 
+    	// update the info
     	try {
     		String sqlQuery = "UPDATE restaurant SET name=?, area_id=?, "
         			+ "food_category_id=?, description=?, address=?, image=? where id=?";
@@ -105,6 +108,7 @@ public class JDBCRestaurantAdapter implements RestaurantAdapter {
     	return restaurant;
     }
 
+    // Delete the given restaurant from the database
     @Override
     public Restaurant deleteRestaurant(Restaurant restaurant) {
     	// Connecting to database
@@ -126,11 +130,13 @@ public class JDBCRestaurantAdapter implements RestaurantAdapter {
     	return restaurant;
     }
 
+    // return the Restaurant object with the given id
     public Restaurant queryRestaurant(int id) throws ResourceNotFoundException {
     	// Connecting to database
     	Connection con = jdbcConnectionPool.takeOut();
 		Restaurant out = null;
 
+		// Query
 		try {
 			String sqlQuery = "select * from restaurant where id=?";
 			PreparedStatement stat = con.prepareStatement(sqlQuery);
@@ -153,12 +159,14 @@ public class JDBCRestaurantAdapter implements RestaurantAdapter {
 		return out;
     }
 
+    // return a list of the Restaurant objects with the given info
 	@Override
 	public List<Restaurant> queryRestaurants(String restaurantName, Area area, FoodCategory foodCategory) throws ResourceNotFoundException {
 		// Connecting to database
     	Connection con = jdbcConnectionPool.takeOut();
     	List<Restaurant> out = new ArrayList<Restaurant>();
 
+    	// Query
     	try {
     		String sqlQuery = "select * from restaurant where (? or area_id=?)"
     				+ " and (? or food_category_id=?) and (? or name=?)";
@@ -197,7 +205,7 @@ public class JDBCRestaurantAdapter implements RestaurantAdapter {
 	}
 
 
-
+	// return a list of restaurants that get the highest average rate in a past week
     @Override
     public List<Restaurant> queryWeeklyHottestRestaurants() throws ResourceNotFoundException {
     	// Connecting to database
@@ -209,7 +217,7 @@ public class JDBCRestaurantAdapter implements RestaurantAdapter {
     	List<Integer> rateArray = new ArrayList<Integer>();
     	int maxRestaurantId = 0;
     	
-
+    	// Query
     	try {
     		PreparedStatement stat = con.prepareStatement(sqlQuery);
     		ResultSet rs = stat.executeQuery();
@@ -236,6 +244,7 @@ public class JDBCRestaurantAdapter implements RestaurantAdapter {
     	int[] totalRate = new int [maxRestaurantId + 20];
     	int[] commentCnt = new int [maxRestaurantId + 20];
     	
+    	// calculate the total rate and how many times a restautant is commented
     	for (int i = 0; i < restaurantIds.size(); i++) {
     		int restaurantId = restaurantIds.get(i);
     		int restaurantRate = rateArray.get(i);
@@ -263,6 +272,7 @@ public class JDBCRestaurantAdapter implements RestaurantAdapter {
     	return out;
     }
 
+    // insert the given area into the database and return the area object with its id
     @Override
     public Area createArea(Area area) {
     	// Connecting to database
@@ -295,12 +305,14 @@ public class JDBCRestaurantAdapter implements RestaurantAdapter {
     	return out;
     }
 
+    // update the given area object to the database
     @Override
     public Area updateArea(Area area) {
     	// Connecting to database
     	Connection con = jdbcConnectionPool.takeOut();
     	String sqlQuery = "UPDATE area SET name=? where id=?";
 
+    	// update the table
     	try {
     		PreparedStatement stat = con.prepareStatement(sqlQuery);
     		stat.setString(1, area.getName());
@@ -316,6 +328,7 @@ public class JDBCRestaurantAdapter implements RestaurantAdapter {
     	return new Area(area.getId(), area.getName());
     }
 
+    // delete the given area from the database
     @Override
     public Area deleteArea(Area area) {
     	// Connecting to database
@@ -337,6 +350,7 @@ public class JDBCRestaurantAdapter implements RestaurantAdapter {
     	return new Area(area.getId(), area.getName());
     }
 
+    // return the area with the given id
     @Override
     public Area queryArea(Integer id) throws ResourceNotFoundException {
     	// Connecting to database
@@ -368,6 +382,7 @@ public class JDBCRestaurantAdapter implements RestaurantAdapter {
     	return out;
     }
 
+    // return the area object with the given area name
     @Override
     public Area queryArea(String name) throws ResourceNotFoundException {
     	// Connecting to database
@@ -399,6 +414,7 @@ public class JDBCRestaurantAdapter implements RestaurantAdapter {
 		return out;
     }
 
+    // return a list of all areas in the database
     @Override
     public List<Area> queryAreas() throws ResourceNotFoundException {
     	// Connecting to database
@@ -428,13 +444,14 @@ public class JDBCRestaurantAdapter implements RestaurantAdapter {
     	return out;
     }
 
-
+    // insert the given foodcategory into the database
     @Override
     public FoodCategory createFoodCategory(FoodCategory foodCategory) {
     	// Connecting to database
     	Connection con = jdbcConnectionPool.takeOut();
     	String sqlUpdate = "insert into food_category (name) values (?)";
 
+    	// insert the given foodcategory into the table
     	try {
     		PreparedStatement stat = con.prepareStatement(sqlUpdate);
     		stat.setString(1, foodCategory.getName());
@@ -462,12 +479,14 @@ public class JDBCRestaurantAdapter implements RestaurantAdapter {
     	return out;
     }
 
+    // update the given foodCategory to the database and return the given foodCategory
     @Override
     public FoodCategory updateFoodCategory(FoodCategory foodCategory) {
     	// Connecting to database
     	Connection con = jdbcConnectionPool.takeOut();
     	String sqlQuery = "UPDATE food_category SET name=? where id=?";
 
+    	// update
     	try {
     		PreparedStatement stat = con.prepareStatement(sqlQuery);
     		stat.setString(1, foodCategory.getName());
@@ -483,6 +502,7 @@ public class JDBCRestaurantAdapter implements RestaurantAdapter {
     	return new FoodCategory(foodCategory.getId(), foodCategory.getName());
     }
 
+    // delete the given foodCategory from the database
     @Override
     public FoodCategory deleteFoodCategory(FoodCategory foodCategory) {
     	// Connecting to database
@@ -504,6 +524,7 @@ public class JDBCRestaurantAdapter implements RestaurantAdapter {
     	return new FoodCategory(foodCategory.getId(), foodCategory.getName());
     }
 
+    // return a FoodCategory object with the given id
     @Override
     public FoodCategory queryFoodCategory(Integer id) throws ResourceNotFoundException {
     	// Connecting to database
@@ -535,6 +556,7 @@ public class JDBCRestaurantAdapter implements RestaurantAdapter {
 		return out;
     }
 
+    // return a FoodCategory object with the given FoodCategoryName
     @Override
     public FoodCategory queryFoodCategory(String name) throws ResourceNotFoundException {
     	// Connecting to database
@@ -566,6 +588,7 @@ public class JDBCRestaurantAdapter implements RestaurantAdapter {
 		return out;
     }
 
+    // return a list of FoodCategory objects in the database
     @Override
     public List<FoodCategory> queryFoodCategories() throws ResourceNotFoundException {
     	// Connecting to database
@@ -595,6 +618,7 @@ public class JDBCRestaurantAdapter implements RestaurantAdapter {
     	return out;
     }
 
+    // insert a given comment to the database and return the comment with its comment_id
     @Override
     public Comment createComment(Comment comment) {
     	// Connecting to database
@@ -647,6 +671,7 @@ public class JDBCRestaurantAdapter implements RestaurantAdapter {
     	return out;
     }
 
+    // update the given comment to the database
     @Override
     public Comment updateComment(Comment comment) {
     	// Connecting to database
@@ -684,11 +709,13 @@ public class JDBCRestaurantAdapter implements RestaurantAdapter {
     	return comment;
     }
 
+    // delete the comment from the database
     @Override
     public Comment deleteComment(Comment comment) {
     	// Connecting to database
     	Connection con = jdbcConnectionPool.takeOut();
 
+    	// Delete
     	try {
     		String sqlQuery = "delete from comment where id=?";
     		PreparedStatement stat = con.prepareStatement(sqlQuery);
@@ -705,12 +732,14 @@ public class JDBCRestaurantAdapter implements RestaurantAdapter {
     	return comment;
     }
 
+    // query a list of comments with the given user
     @Override
     public List<Comment> queryComments(User user) throws ResourceNotFoundException {
     	// Connecting to database
     	Connection con = jdbcConnectionPool.takeOut();
     	String sqlQuery = "select * from comment where user_id=?";
 
+    	// Query
     	List<Comment> out = new ArrayList<Comment>();
     	try {
     		PreparedStatement stat = con.prepareStatement(sqlQuery);
@@ -735,12 +764,14 @@ public class JDBCRestaurantAdapter implements RestaurantAdapter {
     	return out;
     }
 
+    // query a list of comments with the given restaurant
     @Override
     public List<Comment> queryComments(Restaurant restaurant) throws ResourceNotFoundException {
     	// Connecting to database
     	Connection con = jdbcConnectionPool.takeOut();
     	String sqlQuery = "select * from comment where restaurant_id=?";
 
+    	// Query
     	List<Comment> out = new ArrayList<Comment>();
     	try {
     		PreparedStatement stat = con.prepareStatement(sqlQuery);
@@ -767,12 +798,14 @@ public class JDBCRestaurantAdapter implements RestaurantAdapter {
     	return out;
     }
 
+    // query a list of UserComment objects with the given restaurant
     @Override
     public List<UserComment> queryUserComments(Restaurant restaurant) throws ResourceNotFoundException {
     	// Connecting to database
     	Connection con = jdbcConnectionPool.takeOut();
     	String sqlQuery = "select * from comment c inner join user u on restaurant_id=? and c.user_id=u.id";
 
+    	// Query
     	List<UserComment> out = new ArrayList<UserComment>();
     	try {
     		PreparedStatement stat = con.prepareStatement(sqlQuery);
@@ -802,12 +835,14 @@ public class JDBCRestaurantAdapter implements RestaurantAdapter {
     	return out;
     }
 
+    // query a comment object with the given restaurant_id or user_id
 	@Override
 	public Comment queryComment(Integer userId, Integer restaurantId) throws ResourceNotFoundException {
 		// Connecting to database
     	Connection con = jdbcConnectionPool.takeOut();
     	String sqlQuery = "select * from comment where user_id=? and restaurant_id=?";
 
+    	// Query
     	Comment out = null;
     	try {
     		PreparedStatement stat = con.prepareStatement(sqlQuery);
